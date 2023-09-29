@@ -11,8 +11,6 @@
 		<string>The Jamsil OTF 5 Bold.otf</string>
 		<string>The Jamsil OTF 6 ExtraBold.otf</string>
 	</array>
-	<key>UIUserInterfaceStyle</key>
-	<string>Light</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
