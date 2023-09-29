@@ -9,21 +9,42 @@
 /* Begin PBXBuildFile section */
 		F457C10A2AC1854500B4D46C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F457C1092AC1854500B4D46C /* AppDelegate.swift */; };
 		F457C10C2AC1854500B4D46C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F457C10B2AC1854500B4D46C /* SceneDelegate.swift */; };
-		F457C10E2AC1854500B4D46C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F457C10D2AC1854500B4D46C /* ViewController.swift */; };
-		F457C1112AC1854500B4D46C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F457C10F2AC1854500B4D46C /* Main.storyboard */; };
+		F457C10E2AC1854500B4D46C /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F457C10D2AC1854500B4D46C /* MainViewController.swift */; };
 		F457C1132AC1854600B4D46C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F457C1122AC1854600B4D46C /* Assets.xcassets */; };
 		F457C1162AC1854600B4D46C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F457C1142AC1854600B4D46C /* LaunchScreen.storyboard */; };
+		F457C11F2AC185C800B4D46C /* FSCalendar in Frameworks */ = {isa = PBXBuildFile; productRef = F457C11E2AC185C800B4D46C /* FSCalendar */; };
+		F457C1222AC185D500B4D46C /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = F457C1212AC185D500B4D46C /* Alamofire */; };
+		F457C1252AC185E300B4D46C /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = F457C1242AC185E300B4D46C /* SnapKit */; };
+		F45DF3052AC6C113004D4667 /* The Jamsil OTF 3 Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = F45DF2FF2AC6C113004D4667 /* The Jamsil OTF 3 Regular.otf */; };
+		F45DF3062AC6C113004D4667 /* The Jamsil OTF 4 Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = F45DF3002AC6C113004D4667 /* The Jamsil OTF 4 Medium.otf */; };
+		F45DF3072AC6C113004D4667 /* The Jamsil OTF 2 Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = F45DF3012AC6C113004D4667 /* The Jamsil OTF 2 Light.otf */; };
+		F45DF3082AC6C113004D4667 /* The Jamsil OTF 5 Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = F45DF3022AC6C113004D4667 /* The Jamsil OTF 5 Bold.otf */; };
+		F45DF3092AC6C113004D4667 /* The Jamsil OTF 1 Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = F45DF3032AC6C113004D4667 /* The Jamsil OTF 1 Thin.otf */; };
+		F45DF30A2AC6C113004D4667 /* The Jamsil OTF 6 ExtraBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = F45DF3042AC6C113004D4667 /* The Jamsil OTF 6 ExtraBold.otf */; };
+		F45DF30C2AC6C351004D4667 /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45DF30B2AC6C351004D4667 /* Font.swift */; };
+		F45DF30F2AC6C431004D4667 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45DF30E2AC6C431004D4667 /* BaseViewController.swift */; };
+		F45DF3122AC6C6D9004D4667 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45DF3112AC6C6D9004D4667 /* UIColor+Extension.swift */; };
+		F45DF3152AC6C7CC004D4667 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45DF3142AC6C7CC004D4667 /* Color.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		F457C1062AC1854500B4D46C /* PodoTodo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PodoTodo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F457C1092AC1854500B4D46C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F457C10B2AC1854500B4D46C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		F457C10D2AC1854500B4D46C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		F457C1102AC1854500B4D46C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		F457C10D2AC1854500B4D46C /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		F457C1122AC1854600B4D46C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F457C1152AC1854600B4D46C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F457C1172AC1854600B4D46C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F45DF2FF2AC6C113004D4667 /* The Jamsil OTF 3 Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "The Jamsil OTF 3 Regular.otf"; sourceTree = "<group>"; };
+		F45DF3002AC6C113004D4667 /* The Jamsil OTF 4 Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "The Jamsil OTF 4 Medium.otf"; sourceTree = "<group>"; };
+		F45DF3012AC6C113004D4667 /* The Jamsil OTF 2 Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "The Jamsil OTF 2 Light.otf"; sourceTree = "<group>"; };
+		F45DF3022AC6C113004D4667 /* The Jamsil OTF 5 Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "The Jamsil OTF 5 Bold.otf"; sourceTree = "<group>"; };
+		F45DF3032AC6C113004D4667 /* The Jamsil OTF 1 Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "The Jamsil OTF 1 Thin.otf"; sourceTree = "<group>"; };
+		F45DF3042AC6C113004D4667 /* The Jamsil OTF 6 ExtraBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "The Jamsil OTF 6 ExtraBold.otf"; sourceTree = "<group>"; };
+		F45DF30B2AC6C351004D4667 /* Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Font.swift; sourceTree = "<group>"; };
+		F45DF30E2AC6C431004D4667 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		F45DF3112AC6C6D9004D4667 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
+		F45DF3142AC6C7CC004D4667 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,6 +52,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F457C1252AC185E300B4D46C /* SnapKit in Frameworks */,
+				F457C11F2AC185C800B4D46C /* FSCalendar in Frameworks */,
+				F457C1222AC185D500B4D46C /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -56,15 +80,56 @@
 		F457C1082AC1854500B4D46C /* PodoTodo */ = {
 			isa = PBXGroup;
 			children = (
+				F45DF3132AC6C7BE004D4667 /* Constant */,
+				F45DF3102AC6C6CF004D4667 /* Extension */,
+				F45DF30D2AC6C427004D4667 /* CustomView */,
+				F45DF2FE2AC6C024004D4667 /* Font */,
 				F457C1092AC1854500B4D46C /* AppDelegate.swift */,
 				F457C10B2AC1854500B4D46C /* SceneDelegate.swift */,
-				F457C10D2AC1854500B4D46C /* ViewController.swift */,
-				F457C10F2AC1854500B4D46C /* Main.storyboard */,
+				F457C10D2AC1854500B4D46C /* MainViewController.swift */,
 				F457C1122AC1854600B4D46C /* Assets.xcassets */,
 				F457C1142AC1854600B4D46C /* LaunchScreen.storyboard */,
 				F457C1172AC1854600B4D46C /* Info.plist */,
 			);
 			path = PodoTodo;
+			sourceTree = "<group>";
+		};
+		F45DF2FE2AC6C024004D4667 /* Font */ = {
+			isa = PBXGroup;
+			children = (
+				F45DF3032AC6C113004D4667 /* The Jamsil OTF 1 Thin.otf */,
+				F45DF3012AC6C113004D4667 /* The Jamsil OTF 2 Light.otf */,
+				F45DF2FF2AC6C113004D4667 /* The Jamsil OTF 3 Regular.otf */,
+				F45DF3002AC6C113004D4667 /* The Jamsil OTF 4 Medium.otf */,
+				F45DF3022AC6C113004D4667 /* The Jamsil OTF 5 Bold.otf */,
+				F45DF3042AC6C113004D4667 /* The Jamsil OTF 6 ExtraBold.otf */,
+			);
+			path = Font;
+			sourceTree = "<group>";
+		};
+		F45DF30D2AC6C427004D4667 /* CustomView */ = {
+			isa = PBXGroup;
+			children = (
+				F45DF30E2AC6C431004D4667 /* BaseViewController.swift */,
+			);
+			path = CustomView;
+			sourceTree = "<group>";
+		};
+		F45DF3102AC6C6CF004D4667 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				F45DF3112AC6C6D9004D4667 /* UIColor+Extension.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		F45DF3132AC6C7BE004D4667 /* Constant */ = {
+			isa = PBXGroup;
+			children = (
+				F45DF30B2AC6C351004D4667 /* Font.swift */,
+				F45DF3142AC6C7CC004D4667 /* Color.swift */,
+			);
+			path = Constant;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -83,6 +148,11 @@
 			dependencies = (
 			);
 			name = PodoTodo;
+			packageProductDependencies = (
+				F457C11E2AC185C800B4D46C /* FSCalendar */,
+				F457C1212AC185D500B4D46C /* Alamofire */,
+				F457C1242AC185E300B4D46C /* SnapKit */,
+			);
 			productName = PodoTodo;
 			productReference = F457C1062AC1854500B4D46C /* PodoTodo.app */;
 			productType = "com.apple.product-type.application";
@@ -111,6 +181,11 @@
 				Base,
 			);
 			mainGroup = F457C0FD2AC1854500B4D46C;
+			packageReferences = (
+				F457C11D2AC185C800B4D46C /* XCRemoteSwiftPackageReference "FSCalendar" */,
+				F457C1202AC185D500B4D46C /* XCRemoteSwiftPackageReference "Alamofire" */,
+				F457C1232AC185E300B4D46C /* XCRemoteSwiftPackageReference "SnapKit" */,
+			);
 			productRefGroup = F457C1072AC1854500B4D46C /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -125,9 +200,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F45DF3092AC6C113004D4667 /* The Jamsil OTF 1 Thin.otf in Resources */,
+				F45DF3052AC6C113004D4667 /* The Jamsil OTF 3 Regular.otf in Resources */,
+				F45DF30A2AC6C113004D4667 /* The Jamsil OTF 6 ExtraBold.otf in Resources */,
+				F45DF3062AC6C113004D4667 /* The Jamsil OTF 4 Medium.otf in Resources */,
+				F45DF3082AC6C113004D4667 /* The Jamsil OTF 5 Bold.otf in Resources */,
+				F45DF3072AC6C113004D4667 /* The Jamsil OTF 2 Light.otf in Resources */,
 				F457C1162AC1854600B4D46C /* LaunchScreen.storyboard in Resources */,
 				F457C1132AC1854600B4D46C /* Assets.xcassets in Resources */,
-				F457C1112AC1854500B4D46C /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -138,23 +218,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F457C10E2AC1854500B4D46C /* ViewController.swift in Sources */,
+				F45DF30F2AC6C431004D4667 /* BaseViewController.swift in Sources */,
+				F457C10E2AC1854500B4D46C /* MainViewController.swift in Sources */,
+				F45DF3152AC6C7CC004D4667 /* Color.swift in Sources */,
 				F457C10A2AC1854500B4D46C /* AppDelegate.swift in Sources */,
+				F45DF3122AC6C6D9004D4667 /* UIColor+Extension.swift in Sources */,
 				F457C10C2AC1854500B4D46C /* SceneDelegate.swift in Sources */,
+				F45DF30C2AC6C351004D4667 /* Font.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		F457C10F2AC1854500B4D46C /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				F457C1102AC1854500B4D46C /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		F457C1142AC1854600B4D46C /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -290,11 +366,12 @@
 				DEVELOPMENT_TEAM = N54L2GS5Z3;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PodoTodo/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "포도투두";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -302,9 +379,12 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = eunseo.PodoTodo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -318,11 +398,12 @@
 				DEVELOPMENT_TEAM = N54L2GS5Z3;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PodoTodo/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "포도투두";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -330,9 +411,12 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = eunseo.PodoTodo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -358,6 +442,51 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		F457C11D2AC185C800B4D46C /* XCRemoteSwiftPackageReference "FSCalendar" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/WenchaoD/FSCalendar.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
+		F457C1202AC185D500B4D46C /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+		F457C1232AC185E300B4D46C /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		F457C11E2AC185C800B4D46C /* FSCalendar */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F457C11D2AC185C800B4D46C /* XCRemoteSwiftPackageReference "FSCalendar" */;
+			productName = FSCalendar;
+		};
+		F457C1212AC185D500B4D46C /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F457C1202AC185D500B4D46C /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+		F457C1242AC185E300B4D46C /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F457C1232AC185E300B4D46C /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = F457C0FE2AC1854500B4D46C /* Project object */;
 }
