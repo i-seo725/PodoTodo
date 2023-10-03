@@ -13,12 +13,25 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
-        // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
-        // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
+
         guard let scene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: scene)
-        window?.rootViewController = UINavigationController(rootViewController: MainViewController())
+        
+        let main = Tabbar.Main.vc //UINavigationController(rootViewController: Tabbar.Main.vc)
+        let second = UINavigationController(rootViewController: Tabbar.Podo.vc)
+        
+        let tabBarController = UITabBarController()
+        tabBarController.setViewControllers([main, second], animated: true)
+        tabBarController.tabBar.tintColor = UIColor(rgb: Color.text.rawValue)
+        
+        if let items = tabBarController.tabBar.items {
+            items[0].image = Tabbar.Main.image
+            items[0].title = Tabbar.Main.text.rawValue
+            items[1].image = Tabbar.Podo.image//.withTintColor(UIColor(rgb: Color.text.rawValue))
+            items[1].title = Tabbar.Podo.text.rawValue
+        }
+        
+        window?.rootViewController = tabBarController
         window?.makeKeyAndVisible()
     }
 
