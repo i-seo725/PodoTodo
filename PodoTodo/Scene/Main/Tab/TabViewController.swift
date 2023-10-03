@@ -11,11 +11,10 @@ import Pageboy
 
 class TabViewController: TabmanViewController {
     
-    var vc = [TodoTab(), GoalTab()]
+    private var vc: [UIViewController] = [TodoTab(), GoalTab()]
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .lightGray
         self.dataSource = self
         
         let bar = TMBar.ButtonBar()
@@ -23,14 +22,13 @@ class TabViewController: TabmanViewController {
         bar.layout.alignment = .centerDistributed
         bar.layout.contentMode = .intrinsic
         bar.backgroundView.style = .clear
-        bar.layout.interButtonSpacing = 20
+        bar.layout.interButtonSpacing = 24
         
         
         bar.buttons.customize { (button) in
-            button.tintColor = .orange
-            button.selectedTintColor = .systemRed
+            button.tintColor = UIColor(rgb: Color.point.rawValue)
+            button.selectedTintColor = UIColor(rgb: Color.text.rawValue)
             button.font = UIFont(name: Font.jamsilRegular.rawValue, size: 20)!
-            
         }
         addBar(bar, dataSource: self, at: .top)
     }
@@ -54,9 +52,9 @@ extension TabViewController: PageboyViewControllerDataSource, TMBarDataSource {
     func barItem(for bar: Tabman.TMBar, at index: Int) -> Tabman.TMBarItemable {
         
         if index == 0 {
-            return TMBarItem(title: "Todo")
+            return TMBarItem(title: "할 일")
         } else {
-            return TMBarItem(title: "Goal")
+            return TMBarItem(title: "목표")
         }
     }
 }

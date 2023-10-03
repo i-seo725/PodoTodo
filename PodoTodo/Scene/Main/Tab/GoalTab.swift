@@ -9,7 +9,7 @@ import UIKit
 import Tabman
 import SnapKit
 
-class GoalTab: UITableViewController {
+class GoalTab: UITabBarController {
     
     let label = {
         let view = UILabel()
@@ -21,6 +21,7 @@ class GoalTab: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = UIColor(rgb: Color.background.rawValue)
         view.addSubview(label)
         label.snp.makeConstraints { make in
             make.center.equalToSuperview()

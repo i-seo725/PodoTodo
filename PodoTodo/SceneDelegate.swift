@@ -19,11 +19,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let main = Tabbar.Main.vc //UINavigationController(rootViewController: Tabbar.Main.vc)
         let second = UINavigationController(rootViewController: Tabbar.Podo.vc)
-        
+
         let tabBarController = UITabBarController()
         tabBarController.setViewControllers([main, second], animated: true)
         tabBarController.tabBar.tintColor = UIColor(rgb: Color.text.rawValue)
-        
+
         if let items = tabBarController.tabBar.items {
             items[0].image = Tabbar.Main.image
             items[0].title = Tabbar.Main.text.rawValue
