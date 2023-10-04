@@ -32,7 +32,7 @@ class MainViewController: UIViewController {
     let tabView = {
         let view = UIView()
         view.backgroundColor = .brown
-        view.addSubview(TabViewController().view)
+//        view.addSubview(TabViewController().view)
 
         return view
     }()
@@ -70,7 +70,16 @@ class MainViewController: UIViewController {
         configureTabbar()
         calendar.dataSource = self
         calendar.delegate = self
-        addChild(TabViewController())
+        setContainerView()
+    }
+    
+    func setContainerView() {
+        let containedView = TabViewController()
+        
+        containedView.view.frame = .zero
+        self.addChild(containedView)
+        tabView.addSubview(containedView.view)
+        containedView.didMove(toParent: self)
     }
     
     func configureView() {
