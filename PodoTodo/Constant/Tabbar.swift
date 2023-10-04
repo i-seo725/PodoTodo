@@ -16,7 +16,7 @@ enum Tabbar {
             return UIImage(systemName: "checklist")!
         }
         static var vc: UIViewController {
-            return MainViewController()
+            return TabViewController()
         }
     }
     

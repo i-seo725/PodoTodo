@@ -6,8 +6,10 @@
 //
 
 import UIKit
+import Tabman
+import Pageboy
 
-class PodoViewController: BaseViewController {
+class PodoViewController: TabViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()

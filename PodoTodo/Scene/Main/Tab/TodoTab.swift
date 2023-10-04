@@ -9,7 +9,7 @@ import UIKit
 import Tabman
 import SnapKit
 
-class TodoTab: UITabBarController {
+class TodoTab: UIViewController {
     
     let label = {
         let view = UILabel()
@@ -18,6 +18,7 @@ class TodoTab: UITabBarController {
         view.textColor = .brown
         return view
     }()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()

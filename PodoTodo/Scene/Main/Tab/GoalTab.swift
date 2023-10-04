@@ -9,7 +9,7 @@ import UIKit
 import Tabman
 import SnapKit
 
-class GoalTab: UITabBarController {
+class GoalTab: UIViewController {
     
     let label = {
         let view = UILabel()

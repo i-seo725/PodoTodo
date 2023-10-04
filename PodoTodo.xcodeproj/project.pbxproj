@@ -35,6 +35,8 @@
 		F45DF32F2ACBFF1B004D4667 /* Tabman in Frameworks */ = {isa = PBXBuildFile; productRef = F45DF32E2ACBFF1B004D4667 /* Tabman */; };
 		F45DF3322ACBFF67004D4667 /* TodoTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45DF3312ACBFF67004D4667 /* TodoTab.swift */; };
 		F45DF3342ACC00AC004D4667 /* GoalTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45DF3332ACC00AC004D4667 /* GoalTab.swift */; };
+		F49DDCB22ACC62050067EFE6 /* CollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49DDCB12ACC62050067EFE6 /* CollectionView.swift */; };
+		F49DDCE12ACD82600067EFE6 /* TodoPodo.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49DDCE02ACD82600067EFE6 /* TodoPodo.swift */; };
 		F4EE22262ACC06D50080535F /* TabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4EE22252ACC06D50080535F /* TabViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -66,6 +68,8 @@
 		F45DF32B2AC87ED5004D4667 /* WeatherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherView.swift; sourceTree = "<group>"; };
 		F45DF3312ACBFF67004D4667 /* TodoTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoTab.swift; sourceTree = "<group>"; };
 		F45DF3332ACC00AC004D4667 /* GoalTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalTab.swift; sourceTree = "<group>"; };
+		F49DDCB12ACC62050067EFE6 /* CollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionView.swift; sourceTree = "<group>"; };
+		F49DDCE02ACD82600067EFE6 /* TodoPodo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoPodo.swift; sourceTree = "<group>"; };
 		F4EE22252ACC06D50080535F /* TabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -183,6 +187,7 @@
 				F457C10D2AC1854500B4D46C /* MainViewController.swift */,
 				F45DF3222AC81A5E004D4667 /* MainViewModel.swift */,
 				F45DF32B2AC87ED5004D4667 /* WeatherView.swift */,
+				F49DDCB12ACC62050067EFE6 /* CollectionView.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -190,6 +195,7 @@
 		F45DF3282AC81D20004D4667 /* Podo */ = {
 			isa = PBXGroup;
 			children = (
+				F49DDCDF2ACD82330067EFE6 /* Tab */,
 				F45DF3292AC81D2A004D4667 /* PodoViewController.swift */,
 			);
 			path = Podo;
@@ -201,6 +207,14 @@
 				F45DF3312ACBFF67004D4667 /* TodoTab.swift */,
 				F45DF3332ACC00AC004D4667 /* GoalTab.swift */,
 				F4EE22252ACC06D50080535F /* TabViewController.swift */,
+			);
+			path = Tab;
+			sourceTree = "<group>";
+		};
+		F49DDCDF2ACD82330067EFE6 /* Tab */ = {
+			isa = PBXGroup;
+			children = (
+				F49DDCE02ACD82600067EFE6 /* TodoPodo.swift */,
 			);
 			path = Tab;
 			sourceTree = "<group>";
@@ -304,9 +318,11 @@
 				F45DF3272AC81A93004D4667 /* Tabbar.swift in Sources */,
 				F45DF32C2AC87ED5004D4667 /* WeatherView.swift in Sources */,
 				F4EE22262ACC06D50080535F /* TabViewController.swift in Sources */,
+				F49DDCB22ACC62050067EFE6 /* CollectionView.swift in Sources */,
 				F45DF3152AC6C7CC004D4667 /* Color.swift in Sources */,
 				F457C10A2AC1854500B4D46C /* AppDelegate.swift in Sources */,
 				F45DF3122AC6C6D9004D4667 /* UIColor+Extension.swift in Sources */,
+				F49DDCE12ACD82600067EFE6 /* TodoPodo.swift in Sources */,
 				F45DF3252AC81A76004D4667 /* Observable.swift in Sources */,
 				F457C10C2AC1854500B4D46C /* SceneDelegate.swift in Sources */,
 				F45DF30C2AC6C351004D4667 /* Font.swift in Sources */,
