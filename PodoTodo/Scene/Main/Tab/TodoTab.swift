@@ -11,7 +11,6 @@ import SnapKit
 
 class TodoTab: UIViewController {
  
-    
     override func loadView() {
         view = ListCollectionView()
     }
@@ -19,6 +18,7 @@ class TodoTab: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor(rgb: Color.background.rawValue)
+ 
     }
     
 }

@@ -16,17 +16,16 @@ class MainViewController: UIViewController {
     let addButton = {
         let view = UIButton()
         view.layer.cornerRadius = 24
-        view.setImage(UIImage(systemName: "plus"), for: .normal)
+        
+        let imageConfig = UIImage.SymbolConfiguration(pointSize: 30, weight: .light)
+        let image = UIImage(systemName: "plus", withConfiguration: imageConfig)
+        view.setImage(image, for: .normal)
         view.tintColor = UIColor(rgb: Color.background.rawValue)
         view.backgroundColor = UIColor(rgb: Color.point.rawValue)
         
-        view.imageEdgeInsets = .init(top: 7, left: 3, bottom: 7, right: 7)
-        view.contentVerticalAlignment = .fill
-        view.contentHorizontalAlignment = .fill
-        
         view.layer.shadowOffset = .init(width: 5, height: 5)
-        view.layer.shadowOpacity = 0.4
-        view.layer.shadowRadius = 5
+        view.layer.shadowOpacity = 0.2
+        view.layer.shadowRadius = 3
         return view
     }()
     let tabView = UIView()
@@ -78,6 +77,21 @@ class MainViewController: UIViewController {
         view.addSubview(weather)
         view.addSubview(tabView)
         view.addSubview(addButton)
+        addButton.addTarget(self, action: #selector(addButtonTapped), for: .touchUpInside)
+    }
+    
+    @objc func addButtonTapped() {
+        let vc = TodoAddViewController()
+        vc.modalPresentationStyle = .pageSheet
+        guard let sheet = vc.sheetPresentationController else { return }
+        if #available(iOS 16.0, *) {
+            sheet.detents = [.custom(resolver: { context in
+                return 60
+            })]
+        } else {
+            sheet.detents = [.medium()]
+        }
+        present(vc, animated: true)
     }
 
     func setConstraints() {
@@ -101,7 +115,7 @@ class MainViewController: UIViewController {
         
         addButton.snp.makeConstraints { make in
             make.size.equalTo(48)
-            make.trailing.equalTo(view.safeAreaLayoutGuide).multipliedBy(0.88)
+            make.trailing.equalTo(view.safeAreaLayoutGuide).multipliedBy(0.92)
             make.bottom.equalTo(view.safeAreaLayoutGuide).multipliedBy(0.92)
         }
     }

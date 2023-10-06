@@ -11,7 +11,7 @@ import SnapKit
 class ListCollectionView: UIView {
     
     let collectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout())
-    var dataSource: UICollectionViewDiffableDataSource<Int, String>!
+    var dataSource: UICollectionViewDiffableDataSource<String, String>!
     let dummy = ["a@@@@@@@@@@@@@@", "b##########", "c$$$$$$$$$", "d%%%%%%%%%"]
     let dummy2 = ["aaaaaaaa", "bbbbbbbbb", "ccccccccc", "ddddddddddd"]
     
@@ -44,7 +44,8 @@ class ListCollectionView: UIView {
         let headerRegistration = UICollectionView.CellRegistration<UICollectionViewListCell, String> { cell, indexPath, itemIdentifier in
             var content = cell.defaultContentConfiguration()
             content.text = itemIdentifier
-            content.textProperties.font = UIFont(name: Font.jamsilRegular.rawValue, size: 14)!
+            content.textProperties.font = UIFont(name: Font.jamsilRegular.rawValue, size: 16)!
+            content.textProperties.color = UIColor(rgb: Color.text.rawValue)
             cell.contentConfiguration = content
             cell.accessories = [.outlineDisclosure()]
             cell.tintColor = UIColor(rgb: Color.point.rawValue)
@@ -53,11 +54,8 @@ class ListCollectionView: UIView {
         let cellRegistration = UICollectionView.CellRegistration<UICollectionViewListCell, String>(handler: { cell, indexPath, itemIdentifier in
             var content = UIListContentConfiguration.cell()
             content.text = itemIdentifier
-            content.textProperties.color = UIColor(rgb: Color.text.rawValue)
+            content.textProperties.color = UIColor(rgb: Color.todo.rawValue)
             content.textProperties.font = UIFont(name: Font.jamsilLight.rawValue, size: 15)!
-            content.secondaryText = "테스트 중"
-            content.secondaryTextProperties.font = UIFont(name: Font.jamsilLight.rawValue, size: 12)!
-            content.secondaryTextProperties.color = UIColor(rgb: Color.point.rawValue)
             
             cell.contentConfiguration = content
             
@@ -82,24 +80,25 @@ class ListCollectionView: UIView {
     
     
     func updateSnapshot() {
-        var snapshot = NSDiffableDataSourceSnapshot<Int, String>()
-        let sections = [0, 1]
+        var snapshot = NSDiffableDataSourceSnapshot<String, String>()
+        let sections = ["과제", "쇼핑"]
         snapshot.appendSections(sections)
         dataSource.apply(snapshot)
         for (index, item) in sections.enumerated() {
             if index == 0 {
                 var sectionSnapshot = NSDiffableDataSourceSectionSnapshot<String>()
-                let headerItem = "\(item) 섹션"
+                let headerItem = item
                 sectionSnapshot.append([headerItem])
-                let arrays = Array(0...9).map { "\($0)번째 셀"}
+                let arrays = ["컬렉션뷰 만들기", "디퍼블이 머지", "날씨 API 구현", "UI 그리기...ㅠㅠ"]
                 sectionSnapshot.append(arrays, to: headerItem)
                 sectionSnapshot.expand([headerItem])
                 dataSource.apply(sectionSnapshot, to: item)
+
             } else {
                 var sectionSnapshot = NSDiffableDataSourceSectionSnapshot<String>()
-                let headerItem = "\(item) 섹션"
+                let headerItem = item
                 sectionSnapshot.append([headerItem])
-                let arrays = Array(0...9).map { "이건 \($0)번째 셀"}
+                let arrays = ["무스탕", "코트", "레더자켓", "로퍼"]
                 sectionSnapshot.append(arrays, to: headerItem)
                 sectionSnapshot.expand([headerItem])
                 dataSource.apply(sectionSnapshot, to: item)

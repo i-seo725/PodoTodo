@@ -35,6 +35,7 @@
 		F45DF32F2ACBFF1B004D4667 /* Tabman in Frameworks */ = {isa = PBXBuildFile; productRef = F45DF32E2ACBFF1B004D4667 /* Tabman */; };
 		F45DF3322ACBFF67004D4667 /* TodoTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45DF3312ACBFF67004D4667 /* TodoTab.swift */; };
 		F45DF3342ACC00AC004D4667 /* GoalTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45DF3332ACC00AC004D4667 /* GoalTab.swift */; };
+		F46210F42ACFC16D001A5EA2 /* TodoAddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46210F32ACFC16D001A5EA2 /* TodoAddView.swift */; };
 		F49DDCB22ACC62050067EFE6 /* CollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49DDCB12ACC62050067EFE6 /* CollectionView.swift */; };
 		F49DDCE32ACD88210067EFE6 /* ListCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49DDCE22ACD88210067EFE6 /* ListCollectionViewController.swift */; };
 		F49DDCE72ACDB0A60067EFE6 /* Grape.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49DDCE62ACDB0A60067EFE6 /* Grape.swift */; };
@@ -71,6 +72,7 @@
 		F45DF32B2AC87ED5004D4667 /* WeatherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherView.swift; sourceTree = "<group>"; };
 		F45DF3312ACBFF67004D4667 /* TodoTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoTab.swift; sourceTree = "<group>"; };
 		F45DF3332ACC00AC004D4667 /* GoalTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalTab.swift; sourceTree = "<group>"; };
+		F46210F32ACFC16D001A5EA2 /* TodoAddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoAddView.swift; sourceTree = "<group>"; };
 		F49DDCB12ACC62050067EFE6 /* CollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionView.swift; sourceTree = "<group>"; };
 		F49DDCE22ACD88210067EFE6 /* ListCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCollectionViewController.swift; sourceTree = "<group>"; };
 		F49DDCE62ACDB0A60067EFE6 /* Grape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grape.swift; sourceTree = "<group>"; };
@@ -118,7 +120,6 @@
 				F45DF3172AC6CC33004D4667 /* Localization */,
 				F45DF3132AC6C7BE004D4667 /* Constant */,
 				F45DF3102AC6C6CF004D4667 /* Extension */,
-				F45DF30D2AC6C427004D4667 /* CustomView */,
 				F45DF2FE2AC6C024004D4667 /* Font */,
 				F457C1092AC1854500B4D46C /* AppDelegate.swift */,
 				F457C10B2AC1854500B4D46C /* SceneDelegate.swift */,
@@ -147,6 +148,7 @@
 			isa = PBXGroup;
 			children = (
 				F45DF30E2AC6C431004D4667 /* BaseViewController.swift */,
+				F46210F32ACFC16D001A5EA2 /* TodoAddView.swift */,
 			);
 			path = CustomView;
 			sourceTree = "<group>";
@@ -182,6 +184,7 @@
 		F45DF3202AC81A07004D4667 /* Scene */ = {
 			isa = PBXGroup;
 			children = (
+				F45DF30D2AC6C427004D4667 /* CustomView */,
 				F45DF3242AC81A76004D4667 /* Observable.swift */,
 				F45DF3282AC81D20004D4667 /* Podo */,
 				F45DF3212AC81A53004D4667 /* Main */,
@@ -321,6 +324,7 @@
 			files = (
 				F45DF32A2AC81D2A004D4667 /* PodoViewController.swift in Sources */,
 				F45DF3322ACBFF67004D4667 /* TodoTab.swift in Sources */,
+				F46210F42ACFC16D001A5EA2 /* TodoAddView.swift in Sources */,
 				F45DF3342ACC00AC004D4667 /* GoalTab.swift in Sources */,
 				F45DF31F2AC6CDBC004D4667 /* String+Extension.swift in Sources */,
 				F45DF30F2AC6C431004D4667 /* BaseViewController.swift in Sources */,
