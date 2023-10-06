@@ -18,7 +18,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window = UIWindow(windowScene: scene)
         
         let main = Tabbar.Main.vc //UINavigationController(rootViewController: Tabbar.Main.vc)
-        let second = UINavigationController(rootViewController: Tabbar.Podo.vc)
+        let second = Tabbar.Podo.vc //UINavigationController(rootViewController: Tabbar.Podo.vc)
 
         let tabBarController = UITabBarController()
         tabBarController.setViewControllers([main, second], animated: true)

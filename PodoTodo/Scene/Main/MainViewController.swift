@@ -29,13 +29,7 @@ class MainViewController: UIViewController {
         view.layer.shadowRadius = 5
         return view
     }()
-    let tabView = {
-        let view = UIView()
-        view.backgroundColor = .brown
-//        view.addSubview(TabViewController().view)
-
-        return view
-    }()
+    let tabView = UIView()
     var calendar = {
         let view = FSCalendar(frame: .zero)
         view.scope = FSCalendarScope.week
@@ -60,14 +54,10 @@ class MainViewController: UIViewController {
        
         return view
     }()
-    private var viewControllers: [UIViewController] = []
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureView()
         setConstraints()
-        configureTabbar()
         calendar.dataSource = self
         calendar.delegate = self
         setContainerView()
@@ -100,7 +90,7 @@ class MainViewController: UIViewController {
         weather.snp.makeConstraints { make in
             make.top.equalTo(calendar.snp.bottom).multipliedBy(0.6)
             make.horizontalEdges.equalTo(calendar.snp.horizontalEdges)
-            make.height.equalTo(80)
+            make.height.equalTo(calendar.snp.height).multipliedBy(0.2)
         }
         
         tabView.snp.makeConstraints { make in
@@ -115,31 +105,9 @@ class MainViewController: UIViewController {
             make.bottom.equalTo(view.safeAreaLayoutGuide).multipliedBy(0.92)
         }
     }
-    func configureTabbar() {
-//        self.dataSource = self
-        viewControllers.append(TodoTab())
-        viewControllers.append(GoalTab())
-    }
 
 }
 
 extension MainViewController: FSCalendarDelegate, FSCalendarDataSource {
    
 }
-
-//extension MainViewController: PageboyViewControllerDataSource {
-//    
-//    func numberOfViewControllers(in pageboyViewController: Pageboy.PageboyViewController) -> Int {
-//        <#code#>
-//    }
-//    
-//    func viewController(for pageboyViewController: Pageboy.PageboyViewController, at index: Pageboy.PageboyViewController.PageIndex) -> UIViewController? {
-//        <#code#>
-//    }
-//    
-//    func defaultPage(for pageboyViewController: Pageboy.PageboyViewController) -> Pageboy.PageboyViewController.Page? {
-//        <#code#>
-//    }
-//    
-//    
-//}

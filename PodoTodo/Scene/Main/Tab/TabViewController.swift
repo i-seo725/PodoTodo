@@ -23,7 +23,7 @@ class TabViewController: TabmanViewController {
         bar.layout.contentMode = .intrinsic
         bar.backgroundView.style = .clear
         bar.layout.interButtonSpacing = 24
-        
+        bar.indicator.tintColor = UIColor(rgb: Color.today.rawValue)
         
         bar.buttons.customize { (button) in
             button.tintColor = UIColor(rgb: Color.point.rawValue)
