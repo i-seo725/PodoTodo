@@ -20,4 +20,10 @@ class GoalTab: UIViewController {
         view.backgroundColor = UIColor(rgb: Color.background.rawValue)
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        print("goal tab")
+        NotificationCenter.default.post(name: NSNotification.Name("goal"), object: nil, userInfo: ["tab": KindOfTab.goal])
+    }
+    
 }

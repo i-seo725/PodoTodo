@@ -53,6 +53,9 @@ class MainViewController: UIViewController {
        
         return view
     }()
+    
+    var tab: KindOfTab = .todo
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureView()
@@ -60,6 +63,7 @@ class MainViewController: UIViewController {
         calendar.dataSource = self
         calendar.delegate = self
         setContainerView()
+        receiveNotification()
     }
     
     func setContainerView() {
@@ -81,19 +85,43 @@ class MainViewController: UIViewController {
     }
     
     @objc func addButtonTapped() {
-        let vc = TodoAddViewController()
-        vc.modalPresentationStyle = .pageSheet
-        guard let sheet = vc.sheetPresentationController else { return }
-        if #available(iOS 16.0, *) {
-            sheet.detents = [.custom(resolver: { context in
-                return 60
-            })]
-        } else {
-            sheet.detents = [.medium()]
+        print(tab)
+        switch tab {
+        case .todo:
+            let vc = TodoAddViewController()
+            vc.modalPresentationStyle = .pageSheet
+            guard let sheet = vc.sheetPresentationController else { return }
+            if #available(iOS 16.0, *) {
+                sheet.detents = [.custom(resolver: { context in
+                    return 60
+                })]
+            } else {
+                sheet.detents = [.medium()]
+            }
+            present(vc, animated: true)
+        case .goal:
+            print("목표")
         }
-        present(vc, animated: true)
+        
+        
     }
 
+    func receiveNotification() {
+        NotificationCenter.default.addObserver(self, selector: #selector(receiveTodoValue), name: NSNotification.Name("todo"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(receiveGoalValue), name: NSNotification.Name("goal"), object: nil)
+    }
+    
+    @objc func receiveTodoValue(notification: NSNotification) {
+        guard let value = notification.userInfo?["tab"] as? KindOfTab else { return }
+        tab = value
+        
+    }
+    
+    @objc func receiveGoalValue(notification: NSNotification) {
+        guard let value = notification.userInfo?["tab"] as? KindOfTab else { return }
+        tab = value
+    }
+    
     func setConstraints() {
         calendar.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide)
