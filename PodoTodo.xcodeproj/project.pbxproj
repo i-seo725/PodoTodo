@@ -27,7 +27,6 @@
 		F45DF3152AC6C7CC004D4667 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45DF3142AC6C7CC004D4667 /* Color.swift */; };
 		F45DF31A2AC6CC54004D4667 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F45DF31C2AC6CC54004D4667 /* Localizable.strings */; };
 		F45DF31F2AC6CDBC004D4667 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45DF31E2AC6CDBC004D4667 /* String+Extension.swift */; };
-		F45DF3232AC81A5E004D4667 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45DF3222AC81A5E004D4667 /* MainViewModel.swift */; };
 		F45DF3252AC81A76004D4667 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45DF3242AC81A76004D4667 /* Observable.swift */; };
 		F45DF3272AC81A93004D4667 /* Tabbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45DF3262AC81A93004D4667 /* Tabbar.swift */; };
 		F45DF32A2AC81D2A004D4667 /* PodoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45DF3292AC81D2A004D4667 /* PodoViewController.swift */; };
@@ -37,6 +36,7 @@
 		F45DF3342ACC00AC004D4667 /* GoalTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45DF3332ACC00AC004D4667 /* GoalTab.swift */; };
 		F46210F42ACFC16D001A5EA2 /* TodoAddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46210F32ACFC16D001A5EA2 /* TodoAddView.swift */; };
 		F46210FD2AD07BA0001A5EA2 /* KindOfTabEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46210FC2AD07BA0001A5EA2 /* KindOfTabEnum.swift */; };
+		F466D6002AD10F7F00819ED9 /* GoalAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F466D5FF2AD10F7F00819ED9 /* GoalAddViewController.swift */; };
 		F49DDCE32ACD88210067EFE6 /* ListCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49DDCE22ACD88210067EFE6 /* ListCollectionViewController.swift */; };
 		F49DDCE72ACDB0A60067EFE6 /* Grape.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49DDCE62ACDB0A60067EFE6 /* Grape.swift */; };
 		F49DDCE92ACDB7220067EFE6 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = F49DDCE82ACDB7220067EFE6 /* .gitignore */; };
@@ -65,7 +65,6 @@
 		F45DF3162AC6CC04004D4667 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		F45DF31B2AC6CC54004D4667 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
 		F45DF31E2AC6CDBC004D4667 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
-		F45DF3222AC81A5E004D4667 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		F45DF3242AC81A76004D4667 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 		F45DF3262AC81A93004D4667 /* Tabbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tabbar.swift; sourceTree = "<group>"; };
 		F45DF3292AC81D2A004D4667 /* PodoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodoViewController.swift; sourceTree = "<group>"; };
@@ -74,6 +73,7 @@
 		F45DF3332ACC00AC004D4667 /* GoalTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalTab.swift; sourceTree = "<group>"; };
 		F46210F32ACFC16D001A5EA2 /* TodoAddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoAddView.swift; sourceTree = "<group>"; };
 		F46210FC2AD07BA0001A5EA2 /* KindOfTabEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KindOfTabEnum.swift; sourceTree = "<group>"; };
+		F466D5FF2AD10F7F00819ED9 /* GoalAddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalAddViewController.swift; sourceTree = "<group>"; };
 		F49DDCE22ACD88210067EFE6 /* ListCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCollectionViewController.swift; sourceTree = "<group>"; };
 		F49DDCE62ACDB0A60067EFE6 /* Grape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grape.swift; sourceTree = "<group>"; };
 		F49DDCE82ACDB7220067EFE6 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
@@ -148,7 +148,6 @@
 			isa = PBXGroup;
 			children = (
 				F45DF30E2AC6C431004D4667 /* BaseViewController.swift */,
-				F46210F32ACFC16D001A5EA2 /* TodoAddView.swift */,
 			);
 			path = CustomView;
 			sourceTree = "<group>";
@@ -195,9 +194,9 @@
 		F45DF3212AC81A53004D4667 /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				F466D5FE2AD10F4300819ED9 /* Add */,
 				F45DF3302ACBFF60004D4667 /* Tab */,
 				F457C10D2AC1854500B4D46C /* MainViewController.swift */,
-				F45DF3222AC81A5E004D4667 /* MainViewModel.swift */,
 				F45DF32B2AC87ED5004D4667 /* WeatherView.swift */,
 				F49DDCE22ACD88210067EFE6 /* ListCollectionViewController.swift */,
 				F46210FC2AD07BA0001A5EA2 /* KindOfTabEnum.swift */,
@@ -221,6 +220,15 @@
 				F4EE22252ACC06D50080535F /* TabViewController.swift */,
 			);
 			path = Tab;
+			sourceTree = "<group>";
+		};
+		F466D5FE2AD10F4300819ED9 /* Add */ = {
+			isa = PBXGroup;
+			children = (
+				F46210F32ACFC16D001A5EA2 /* TodoAddView.swift */,
+				F466D5FF2AD10F7F00819ED9 /* GoalAddViewController.swift */,
+			);
+			path = Add;
 			sourceTree = "<group>";
 		};
 		F49DDCEA2ACDB72B0067EFE6 /* Network */ = {
@@ -332,6 +340,7 @@
 				F49DDCEC2ACDB7330067EFE6 /* APIKey.swift in Sources */,
 				F45DF3272AC81A93004D4667 /* Tabbar.swift in Sources */,
 				F45DF32C2AC87ED5004D4667 /* WeatherView.swift in Sources */,
+				F466D6002AD10F7F00819ED9 /* GoalAddViewController.swift in Sources */,
 				F4EE22262ACC06D50080535F /* TabViewController.swift in Sources */,
 				F45DF3152AC6C7CC004D4667 /* Color.swift in Sources */,
 				F49DDCE32ACD88210067EFE6 /* ListCollectionViewController.swift in Sources */,
@@ -342,7 +351,6 @@
 				F45DF3252AC81A76004D4667 /* Observable.swift in Sources */,
 				F457C10C2AC1854500B4D46C /* SceneDelegate.swift in Sources */,
 				F45DF30C2AC6C351004D4667 /* Font.swift in Sources */,
-				F45DF3232AC81A5E004D4667 /* MainViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
