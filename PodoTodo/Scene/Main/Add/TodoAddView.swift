@@ -42,8 +42,15 @@ class TodoAddViewController: BaseViewController {
         super.configureView()
         view.addSubview(textField)
         view.addSubview(groupSelectButton)
-    
+        textField.addTarget(self, action: #selector(enterButtonTapped), for: .editingDidEndOnExit)
     }
+    
+    @objc func enterButtonTapped(_ sender: UITextField) {
+        guard let text = sender.text else { return }
+        Repository.shared.create(MainList(isTodo: true, contents: text))
+        dismiss(animated: true)
+    }
+    
     
     override func setConstraints() {
         textField.snp.makeConstraints { make in

@@ -36,9 +36,13 @@ class GoalAddViewController: BaseViewController {
         return view
     }()
     
+    let datePicker = UIDatePicker()
+    var selectedDate: Date?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setDatePicker()
+        setupToolbar()
     }
  
     override func configureView() {
@@ -46,6 +50,13 @@ class GoalAddViewController: BaseViewController {
         view.addSubview(textField)
         view.addSubview(groupSelectButton)
         view.addSubview(dateTextField)
+        textField.addTarget(self, action: #selector(enterButtonClicked), for: .editingDidEndOnExit)
+    }
+    
+    @objc func enterButtonClicked(_ sender: UITextField) {
+        guard let text = sender.text else { return }
+        Repository.shared.create(MainList(isTodo: false, contents: text, date: selectedDate))
+        dismiss(animated: true)
     }
     
     override func setConstraints() {
@@ -68,8 +79,7 @@ class GoalAddViewController: BaseViewController {
         
     }
     
-    func setDatePicker() {
-        let datePicker = UIDatePicker()
+    func setDatePicker(){
         datePicker.datePickerMode = .date
         datePicker.minimumDate = .now
         datePicker.preferredDatePickerStyle = .wheels
@@ -79,7 +89,42 @@ class GoalAddViewController: BaseViewController {
     }
     
     @objc func dateChange(_ sender: UIDatePicker) {
-        print(sender.date)
+        dateTextField.text = convertDateFormat(sender.date)
+        selectedDate = sender.date
+    }
+    
+    func convertDateFormat(_ date: Date) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy년 MM월 dd일"
+        let result = dateFormatter.string(from: date)
+        return result
+    }
+    
+    func setupToolbar() {
+        let toolBar = UIToolbar()
+        let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneButtonTapped))
+        toolBar.items = [flexibleSpace, doneButton]
+        toolBar.sizeToFit()
+        dateTextField.inputAccessoryView = toolBar
+    }
+    
+    @objc func doneButtonTapped() {
+        guard let text = textField.text else {
+            dateTextField.text = convertDateFormat(datePicker.date)
+            dateTextField.resignFirstResponder()
+            selectedDate = datePicker.date
+            return
+        }
+        
+        if text == "" {
+            dateTextField.text = convertDateFormat(datePicker.date)
+            dateTextField.resignFirstResponder()
+            selectedDate = datePicker.date
+        } else {
+            Repository.shared.create(MainList(isTodo: false, contents: text, date: datePicker.date))
+            dismiss(animated: true)
+        }
     }
     
 }

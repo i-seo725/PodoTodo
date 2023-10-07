@@ -36,6 +36,10 @@
 		F46210F42ACFC16D001A5EA2 /* TodoAddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46210F32ACFC16D001A5EA2 /* TodoAddView.swift */; };
 		F46210FD2AD07BA0001A5EA2 /* KindOfTabEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46210FC2AD07BA0001A5EA2 /* KindOfTabEnum.swift */; };
 		F466D6002AD10F7F00819ED9 /* GoalAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F466D5FF2AD10F7F00819ED9 /* GoalAddViewController.swift */; };
+		F466D6042AD12A1D00819ED9 /* MainListTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F466D6032AD12A1D00819ED9 /* MainListTable.swift */; };
+		F466D6072AD12ACA00819ED9 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = F466D6062AD12ACA00819ED9 /* Realm */; };
+		F466D6092AD12ACA00819ED9 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = F466D6082AD12ACA00819ED9 /* RealmSwift */; };
+		F466D6102AD131F800819ED9 /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = F466D60F2AD131F800819ED9 /* Repository.swift */; };
 		F49DDCE32ACD88210067EFE6 /* ListCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49DDCE22ACD88210067EFE6 /* ListCollectionViewController.swift */; };
 		F49DDCE72ACDB0A60067EFE6 /* Grape.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49DDCE62ACDB0A60067EFE6 /* Grape.swift */; };
 		F49DDCE92ACDB7220067EFE6 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = F49DDCE82ACDB7220067EFE6 /* .gitignore */; };
@@ -72,6 +76,8 @@
 		F46210F32ACFC16D001A5EA2 /* TodoAddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoAddView.swift; sourceTree = "<group>"; };
 		F46210FC2AD07BA0001A5EA2 /* KindOfTabEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KindOfTabEnum.swift; sourceTree = "<group>"; };
 		F466D5FF2AD10F7F00819ED9 /* GoalAddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalAddViewController.swift; sourceTree = "<group>"; };
+		F466D6032AD12A1D00819ED9 /* MainListTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainListTable.swift; sourceTree = "<group>"; };
+		F466D60F2AD131F800819ED9 /* Repository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Repository.swift; sourceTree = "<group>"; };
 		F49DDCE22ACD88210067EFE6 /* ListCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCollectionViewController.swift; sourceTree = "<group>"; };
 		F49DDCE62ACDB0A60067EFE6 /* Grape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grape.swift; sourceTree = "<group>"; };
 		F49DDCE82ACDB7220067EFE6 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
@@ -84,10 +90,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F466D6092AD12ACA00819ED9 /* RealmSwift in Frameworks */,
 				F457C1252AC185E300B4D46C /* SnapKit in Frameworks */,
 				F45DF32F2ACBFF1B004D4667 /* Tabman in Frameworks */,
 				F457C11F2AC185C800B4D46C /* FSCalendar in Frameworks */,
 				F457C1222AC185D500B4D46C /* Alamofire in Frameworks */,
+				F466D6072AD12ACA00819ED9 /* Realm in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -113,6 +121,7 @@
 		F457C1082AC1854500B4D46C /* PodoTodo */ = {
 			isa = PBXGroup;
 			children = (
+				F466D6012AD129AB00819ED9 /* Realm */,
 				F49DDCEA2ACDB72B0067EFE6 /* Network */,
 				F45DF3202AC81A07004D4667 /* Scene */,
 				F45DF3172AC6CC33004D4667 /* Localization */,
@@ -228,6 +237,23 @@
 			path = Add;
 			sourceTree = "<group>";
 		};
+		F466D6012AD129AB00819ED9 /* Realm */ = {
+			isa = PBXGroup;
+			children = (
+				F466D6022AD129B400819ED9 /* Table */,
+				F466D60F2AD131F800819ED9 /* Repository.swift */,
+			);
+			path = Realm;
+			sourceTree = "<group>";
+		};
+		F466D6022AD129B400819ED9 /* Table */ = {
+			isa = PBXGroup;
+			children = (
+				F466D6032AD12A1D00819ED9 /* MainListTable.swift */,
+			);
+			path = Table;
+			sourceTree = "<group>";
+		};
 		F49DDCEA2ACDB72B0067EFE6 /* Network */ = {
 			isa = PBXGroup;
 			children = (
@@ -257,6 +283,8 @@
 				F457C1212AC185D500B4D46C /* Alamofire */,
 				F457C1242AC185E300B4D46C /* SnapKit */,
 				F45DF32E2ACBFF1B004D4667 /* Tabman */,
+				F466D6062AD12ACA00819ED9 /* Realm */,
+				F466D6082AD12ACA00819ED9 /* RealmSwift */,
 			);
 			productName = PodoTodo;
 			productReference = F457C1062AC1854500B4D46C /* PodoTodo.app */;
@@ -292,6 +320,7 @@
 				F457C1202AC185D500B4D46C /* XCRemoteSwiftPackageReference "Alamofire" */,
 				F457C1232AC185E300B4D46C /* XCRemoteSwiftPackageReference "SnapKit" */,
 				F45DF32D2ACBFF1B004D4667 /* XCRemoteSwiftPackageReference "Tabman" */,
+				F466D6052AD12ACA00819ED9 /* XCRemoteSwiftPackageReference "realm-swift" */,
 			);
 			productRefGroup = F457C1072AC1854500B4D46C /* Products */;
 			projectDirPath = "";
@@ -330,7 +359,9 @@
 				F45DF32A2AC81D2A004D4667 /* PodoViewController.swift in Sources */,
 				F45DF3322ACBFF67004D4667 /* TodoTab.swift in Sources */,
 				F46210F42ACFC16D001A5EA2 /* TodoAddView.swift in Sources */,
+				F466D6042AD12A1D00819ED9 /* MainListTable.swift in Sources */,
 				F45DF3342ACC00AC004D4667 /* GoalTab.swift in Sources */,
+				F466D6102AD131F800819ED9 /* Repository.swift in Sources */,
 				F45DF31F2AC6CDBC004D4667 /* String+Extension.swift in Sources */,
 				F45DF30F2AC6C431004D4667 /* BaseViewController.swift in Sources */,
 				F457C10E2AC1854500B4D46C /* MainViewController.swift in Sources */,
@@ -611,6 +642,14 @@
 				minimumVersion = 3.0.0;
 			};
 		};
+		F466D6052AD12ACA00819ED9 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-swift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.42.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -633,6 +672,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = F45DF32D2ACBFF1B004D4667 /* XCRemoteSwiftPackageReference "Tabman" */;
 			productName = Tabman;
+		};
+		F466D6062AD12ACA00819ED9 /* Realm */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F466D6052AD12ACA00819ED9 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = Realm;
+		};
+		F466D6082AD12ACA00819ED9 /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F466D6052AD12ACA00819ED9 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

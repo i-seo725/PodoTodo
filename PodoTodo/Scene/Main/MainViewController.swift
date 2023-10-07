@@ -65,6 +65,7 @@ class MainViewController: UIViewController {
         calendar.delegate = self
         setContainerView()
         receiveNotification()
+        Repository.shared.fetch()
     }
     
     func setContainerView() {
