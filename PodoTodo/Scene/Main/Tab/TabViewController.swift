@@ -23,11 +23,11 @@ class TabViewController: TabmanViewController {
         bar.layout.contentMode = .intrinsic
         bar.backgroundView.style = .clear
         bar.layout.interButtonSpacing = 24
-        bar.indicator.tintColor = UIColor(rgb: Color.today.rawValue)
+        bar.indicator.tintColor = .secondGrape
         
         bar.buttons.customize { (button) in
-            button.tintColor = UIColor(rgb: Color.point.rawValue)
-            button.selectedTintColor = UIColor(rgb: Color.text.rawValue)
+            button.tintColor = .fourthGrape
+            button.selectedTintColor = .black
             button.font = UIFont(name: Font.jamsilRegular.rawValue, size: 20)!
         }
         addBar(bar, dataSource: self, at: .top)

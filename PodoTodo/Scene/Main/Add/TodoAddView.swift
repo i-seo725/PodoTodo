@@ -15,7 +15,7 @@ class TodoAddViewController: BaseViewController {
         view.placeholder = "할 일을 입력해주세요"
         view.borderStyle = .roundedRect
         view.font = UIFont(name: Font.jamsilLight.rawValue, size: 14)
-        view.textColor = UIColor(rgb: Color.text.rawValue)
+        view.textColor = .black
         view.becomeFirstResponder()
         return view
     }()
@@ -25,6 +25,7 @@ class TodoAddViewController: BaseViewController {
         let imageConfig = UIImage.SymbolConfiguration(pointSize: 24, weight: .light)
         let image = UIImage(systemName: "list.bullet", withConfiguration: imageConfig)
         view.setImage(image, for: .normal)
+        view.tintColor = .firstGrape
         return view
     }()
     

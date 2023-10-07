@@ -22,7 +22,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         let tabBarController = UITabBarController()
         tabBarController.setViewControllers([main, second], animated: true)
-        tabBarController.tabBar.tintColor = UIColor(rgb: Color.text.rawValue)
+        tabBarController.tabBar.tintColor = .black
 
         if let items = tabBarController.tabBar.items {
             items[0].image = Tabbar.Main.image

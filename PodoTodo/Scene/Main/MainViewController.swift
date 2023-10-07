@@ -20,8 +20,8 @@ class MainViewController: UIViewController {
         let imageConfig = UIImage.SymbolConfiguration(pointSize: 30, weight: .light)
         let image = UIImage(systemName: "plus", withConfiguration: imageConfig)
         view.setImage(image, for: .normal)
-        view.tintColor = UIColor(rgb: Color.background.rawValue)
-        view.backgroundColor = UIColor(rgb: Color.point.rawValue)
+        view.tintColor = .fourthGrape
+        view.backgroundColor = .firstGrape
         
         view.layer.shadowOffset = .init(width: 5, height: 5)
         view.layer.shadowOpacity = 0.2
@@ -38,18 +38,19 @@ class MainViewController: UIViewController {
         view.headerHeight = 70
         view.appearance.headerMinimumDissolvedAlpha = 0
         view.appearance.headerDateFormat = "YYYY년 MM월"
-        view.appearance.headerTitleColor = UIColor(rgb: Color.text.rawValue)
+        view.appearance.headerTitleColor = UIColor.black
         view.appearance.headerTitleFont = UIFont(name: Font.jamsilRegular.rawValue, size: 18)
         
+        
         //날짜 영역
-        view.appearance.weekdayTextColor = UIColor(rgb: Color.point.rawValue)
+        view.appearance.weekdayTextColor = UIColor.black
         view.appearance.weekdayFont = UIFont(name: Font.jamsilRegular.rawValue, size: 14)
         view.appearance.titleWeekendColor = UIColor.gray
-        view.appearance.selectionColor = UIColor(rgb: Color.selected.rawValue)
-        view.backgroundColor = UIColor.systemYellow
+        view.appearance.selectionColor = UIColor.secondGrape
+//        view.backgroundColor = UIColor.fourthGrape
         
         //today
-        view.appearance.todayColor = UIColor(rgb: Color.today.rawValue)
+        view.appearance.todayColor = UIColor.thirdGrape
        
         return view
     }()
@@ -76,7 +77,7 @@ class MainViewController: UIViewController {
     }
     
     func configureView() {
-        view.backgroundColor = UIColor(rgb: Color.background.rawValue)
+        view.backgroundColor = .white
         view.addSubview(calendar)
         view.addSubview(weather)
         view.addSubview(tabView)
@@ -103,15 +104,14 @@ class MainViewController: UIViewController {
             let vc = GoalAddViewController()
             vc.modalPresentationStyle = .pageSheet
             guard let sheet = vc.sheetPresentationController else { return }
-            sheet.detents = [.medium()]
+            if #available(iOS 16.0, *) {
+                sheet.detents = [.custom(resolver: { context in
+                    return 120
+                })]
+            } else {
+                sheet.detents = [.medium()]
+            }
             present(vc, animated: true)
-//            if #available(iOS 16.0, *) {
-//                sheet.detents = [.custom(resolver: { context in
-//                    return 60
-//                })]
-//            } else {
-//                sheet.detents = [.medium()]
-//            }
         }
         
         

@@ -17,7 +17,7 @@ class GoalTab: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor(rgb: Color.background.rawValue)
+        view.backgroundColor = .white
     }
     
     override func viewDidAppear(_ animated: Bool) {

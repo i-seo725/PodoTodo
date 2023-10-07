@@ -45,16 +45,16 @@ class ListCollectionView: UIView {
             var content = cell.defaultContentConfiguration()
             content.text = itemIdentifier
             content.textProperties.font = UIFont(name: Font.jamsilRegular.rawValue, size: 16)!
-            content.textProperties.color = UIColor(rgb: Color.text.rawValue)
+            content.textProperties.color = .black
             cell.contentConfiguration = content
             cell.accessories = [.outlineDisclosure()]
-            cell.tintColor = UIColor(rgb: Color.point.rawValue)
+            cell.tintColor = .firstGrape
         }
         
         let cellRegistration = UICollectionView.CellRegistration<UICollectionViewListCell, String>(handler: { cell, indexPath, itemIdentifier in
             var content = UIListContentConfiguration.cell()
             content.text = itemIdentifier
-            content.textProperties.color = UIColor(rgb: Color.todo.rawValue)
+            content.textProperties.color = .black
             content.textProperties.font = UIFont(name: Font.jamsilLight.rawValue, size: 15)!
             
             cell.contentConfiguration = content

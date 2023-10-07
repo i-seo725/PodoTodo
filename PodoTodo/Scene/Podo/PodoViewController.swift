@@ -15,13 +15,12 @@ class PodoViewController: BaseViewController {
         let view = UIImageView()
         view.image = UIImage(named: Grape.Purple.complete.rawValue)!
         view.contentMode = .scaleAspectFit
-        view.backgroundColor = .black
         return view
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        view.backgroundColor = .white
        
     }
     
