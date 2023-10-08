@@ -11,8 +11,9 @@ import SnapKit
 
 class TodoTab: UIViewController {
  
+    let mainView = ListCollectionView()
     override func loadView() {
-        view = ListCollectionView()
+        view = mainView
     }
     
     override func viewDidLoad() {
@@ -20,9 +21,11 @@ class TodoTab: UIViewController {
         view.backgroundColor = .white
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         NotificationCenter.default.post(name: NSNotification.Name("todo"), object: nil, userInfo: ["tab": KindOfTab.todo])
+        mainView.tap = .todo
+        mainView.updateSnapshot()
     }
     
 }

@@ -14,6 +14,7 @@ class ListCollectionView: UIView {
     let collectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout())
     var dataSource: UICollectionViewDiffableDataSource<String, String>!
     let viewModel = CollectionViewModel()
+    var tap: KindOfTab = .todo
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -24,6 +25,7 @@ class ListCollectionView: UIView {
         }
         configureDataSource()
         updateSnapshot()
+        
     }
     
     static func collectionViewLayout() -> UICollectionViewLayout {
@@ -81,17 +83,25 @@ class ListCollectionView: UIView {
     
     func updateSnapshot() {
         var snapshot = NSDiffableDataSourceSnapshot<String, String>()
-        let sections = ["기본 그룹"]
+        let sections = ["기본 그룹", "test"]
         snapshot.appendSections(sections)
         dataSource.apply(snapshot)
         for (index, item) in sections.enumerated() {
             if index == 0 {
                 var sectionSnapshot = NSDiffableDataSourceSectionSnapshot<String>()
-                let headerItem = item
-                sectionSnapshot.append([headerItem])
-                let arrays = viewModel.listToArray(viewModel.todoList)
-                sectionSnapshot.append(arrays, to: headerItem)
-                sectionSnapshot.expand([headerItem])
+                sectionSnapshot.append([item])
+                var arrays: [String] = []
+                
+                switch tap {
+                case .todo:
+                    arrays = viewModel.listToArray(viewModel.todoList)
+                    sectionSnapshot.append(arrays, to: item)
+                    sectionSnapshot.expand([item])
+                case .goal:
+                    arrays = viewModel.listToArray(viewModel.goalList)
+                    sectionSnapshot.append(arrays, to: item)
+                    sectionSnapshot.expand([item])
+                }
                 dataSource.apply(sectionSnapshot, to: item)
 
             } else {
