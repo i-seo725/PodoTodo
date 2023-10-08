@@ -22,7 +22,6 @@ class TodoTab: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        print("todo tab")
         NotificationCenter.default.post(name: NSNotification.Name("todo"), object: nil, userInfo: ["tab": KindOfTab.todo])
     }
     

@@ -7,13 +7,13 @@
 
 import UIKit
 import SnapKit
+import RealmSwift
 
 class ListCollectionView: UIView {
     
     let collectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout())
     var dataSource: UICollectionViewDiffableDataSource<String, String>!
-    let dummy = ["a@@@@@@@@@@@@@@", "b##########", "c$$$$$$$$$", "d%%%%%%%%%"]
-    let dummy2 = ["aaaaaaaa", "bbbbbbbbb", "ccccccccc", "ddddddddddd"]
+    let viewModel = CollectionViewModel()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -81,7 +81,7 @@ class ListCollectionView: UIView {
     
     func updateSnapshot() {
         var snapshot = NSDiffableDataSourceSnapshot<String, String>()
-        let sections = ["과제", "쇼핑"]
+        let sections = ["기본 그룹"]
         snapshot.appendSections(sections)
         dataSource.apply(snapshot)
         for (index, item) in sections.enumerated() {
@@ -89,7 +89,7 @@ class ListCollectionView: UIView {
                 var sectionSnapshot = NSDiffableDataSourceSectionSnapshot<String>()
                 let headerItem = item
                 sectionSnapshot.append([headerItem])
-                let arrays = ["컬렉션뷰 만들기", "디퍼블이 머지", "날씨 API 구현", "UI 그리기...ㅠㅠ"]
+                let arrays = viewModel.listToArray(viewModel.todoList)
                 sectionSnapshot.append(arrays, to: headerItem)
                 sectionSnapshot.expand([headerItem])
                 dataSource.apply(sectionSnapshot, to: item)
@@ -105,12 +105,5 @@ class ListCollectionView: UIView {
             }
           
         }
-        
-        //numberOfItemsInSection, 열거형도 고유한 값을 가지기 때문에 사용 가능, 겹치지 않으면 문자열도 가능
-//        var snapshot2 = NSDiffableDataSourceSnapshot<Int, String>()    //스냅샷 찍을 수 있게 하는 구조체, diffableDataSource 제네릭과 같은 형태
-//        snapshot.appendSections([0, 1])    //섹션 몇개 사용하겠다, 인덱스가 아니라 0부터 시작하지 않아도 됨, 리터럴한 값이라 열거형 활용
-//        snapshot.appendItems(dummy, toSection: 0)    //아이템은 list 기반으로 채울거임
-//        snapshot.appendItems(dummy2, toSection: 1)
-//        dataSource.apply(snapshot)      //스냅샷 찍어서 뷰 갱신해라/반영해라
     }
 }

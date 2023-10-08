@@ -10,6 +10,7 @@ import RealmSwift
 
 protocol RepositoryType: AnyObject {
     func fetch() -> Results<MainList>
+    func fetchFilter(isTodo: Bool) -> Results<MainList>
     func create(_ item: MainList)
     func update(id: ObjectId, contents: String)
     func delete(_ item: MainList)
@@ -35,6 +36,13 @@ class Repository: RepositoryType {
     func fetch() -> Results<MainList> {
         let data = realm.objects(MainList.self)
         return data
+    }
+    
+    func fetchFilter(isTodo: Bool) -> Results<MainList> {
+        let result = realm.objects(MainList.self).where {
+            $0.isTodo == isTodo
+        }
+        return result
     }
     
     func create(_ item: MainList) {

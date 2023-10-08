@@ -87,7 +87,6 @@ class MainViewController: UIViewController {
     }
     
     @objc func addButtonTapped() {
-        print(tab)
         switch tab {
         case .todo:
             let vc = TodoAddViewController()

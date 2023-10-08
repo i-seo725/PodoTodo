@@ -40,6 +40,7 @@
 		F466D6072AD12ACA00819ED9 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = F466D6062AD12ACA00819ED9 /* Realm */; };
 		F466D6092AD12ACA00819ED9 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = F466D6082AD12ACA00819ED9 /* RealmSwift */; };
 		F466D6102AD131F800819ED9 /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = F466D60F2AD131F800819ED9 /* Repository.swift */; };
+		F466D6132AD266C900819ED9 /* CollectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F466D6122AD266C900819ED9 /* CollectionViewModel.swift */; };
 		F49DDCE32ACD88210067EFE6 /* ListCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49DDCE22ACD88210067EFE6 /* ListCollectionViewController.swift */; };
 		F49DDCE72ACDB0A60067EFE6 /* Grape.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49DDCE62ACDB0A60067EFE6 /* Grape.swift */; };
 		F49DDCE92ACDB7220067EFE6 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = F49DDCE82ACDB7220067EFE6 /* .gitignore */; };
@@ -78,6 +79,7 @@
 		F466D5FF2AD10F7F00819ED9 /* GoalAddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalAddViewController.swift; sourceTree = "<group>"; };
 		F466D6032AD12A1D00819ED9 /* MainListTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainListTable.swift; sourceTree = "<group>"; };
 		F466D60F2AD131F800819ED9 /* Repository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Repository.swift; sourceTree = "<group>"; };
+		F466D6122AD266C900819ED9 /* CollectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewModel.swift; sourceTree = "<group>"; };
 		F49DDCE22ACD88210067EFE6 /* ListCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCollectionViewController.swift; sourceTree = "<group>"; };
 		F49DDCE62ACDB0A60067EFE6 /* Grape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grape.swift; sourceTree = "<group>"; };
 		F49DDCE82ACDB7220067EFE6 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
@@ -200,11 +202,11 @@
 		F45DF3212AC81A53004D4667 /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				F466D6112AD266C000819ED9 /* CollectionView */,
 				F466D5FE2AD10F4300819ED9 /* Add */,
 				F45DF3302ACBFF60004D4667 /* Tab */,
 				F457C10D2AC1854500B4D46C /* MainViewController.swift */,
 				F45DF32B2AC87ED5004D4667 /* WeatherView.swift */,
-				F49DDCE22ACD88210067EFE6 /* ListCollectionViewController.swift */,
 				F46210FC2AD07BA0001A5EA2 /* KindOfTabEnum.swift */,
 			);
 			path = Main;
@@ -221,9 +223,9 @@
 		F45DF3302ACBFF60004D4667 /* Tab */ = {
 			isa = PBXGroup;
 			children = (
+				F4EE22252ACC06D50080535F /* TabViewController.swift */,
 				F45DF3312ACBFF67004D4667 /* TodoTab.swift */,
 				F45DF3332ACC00AC004D4667 /* GoalTab.swift */,
-				F4EE22252ACC06D50080535F /* TabViewController.swift */,
 			);
 			path = Tab;
 			sourceTree = "<group>";
@@ -240,8 +242,8 @@
 		F466D6012AD129AB00819ED9 /* Realm */ = {
 			isa = PBXGroup;
 			children = (
-				F466D6022AD129B400819ED9 /* Table */,
 				F466D60F2AD131F800819ED9 /* Repository.swift */,
+				F466D6022AD129B400819ED9 /* Table */,
 			);
 			path = Realm;
 			sourceTree = "<group>";
@@ -252,6 +254,15 @@
 				F466D6032AD12A1D00819ED9 /* MainListTable.swift */,
 			);
 			path = Table;
+			sourceTree = "<group>";
+		};
+		F466D6112AD266C000819ED9 /* CollectionView */ = {
+			isa = PBXGroup;
+			children = (
+				F466D6122AD266C900819ED9 /* CollectionViewModel.swift */,
+				F49DDCE22ACD88210067EFE6 /* ListCollectionViewController.swift */,
+			);
+			path = CollectionView;
 			sourceTree = "<group>";
 		};
 		F49DDCEA2ACDB72B0067EFE6 /* Network */ = {
@@ -366,6 +377,7 @@
 				F45DF30F2AC6C431004D4667 /* BaseViewController.swift in Sources */,
 				F457C10E2AC1854500B4D46C /* MainViewController.swift in Sources */,
 				F49DDCEC2ACDB7330067EFE6 /* APIKey.swift in Sources */,
+				F466D6132AD266C900819ED9 /* CollectionViewModel.swift in Sources */,
 				F45DF3272AC81A93004D4667 /* Tabbar.swift in Sources */,
 				F45DF32C2AC87ED5004D4667 /* WeatherView.swift in Sources */,
 				F466D6002AD10F7F00819ED9 /* GoalAddViewController.swift in Sources */,
