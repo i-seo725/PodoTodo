@@ -9,6 +9,11 @@ import Foundation
 import RealmSwift
 
 class MainList: Object {
+    
+    override func isEqual(_ object: Any?) -> Bool {
+        return true
+    }
+    
     @Persisted(primaryKey: true) var _id: ObjectId
     @Persisted var isTodo: Bool
     @Persisted var contents: String

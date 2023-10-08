@@ -15,6 +15,7 @@ class ListCollectionView: UIView {
     var dataSource: UICollectionViewDiffableDataSource<String, String>!
     let viewModel = CollectionViewModel()
     var tap: KindOfTab = .todo
+
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -25,7 +26,8 @@ class ListCollectionView: UIView {
         }
         configureDataSource()
         updateSnapshot()
-        
+        collectionView.delegate = self
+        print(viewModel.listToArray(viewModel.todoList))
     }
     
     static func collectionViewLayout() -> UICollectionViewLayout {
@@ -33,6 +35,7 @@ class ListCollectionView: UIView {
         var config = UICollectionLayoutListConfiguration(appearance: .plain)
         config.headerMode = .firstItemInSection
         config.backgroundColor = .clear
+        
         let layout = UICollectionViewCompositionalLayout.list(using: config)
         return layout
     }
@@ -116,4 +119,16 @@ class ListCollectionView: UIView {
           
         }
     }
+}
+
+extension ListCollectionView: UICollectionViewDelegate {
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let id = dataSource.itemIdentifier(for: indexPath) else {
+            print("id 가져오지 못함")
+            return
+        }
+       print(id)
+    }
+    
 }
