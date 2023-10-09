@@ -11,7 +11,7 @@ import SnapKit
 
 class GoalTab: UIViewController {
 
-    let mainView = ListCollectionView()
+    let mainView = TableView()
     
     override func loadView() {
         view = mainView
@@ -25,7 +25,8 @@ class GoalTab: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         NotificationCenter.default.post(name: NSNotification.Name("goal"), object: nil, userInfo: ["tab": KindOfTab.goal])
-        mainView.tap = .goal
-        mainView.updateSnapshot()
+        mainView.tab = .goal
+        mainView.tableView.reloadData()
+        print("??")
     }
 }

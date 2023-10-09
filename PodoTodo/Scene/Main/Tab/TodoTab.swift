@@ -11,7 +11,9 @@ import SnapKit
 
 class TodoTab: UIViewController {
  
-    let mainView = ListCollectionView()
+    let mainView = TableView()
+    var handler: ((UITableView) -> ())?
+
     override func loadView() {
         view = mainView
     }
@@ -24,8 +26,8 @@ class TodoTab: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         NotificationCenter.default.post(name: NSNotification.Name("todo"), object: nil, userInfo: ["tab": KindOfTab.todo])
-        mainView.tap = .todo
-        mainView.updateSnapshot()
+        mainView.tab = .todo
+        mainView.tableView.reloadData()
     }
     
 }

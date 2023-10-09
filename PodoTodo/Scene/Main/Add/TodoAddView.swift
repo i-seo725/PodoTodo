@@ -29,13 +29,10 @@ class TodoAddViewController: BaseViewController {
         return view
     }()
     
+    var table: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-    }
-    
-    @objc func doneButtonTapped() {
-        dismiss(animated: true)
     }
     
     override func configureView() {
@@ -48,6 +45,7 @@ class TodoAddViewController: BaseViewController {
     @objc func enterButtonTapped(_ sender: UITextField) {
         guard let text = sender.text else { return }
         Repository.shared.create(MainList(isTodo: true, contents: text))
+        table.reloadData()
         dismiss(animated: true)
     }
     

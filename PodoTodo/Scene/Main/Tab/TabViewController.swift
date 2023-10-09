@@ -11,13 +11,26 @@ import Pageboy
 
 class TabViewController: TabmanViewController {
     
-    private var vc: [UIViewController] = [TodoTab(), GoalTab()]
+    private var vc: [UIViewController] = []
+    let todoTab = TodoTab()
+    let goalTab = GoalTab()
+    var todoTable: UITableView!
+    var goalTable: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.dataSource = self
         
+        vc = [todoTab, goalTab]
+        configureTabbar()
+        
+        todoTable = todoTab.mainView.tableView
+        goalTable = goalTab.mainView.tableView
+    }
+    
+    func configureTabbar() {
+        self.dataSource = self
         let bar = TMBar.ButtonBar()
+        
         bar.layout.transitionStyle = .snap
         bar.layout.alignment = .centerDistributed
         bar.layout.contentMode = .intrinsic
@@ -32,6 +45,8 @@ class TabViewController: TabmanViewController {
         }
         addBar(bar, dataSource: self, at: .top)
     }
+    
+    
 }
 
 extension TabViewController: PageboyViewControllerDataSource, TMBarDataSource {

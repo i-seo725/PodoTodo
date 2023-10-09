@@ -38,6 +38,7 @@ class GoalAddViewController: BaseViewController {
     
     let datePicker = UIDatePicker()
     var selectedDate: Date?
+    var table: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,6 +57,7 @@ class GoalAddViewController: BaseViewController {
     @objc func enterButtonClicked(_ sender: UITextField) {
         guard let text = sender.text else { return }
         Repository.shared.create(MainList(isTodo: false, contents: text, date: selectedDate))
+        table.reloadData()
         dismiss(animated: true)
     }
     
@@ -123,6 +125,7 @@ class GoalAddViewController: BaseViewController {
             selectedDate = datePicker.date
         } else {
             Repository.shared.create(MainList(isTodo: false, contents: text, date: datePicker.date))
+            table.reloadData()
             dismiss(animated: true)
         }
     }

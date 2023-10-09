@@ -55,6 +55,9 @@ class MainViewController: UIViewController {
         return view
     }()
     
+    let containedView = TabViewController()
+    var todoTable: UITableView!
+    var goalTable: UITableView!
     var tab: KindOfTab = .todo
     
     override func viewDidLoad() {
@@ -65,11 +68,13 @@ class MainViewController: UIViewController {
         calendar.delegate = self
         setContainerView()
         receiveNotification()
-        
+        todoTable = containedView.todoTable
+        goalTable = containedView.goalTable
+        print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first)
     }
     
     func setContainerView() {
-        let containedView = TabViewController()
+        
         
         containedView.view.frame = .zero
         self.addChild(containedView)
@@ -99,6 +104,7 @@ class MainViewController: UIViewController {
             } else {
                 sheet.detents = [.medium()]
             }
+            vc.table = todoTable
             present(vc, animated: true)
         case .goal:
             let vc = GoalAddViewController()
@@ -111,6 +117,7 @@ class MainViewController: UIViewController {
             } else {
                 sheet.detents = [.medium()]
             }
+            vc.table = goalTable
             present(vc, animated: true)
         }
         
