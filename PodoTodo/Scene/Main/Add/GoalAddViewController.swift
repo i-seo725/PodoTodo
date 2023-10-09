@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 class GoalAddViewController: BaseViewController {
     
@@ -39,6 +40,8 @@ class GoalAddViewController: BaseViewController {
     let datePicker = UIDatePicker()
     var selectedDate: Date?
     var table: UITableView!
+    var listID: ObjectId!
+    var status = Present.add
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,8 +58,15 @@ class GoalAddViewController: BaseViewController {
     }
     
     @objc func enterButtonClicked(_ sender: UITextField) {
+       
         guard let text = sender.text else { return }
-        Repository.shared.create(MainList(isTodo: false, contents: text, date: selectedDate))
+        switch status {
+        case .add:
+            Repository.shared.create(MainList(isTodo: false, contents: text, date: selectedDate))
+        case .edit:
+            Repository.shared.update(id: listID, contents: text)
+        }
+        
         table.reloadData()
         dismiss(animated: true)
     }
@@ -124,7 +134,13 @@ class GoalAddViewController: BaseViewController {
             dateTextField.resignFirstResponder()
             selectedDate = datePicker.date
         } else {
-            Repository.shared.create(MainList(isTodo: false, contents: text, date: datePicker.date))
+            switch status {
+            case .add:
+                Repository.shared.create(MainList(isTodo: false, contents: text, date: datePicker.date))
+            case .edit:
+                Repository.shared.update(id: listID, contents: text)
+            }
+            
             table.reloadData()
             dismiss(animated: true)
         }

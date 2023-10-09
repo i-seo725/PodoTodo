@@ -10,10 +10,9 @@ import Tabman
 import SnapKit
 
 class TodoTab: UIViewController {
- 
+    
     let mainView = TableView()
-    var handler: ((UITableView) -> ())?
-
+    
     override func loadView() {
         view = mainView
     }
@@ -21,6 +20,7 @@ class TodoTab: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        editContents()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -28,6 +28,27 @@ class TodoTab: UIViewController {
         NotificationCenter.default.post(name: NSNotification.Name("todo"), object: nil, userInfo: ["tab": KindOfTab.todo])
         mainView.tab = .todo
         mainView.tableView.reloadData()
+    }
+    
+    func editContents() {
+        mainView.handler = { tableView, text, id, _ in
+            tableView.reloadData()
+            let vc = TodoAddViewController()
+            vc.textField.text = text
+            vc.status = .edit
+            vc.listID = id
+            vc.table = tableView
+            vc.modalPresentationStyle = .pageSheet
+            guard let sheet = vc.sheetPresentationController else { return }
+            if #available(iOS 16.0, *) {
+                sheet.detents = [.custom(resolver: { context in
+                    return 60
+                })]
+            } else {
+                sheet.detents = [.medium()]
+            }
+            self.present(vc, animated: true)
+        }
     }
     
 }

@@ -105,6 +105,7 @@ class MainViewController: UIViewController {
                 sheet.detents = [.medium()]
             }
             vc.table = todoTable
+            vc.status = .add
             present(vc, animated: true)
         case .goal:
             let vc = GoalAddViewController()

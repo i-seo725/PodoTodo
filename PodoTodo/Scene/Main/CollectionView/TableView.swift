@@ -7,12 +7,14 @@
 
 import UIKit
 import SnapKit
+import RealmSwift
 
 class TableView: UIView {
     
     let tableView = UITableView()
     let viewModel = CollectionViewModel()
     var tab = KindOfTab.todo
+    var handler: ((UITableView, String, ObjectId, Date?) -> ())?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -62,5 +64,18 @@ extension TableView: UITableViewDataSource, UITableViewDelegate {
         return cell
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        switch tab {
+        case .todo:
+            let text = viewModel.todoList[indexPath.row].contents
+            let id = viewModel.todoList[indexPath.row]._id
+            handler?(tableView, text, id, nil)
+        case .goal:
+            let text = viewModel.goalList[indexPath.row].contents
+            let date = viewModel.goalList[indexPath.row].date
+            let id = viewModel.goalList[indexPath.row]._id
+            handler?(tableView, text, id, date)
+        }
+    }
     
 }

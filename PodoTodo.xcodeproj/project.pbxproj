@@ -44,6 +44,7 @@
 		F466DB872AD2FFD200E2B306 /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = F466DB862AD2FFD200E2B306 /* Group.swift */; };
 		F466DB892AD30E9300E2B306 /* Results+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F466DB882AD30E9300E2B306 /* Results+Extension.swift */; };
 		F466DB8B2AD43AE300E2B306 /* TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F466DB8A2AD43AE300E2B306 /* TableView.swift */; };
+		F466DB8D2AD47AAF00E2B306 /* PresentEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = F466DB8C2AD47AAF00E2B306 /* PresentEnum.swift */; };
 		F49DDCE32ACD88210067EFE6 /* ListCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49DDCE22ACD88210067EFE6 /* ListCollectionView.swift */; };
 		F49DDCE72ACDB0A60067EFE6 /* Grape.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49DDCE62ACDB0A60067EFE6 /* Grape.swift */; };
 		F49DDCE92ACDB7220067EFE6 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = F49DDCE82ACDB7220067EFE6 /* .gitignore */; };
@@ -86,6 +87,7 @@
 		F466DB862AD2FFD200E2B306 /* Group.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
 		F466DB882AD30E9300E2B306 /* Results+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Results+Extension.swift"; sourceTree = "<group>"; };
 		F466DB8A2AD43AE300E2B306 /* TableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableView.swift; sourceTree = "<group>"; };
+		F466DB8C2AD47AAF00E2B306 /* PresentEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentEnum.swift; sourceTree = "<group>"; };
 		F49DDCE22ACD88210067EFE6 /* ListCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCollectionView.swift; sourceTree = "<group>"; };
 		F49DDCE62ACDB0A60067EFE6 /* Grape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grape.swift; sourceTree = "<group>"; };
 		F49DDCE82ACDB7220067EFE6 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
@@ -242,6 +244,7 @@
 			children = (
 				F46210F32ACFC16D001A5EA2 /* TodoAddView.swift */,
 				F466D5FF2AD10F7F00819ED9 /* GoalAddViewController.swift */,
+				F466DB8C2AD47AAF00E2B306 /* PresentEnum.swift */,
 			);
 			path = Add;
 			sourceTree = "<group>";
@@ -383,6 +386,7 @@
 				F466D6042AD12A1D00819ED9 /* MainListTable.swift in Sources */,
 				F45DF3342ACC00AC004D4667 /* GoalTab.swift in Sources */,
 				F466D6102AD131F800819ED9 /* Repository.swift in Sources */,
+				F466DB8D2AD47AAF00E2B306 /* PresentEnum.swift in Sources */,
 				F45DF31F2AC6CDBC004D4667 /* String+Extension.swift in Sources */,
 				F45DF30F2AC6C431004D4667 /* BaseViewController.swift in Sources */,
 				F457C10E2AC1854500B4D46C /* MainViewController.swift in Sources */,

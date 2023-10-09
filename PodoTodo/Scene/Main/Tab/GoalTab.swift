@@ -20,6 +20,7 @@ class GoalTab: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        editContents()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -28,5 +29,31 @@ class GoalTab: UIViewController {
         mainView.tab = .goal
         mainView.tableView.reloadData()
         print("??")
+    }
+    
+    func editContents() {
+        mainView.handler = { tableView, text, id, date in
+            tableView.reloadData()
+            let vc = GoalAddViewController()
+            vc.textField.text = text
+            vc.table = tableView
+            vc.listID = id
+            vc.status = .edit
+            
+            if let date {
+                vc.dateTextField.text = "\(date)"
+            }
+            
+            vc.modalPresentationStyle = .pageSheet
+            guard let sheet = vc.sheetPresentationController else { return }
+            if #available(iOS 16.0, *) {
+                sheet.detents = [.custom(resolver: { context in
+                    return 120
+                })]
+            } else {
+                sheet.detents = [.medium()]
+            }
+            self.present(vc, animated: true)
+        }
     }
 }

@@ -7,6 +7,7 @@
 
 import UIKit
 import SnapKit
+import RealmSwift
 
 class TodoAddViewController: BaseViewController {
     
@@ -29,7 +30,10 @@ class TodoAddViewController: BaseViewController {
         return view
     }()
     
+    let viewModel = CollectionViewModel()
+    var status = Present.add
     var table: UITableView!
+    var listID: ObjectId!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,10 +47,21 @@ class TodoAddViewController: BaseViewController {
     }
     
     @objc func enterButtonTapped(_ sender: UITextField) {
-        guard let text = sender.text else { return }
-        Repository.shared.create(MainList(isTodo: true, contents: text))
-        table.reloadData()
-        dismiss(animated: true)
+        switch status {
+        case .add:
+            guard let text = sender.text else { return }
+            Repository.shared.create(MainList(isTodo: true, contents: text))
+
+            table.reloadData()
+            dismiss(animated: true)
+        case .edit:
+            guard let text = sender.text else { return }
+            Repository.shared.update(id: listID, contents: text)
+
+            table.reloadData()
+            dismiss(animated: true)
+        }
+    
     }
     
     
