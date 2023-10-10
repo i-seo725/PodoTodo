@@ -28,7 +28,6 @@ class GoalTab: UIViewController {
         NotificationCenter.default.post(name: NSNotification.Name("goal"), object: nil, userInfo: ["tab": KindOfTab.goal])
         mainView.tab = .goal
         mainView.tableView.reloadData()
-        print("??")
     }
     
     func editContents() {

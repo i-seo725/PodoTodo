@@ -78,4 +78,37 @@ extension TableView: UITableViewDataSource, UITableViewDelegate {
         }
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        switch tab {
+        case .todo:
+            return 50
+        case .goal:
+            return 65
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        
+        switch tab {
+        case .todo:
+            if editingStyle == .delete {
+                Repository.shared.delete(viewModel.todoList[indexPath.row])
+                tableView.reloadData()
+            }
+        case .goal:
+            print(viewModel.goalList[indexPath.row])
+            if editingStyle == .delete {
+                Repository.shared.delete(viewModel.goalList[indexPath.row])
+                tableView.reloadData()
+            }
+        }
+        
+    }
+    
+    
+    
 }

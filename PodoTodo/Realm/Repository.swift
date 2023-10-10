@@ -67,7 +67,13 @@ class Repository: RepositoryType {
     }
     
     func delete(_ item: MainList) {
-        
+        do {
+            try realm.write {
+                realm.delete(item)
+            }
+        } catch {
+            print(error)
+        }
     }
     
 }

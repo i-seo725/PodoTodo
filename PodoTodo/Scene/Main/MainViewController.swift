@@ -20,7 +20,7 @@ class MainViewController: UIViewController {
         let imageConfig = UIImage.SymbolConfiguration(pointSize: 30, weight: .light)
         let image = UIImage(systemName: "plus", withConfiguration: imageConfig)
         view.setImage(image, for: .normal)
-        view.tintColor = .fourthGrape
+        view.tintColor = .white
         view.backgroundColor = .firstGrape
         
         view.layer.shadowOffset = .init(width: 5, height: 5)

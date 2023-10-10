@@ -29,6 +29,7 @@ class TabViewController: TabmanViewController {
     
     func configureTabbar() {
         self.dataSource = self
+        self.isScrollEnabled = false
         let bar = TMBar.ButtonBar()
         
         bar.layout.transitionStyle = .snap
@@ -41,7 +42,7 @@ class TabViewController: TabmanViewController {
         bar.buttons.customize { (button) in
             button.tintColor = .fourthGrape
             button.selectedTintColor = .black
-            button.font = UIFont(name: Font.jamsilRegular.rawValue, size: 20)!
+            button.font = UIFont(name: Font.jamsilRegular.rawValue, size: 17)!
         }
         addBar(bar, dataSource: self, at: .top)
     }
