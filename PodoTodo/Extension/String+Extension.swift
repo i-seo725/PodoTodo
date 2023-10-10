@@ -21,4 +21,15 @@ extension String {
         return String(format: self.localized, num)
     }
     
+    func stringToDate() -> Date? {
+        let formatter = DateFormatter()
+             formatter.dateFormat = "yyyy년 MM월 dd일, a h시 mm분"
+             formatter.timeZone = TimeZone(identifier: "KST")
+             if let date = formatter.date(from: self) {
+                 return date
+             } else {
+                 return nil
+             }
+    }
+    
 }

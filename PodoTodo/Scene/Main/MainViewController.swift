@@ -62,6 +62,7 @@ class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print(Date().dateToString())
         configureView()
         setConstraints()
         calendar.dataSource = self
@@ -74,21 +75,25 @@ class MainViewController: UIViewController {
     }
     
     func setContainerView() {
-        
-        
         containedView.view.frame = .zero
         self.addChild(containedView)
         tabView.addSubview(containedView.view)
         containedView.didMove(toParent: self)
     }
-    
     func configureView() {
+        let editButton = UIBarButtonItem(title: "edit", style: .plain, target: self, action: #selector(editButtonTapped))
+        navigationItem.leftBarButtonItem = editButton
+        
         view.backgroundColor = .white
         view.addSubview(calendar)
         view.addSubview(weather)
         view.addSubview(tabView)
         view.addSubview(addButton)
         addButton.addTarget(self, action: #selector(addButtonTapped), for: .touchUpInside)
+    }
+    
+    @objc func editButtonTapped() {
+        
     }
     
     @objc func addButtonTapped() {
