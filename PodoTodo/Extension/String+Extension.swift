@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 extension String {
     
@@ -31,5 +32,13 @@ extension String {
                  return nil
              }
     }
+    
+    func strikeThrough() -> NSAttributedString {
+        let attribute = NSMutableAttributedString(string: self)
+        attribute.addAttribute(.strikethroughStyle, value: NSUnderlineStyle.single.rawValue, range: NSMakeRange(0, attribute.length))
+        attribute.addAttribute(.foregroundColor, value: UIColor.lightGray, range: NSMakeRange(0, attribute.length))
+        return attribute
+    }
+    
     
 }

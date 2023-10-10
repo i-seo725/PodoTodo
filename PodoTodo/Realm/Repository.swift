@@ -39,15 +39,12 @@ class Repository: RepositoryType {
     }
     
     func fetchFilter(isTodo: Bool) -> Results<MainList> {
-        let result = realm.objects(MainList.self).where {
+        let data = realm.objects(MainList.self).where {
             $0.isTodo == isTodo
         }
+        let result = data.sorted(byKeyPath: "isDone")
         return result
     }
-    
-//    func sort(isDone: Bool) -> Results<MainList> {
-//        
-//    }
 //    
 //    func filterDate(isTodo: Bool, date: String) -> Results<MainList> {
 //        
