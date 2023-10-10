@@ -38,10 +38,7 @@ class GoalTab: UIViewController {
             vc.table = tableView
             vc.listID = id
             vc.status = .edit
-            
-            if let date {
-                vc.dateTextField.text = "\(date)"
-            }
+            vc.dateTextField.text = date
             
             vc.modalPresentationStyle = .pageSheet
             guard let sheet = vc.sheetPresentationController else { return }

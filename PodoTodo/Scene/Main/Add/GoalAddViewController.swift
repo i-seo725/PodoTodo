@@ -63,7 +63,7 @@ class GoalAddViewController: BaseViewController {
         switch status {
         case .add:
             if let date = selectedDate {
-                Repository.shared.create(MainList(isTodo: false, contents: text, date: date))
+                Repository.shared.create(MainList(isTodo: false, contents: text, date: date.dateToString()))
             }
         case .edit:
             Repository.shared.update(id: listID, contents: text)
@@ -104,16 +104,8 @@ class GoalAddViewController: BaseViewController {
     
     @objc func dateChange(_ sender: UIDatePicker) {
         dateTextField.text = sender.date.dateToString()
-//        dateTextField.text = convertDateFormat(sender.date)
         selectedDate = sender.date
     }
-    
-//    func convertDateFormat(_ date: Date) -> String {
-//        let dateFormatter = DateFormatter()
-//        dateFormatter.dateFormat = "yyyy년 MM월 dd일"
-//        let result = dateFormatter.string(from: date)
-//        return result
-//    }
     
     func setupToolbar() {
         let toolBar = UIToolbar()
@@ -127,7 +119,6 @@ class GoalAddViewController: BaseViewController {
     @objc func doneButtonTapped() {
         guard let text = textField.text else {
             dateTextField.text = datePicker.date.dateToString()
-//            dateTextField.text = convertDateFormat(datePicker.date)
             dateTextField.resignFirstResponder()
             selectedDate = datePicker.date
             return
@@ -135,13 +126,12 @@ class GoalAddViewController: BaseViewController {
         
         if text == "" {
             dateTextField.text = datePicker.date.dateToString()
-//            dateTextField.text = convertDateFormat(datePicker.date)
             dateTextField.resignFirstResponder()
             selectedDate = datePicker.date
         } else {
             switch status {
             case .add:
-                Repository.shared.create(MainList(isTodo: false, contents: text, date: datePicker.date))
+                Repository.shared.create(MainList(isTodo: false, contents: text, date: datePicker.date.dateToString()))
             case .edit:
                 Repository.shared.update(id: listID, contents: text)
             }

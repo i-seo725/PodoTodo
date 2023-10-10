@@ -19,12 +19,12 @@ class MainList: Object {
     @Persisted var contents: String
 //    @Persisted var group: List<Group>
 //    @Persisted var temp: String = "기본 그룹"
-    @Persisted var date: Date
+    @Persisted var date: String
     @Persisted var checklist: String?
     @Persisted var isDone: Bool
     @Persisted var isAlert: Bool
     
-    convenience init(isTodo: Bool, contents: String, isDone: Bool = false, isAlert: Bool = false, date: Date = Date()) {
+    convenience init(isTodo: Bool, contents: String, isDone: Bool = false, isAlert: Bool = false, date: String = Date().dateToString()) {
         self.init()
         self.isTodo = isTodo
         self.contents = contents

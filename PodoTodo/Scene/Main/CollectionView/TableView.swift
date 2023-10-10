@@ -14,7 +14,7 @@ class TableView: UIView {
     let tableView = UITableView()
     let viewModel = CollectionViewModel()
     var tab = KindOfTab.todo
-    var handler: ((UITableView, String, ObjectId, Date?) -> ())?
+    var handler: ((_ table: UITableView, _ contents: String, _ id: ObjectId, _ date: String) -> ())?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -69,7 +69,7 @@ extension TableView: UITableViewDataSource, UITableViewDelegate {
         case .todo:
             let text = viewModel.todoList[indexPath.row].contents
             let id = viewModel.todoList[indexPath.row]._id
-            handler?(tableView, text, id, nil)
+            handler?(tableView, text, id, Date().dateToString())
         case .goal:
             let text = viewModel.goalList[indexPath.row].contents
             let date = viewModel.goalList[indexPath.row].date
