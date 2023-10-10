@@ -50,8 +50,10 @@ extension TableView: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell()
         var contents = cell.defaultContentConfiguration()
+        
         contents.textProperties.font = UIFont(name: Font.jamsilLight.rawValue, size: 16)!
         contents.secondaryTextProperties.font = UIFont(name: Font.jamsilThin.rawValue, size: 12)!
+        
         switch tab {
         case .todo:
             if viewModel.todoList[indexPath.row].isDone == true {
@@ -60,8 +62,15 @@ extension TableView: UITableViewDataSource, UITableViewDelegate {
                 contents.text = viewModel.todoList[indexPath.row].contents
             }
         case .goal:
-            contents.text = viewModel.goalList[indexPath.row].contents
-            contents.secondaryText = "\(viewModel.goalList[indexPath.row].date.dateToString())까지"
+            let dateText = "\(viewModel.goalList[indexPath.row].date.dateToString())까지"
+            if viewModel.goalList[indexPath.row].isDone == true {
+                contents.attributedText = viewModel.goalList[indexPath.row].contents.strikeThrough()
+                contents.secondaryAttributedText = dateText.strikeThrough()
+            } else {
+                contents.text = viewModel.goalList[indexPath.row].contents
+                contents.secondaryText = dateText
+            }
+            
         }
         
         cell.contentConfiguration = contents
