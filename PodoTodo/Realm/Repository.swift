@@ -38,16 +38,26 @@ class Repository: RepositoryType {
         return data
     }
     
+    
     func fetchFilter(isTodo: Bool) -> Results<MainList> {
+        
         let data = realm.objects(MainList.self).where {
+            
             $0.isTodo == isTodo
         }
         let result = data.sorted(byKeyPath: "isDone")
         return result
     }
-//    
-//    func filterDate(isTodo: Bool, date: String) -> Results<MainList> {
-//        
+    
+    
+//    func fetchFilter(isTodo: Bool, date: Date) -> Results<MainList> {
+//
+//        let data = realm.objects(MainList.self).where {
+//
+//            $0.isTodo == isTodo && $0.date == date
+//        }
+//        let result = data.sorted(byKeyPath: "isDone")
+//        return result
 //    }
     
     func create(_ item: MainList) {
@@ -67,6 +77,16 @@ class Repository: RepositoryType {
             }
         } catch {
             print(error) //nslog로 기록 남기기, 집계하기 등 필요
+        }
+    }
+    
+    func toggleDone(id: ObjectId, isDone: Bool) {
+        do {
+            try realm.write {
+                realm.create(MainList.self, value: ["_id": id, "isDone": isDone], update: .modified)
+            }
+        } catch {
+            print(error)
         }
     }
     

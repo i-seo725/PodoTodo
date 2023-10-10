@@ -15,6 +15,7 @@ class TableView: UIView {
     let viewModel = CollectionViewModel()
     var tab = KindOfTab.todo
     var handler: ((_ table: UITableView, _ contents: String, _ id: ObjectId, _ date: Date) -> ())?
+    var calendarDate = Date()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -29,6 +30,7 @@ class TableView: UIView {
         }
         tableView.dataSource = self
         tableView.delegate = self
+        
     }
     
     required init?(coder: NSCoder) {
@@ -79,6 +81,7 @@ extension TableView: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
         switch tab {
         case .todo:
             let text = viewModel.todoList[indexPath.row].contents
@@ -123,6 +126,26 @@ extension TableView: UITableViewDataSource, UITableViewDelegate {
         
     }
     
+    func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let doneButton = UIContextualAction(style: .normal, title: nil) { action, view, handler in
+                        
+            switch self.tab {
+            case .todo:
+                self.viewModel.toggleTodo(indexPath: indexPath)
+            case .goal:
+                self.viewModel.toggleGoal(indexPath: indexPath)
+            }
+            self.tableView.reloadData()
+            
+            handler(true)
+        }
+        doneButton.backgroundColor = .thirdGrape
+        doneButton.image = UIImage(systemName: "checkmark")!
+        let swipeConfiguration = UISwipeActionsConfiguration(actions: [doneButton])
+        
+        
+        return swipeConfiguration
+    }
     
     
 }

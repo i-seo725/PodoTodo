@@ -122,7 +122,7 @@ class MainViewController: UIViewController {
         
         
     }
-
+    
     func receiveNotification() {
         NotificationCenter.default.addObserver(self, selector: #selector(receiveTodoValue), name: NSNotification.Name("todo"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(receiveGoalValue), name: NSNotification.Name("goal"), object: nil)
@@ -170,6 +170,6 @@ class MainViewController: UIViewController {
 extension MainViewController: FSCalendarDelegate, FSCalendarDataSource {
     
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
-        
+        print(date, "fs")
     }
 }
