@@ -13,7 +13,7 @@ extension Date {
         let formatter = DateFormatter()
         formatter.locale = Locale(identifier: "ko_KR")
         formatter.timeZone = TimeZone(abbreviation: "KST")
-        formatter.dateFormat = "yyyy년 MM월 dd일, a h시 mm분"
+        formatter.dateFormat = "yyyy년 MM월 dd일"
         
         let result = formatter.string(from: self)
         return result

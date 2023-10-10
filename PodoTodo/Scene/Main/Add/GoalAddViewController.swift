@@ -63,7 +63,7 @@ class GoalAddViewController: BaseViewController {
         switch status {
         case .add:
             if let date = selectedDate {
-                Repository.shared.create(MainList(isTodo: false, contents: text, date: date.dateToString()))
+                Repository.shared.create(MainList(isTodo: false, contents: text, date: date))
             }
         case .edit:
             Repository.shared.update(id: listID, contents: text)
@@ -131,7 +131,7 @@ class GoalAddViewController: BaseViewController {
         } else {
             switch status {
             case .add:
-                Repository.shared.create(MainList(isTodo: false, contents: text, date: datePicker.date.dateToString()))
+                Repository.shared.create(MainList(isTodo: false, contents: text, date: datePicker.date))
             case .edit:
                 Repository.shared.update(id: listID, contents: text)
             }

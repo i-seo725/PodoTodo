@@ -81,19 +81,12 @@ class MainViewController: UIViewController {
         containedView.didMove(toParent: self)
     }
     func configureView() {
-        let editButton = UIBarButtonItem(title: "edit", style: .plain, target: self, action: #selector(editButtonTapped))
-        navigationItem.leftBarButtonItem = editButton
-        
         view.backgroundColor = .white
         view.addSubview(calendar)
         view.addSubview(weather)
         view.addSubview(tabView)
         view.addSubview(addButton)
         addButton.addTarget(self, action: #selector(addButtonTapped), for: .touchUpInside)
-    }
-    
-    @objc func editButtonTapped() {
-        
     }
     
     @objc func addButtonTapped() {
@@ -175,5 +168,8 @@ class MainViewController: UIViewController {
 }
 
 extension MainViewController: FSCalendarDelegate, FSCalendarDataSource {
-   
+    
+    func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
+        
+    }
 }

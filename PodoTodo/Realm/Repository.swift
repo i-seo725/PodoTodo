@@ -45,6 +45,13 @@ class Repository: RepositoryType {
         return result
     }
     
+//    func sort(isDone: Bool) -> Results<MainList> {
+//        
+//    }
+//    
+//    func filterDate(isTodo: Bool, date: String) -> Results<MainList> {
+//        
+//    }
     
     func create(_ item: MainList) {
         do {
