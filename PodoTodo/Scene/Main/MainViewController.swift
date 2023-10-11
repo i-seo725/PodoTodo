@@ -62,7 +62,6 @@ class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(Date().dateToString())
         configureView()
         setConstraints()
         calendar.dataSource = self
@@ -167,9 +166,9 @@ class MainViewController: UIViewController {
 
 }
 
-extension MainViewController: FSCalendarDelegate, FSCalendarDataSource {
+extension MainViewController: FSCalendarDelegate, FSCalendarDataSource, FSCalendarDelegateAppearance {
     
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
-        print(date, "fs")
+        NotificationCenter.default.post(name: NSNotification.Name("selectedDate"), object: nil, userInfo: ["date": date])
     }
 }

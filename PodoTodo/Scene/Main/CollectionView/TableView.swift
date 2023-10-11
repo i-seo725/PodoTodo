@@ -17,9 +17,21 @@ class TableView: UIView {
     var handler: ((_ table: UITableView, _ contents: String, _ id: ObjectId, _ date: Date) -> ())?
     var calendarDate = Date()
     
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         configureView()
+        NotificationCenter.default.addObserver(self, selector: #selector(receiveDate), name: NSNotification.Name("selectedDate"), object: nil)
+    }
+    
+    @objc func receiveDate(notification: NSNotification) {
+        guard let date = notification.userInfo?["date"] as? Date else {
+            return
+        }
+        calendarDate = date
+        viewModel.todoList(date: date)
+        viewModel.goalList(date: date)
+        tableView.reloadData()
     }
     
     func configureView() {
@@ -30,7 +42,6 @@ class TableView: UIView {
         }
         tableView.dataSource = self
         tableView.delegate = self
-        
     }
     
     required init?(coder: NSCoder) {
@@ -43,8 +54,12 @@ extension TableView: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch tab {
-        case .todo: return viewModel.todoList.count
-        case .goal: return viewModel.goalList.count
+        case .todo:
+            print(viewModel.todoList(date: calendarDate).count, "todo")
+            return viewModel.todoList(date: calendarDate).count
+        case .goal:
+            print(viewModel.goalList(date: calendarDate).count, "goal")
+            return viewModel.goalList(date: calendarDate).count
         }
     }
     
@@ -53,44 +68,58 @@ extension TableView: UITableViewDataSource, UITableViewDelegate {
         let cell = UITableViewCell()
         var contents = cell.defaultContentConfiguration()
         
-        contents.textProperties.font = UIFont(name: Font.jamsilLight.rawValue, size: 16)!
-        contents.secondaryTextProperties.font = UIFont(name: Font.jamsilThin.rawValue, size: 12)!
-        
-        switch tab {
-        case .todo:
-            if viewModel.todoList[indexPath.row].isDone == true {
-                contents.attributedText = viewModel.todoList[indexPath.row].contents.strikeThrough()
-            } else {
-                contents.text = viewModel.todoList[indexPath.row].contents
-            }
-        case .goal:
-            let dateText = "\(viewModel.goalList[indexPath.row].date.dateToString())까지"
-            if viewModel.goalList[indexPath.row].isDone == true {
-                contents.attributedText = viewModel.goalList[indexPath.row].contents.strikeThrough()
-                contents.secondaryAttributedText = dateText.strikeThrough()
-            } else {
-                contents.text = viewModel.goalList[indexPath.row].contents
-                contents.secondaryText = dateText
+        if indexPath.row < viewModel.goalList(date: calendarDate).count {
+            
+            contents.textProperties.font = UIFont(name: Font.jamsilLight.rawValue, size: 16)!
+            contents.secondaryTextProperties.font = UIFont(name: Font.jamsilThin.rawValue, size: 12)!
+            
+            let todoList = viewModel.todoList(date: calendarDate)[indexPath.row]
+            let goalList = viewModel.goalList(date: calendarDate)[indexPath.row]
+            
+            switch tab {
+            case .todo:
+                
+                if todoList.isDone == true {
+                    contents.attributedText = todoList.contents.strikeThrough()
+                } else {
+                    contents.text = todoList.contents
+                }
+                
+            case .goal:
+                
+                let dateText = "\(goalList.date)까지"
+                if goalList.isDone == true {
+                    contents.attributedText = goalList.contents.strikeThrough()
+                    contents.secondaryAttributedText = dateText.strikeThrough()
+                } else {
+                    contents.text = goalList.contents
+                    contents.secondaryText = dateText
+                }
+                
             }
             
+            cell.contentConfiguration = contents
+        } else {
+            print(indexPath.row, "몇번재 로우")
+            print(viewModel.goalList(date: calendarDate))
         }
-        
-        cell.contentConfiguration = contents
-        
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
+        let todoList = viewModel.todoList(date: calendarDate)[indexPath.row]
+        let goalList = viewModel.goalList(date: calendarDate)[indexPath.row]
+        
         switch tab {
         case .todo:
-            let text = viewModel.todoList[indexPath.row].contents
-            let id = viewModel.todoList[indexPath.row]._id
+            let text = todoList.contents
+            let id = todoList._id
             handler?(tableView, text, id, Date())
         case .goal:
-            let text = viewModel.goalList[indexPath.row].contents
-            let date = viewModel.goalList[indexPath.row].date
-            let id = viewModel.goalList[indexPath.row]._id
+            let text = goalList.contents
+            let date = goalList.date
+            let id = goalList._id
             handler?(tableView, text, id, date)
         }
     }
@@ -113,13 +142,12 @@ extension TableView: UITableViewDataSource, UITableViewDelegate {
         switch tab {
         case .todo:
             if editingStyle == .delete {
-                Repository.shared.delete(viewModel.todoList[indexPath.row])
+                Repository.shared.delete(viewModel.todoList(date: calendarDate)[indexPath.row])
                 tableView.reloadData()
             }
         case .goal:
-            print(viewModel.goalList[indexPath.row])
             if editingStyle == .delete {
-                Repository.shared.delete(viewModel.goalList[indexPath.row])
+                Repository.shared.delete(viewModel.goalList(date: calendarDate)[indexPath.row])
                 tableView.reloadData()
             }
         }
@@ -127,13 +155,14 @@ extension TableView: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        
         let doneButton = UIContextualAction(style: .normal, title: nil) { action, view, handler in
-                        
+            
             switch self.tab {
             case .todo:
-                self.viewModel.toggleTodo(indexPath: indexPath)
+                self.viewModel.toggleTodo(date: self.calendarDate, indexPath: indexPath)
             case .goal:
-                self.viewModel.toggleGoal(indexPath: indexPath)
+                self.viewModel.toggleGoal(date: self.calendarDate, indexPath: indexPath)
             }
             self.tableView.reloadData()
             
@@ -143,9 +172,9 @@ extension TableView: UITableViewDataSource, UITableViewDelegate {
         
         switch tab {
         case .todo:
-            doneButton.image = viewModel.todoList[indexPath.row].isDone ? UIImage(systemName: "return")! : UIImage(systemName: "checkmark")!
+            doneButton.image = viewModel.todoList(date: calendarDate)[indexPath.row].isDone ? UIImage(systemName: "return")! : UIImage(systemName: "checkmark")!
         case .goal:
-            doneButton.image = viewModel.goalList[indexPath.row].isDone ? UIImage(systemName: "return")! : UIImage(systemName: "checkmark")!
+            doneButton.image = viewModel.goalList(date: calendarDate)[indexPath.row].isDone ? UIImage(systemName: "return")! : UIImage(systemName: "checkmark")!
         }
         
         

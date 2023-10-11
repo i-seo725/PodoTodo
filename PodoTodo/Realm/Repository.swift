@@ -10,7 +10,7 @@ import RealmSwift
 
 protocol RepositoryType: AnyObject {
     func fetch() -> Results<MainList>
-    func fetchFilter(isTodo: Bool) -> Results<MainList>
+    func fetchFilter(isTodo: Bool, date: Date) -> Results<MainList>
     func create(_ item: MainList)
     func update(id: ObjectId, contents: String)
     func delete(_ item: MainList)
@@ -39,10 +39,10 @@ class Repository: RepositoryType {
     }
     
     
-    func fetchFilter(isTodo: Bool) -> Results<MainList> {
-        
+    func fetchFilter1(isTodo: Bool) -> Results<MainList> {
+
         let data = realm.objects(MainList.self).where {
-            
+
             $0.isTodo == isTodo
         }
         let result = data.sorted(byKeyPath: "isDone")
@@ -50,15 +50,19 @@ class Repository: RepositoryType {
     }
     
     
-//    func fetchFilter(isTodo: Bool, date: Date) -> Results<MainList> {
-//
-//        let data = realm.objects(MainList.self).where {
-//
-//            $0.isTodo == isTodo && $0.date == date
-//        }
-//        let result = data.sorted(byKeyPath: "isDone")
-//        return result
-//    }
+    func fetchFilter(isTodo: Bool, date: Date) -> Results<MainList> {
+        let startDay = date.dateToString().stringToDate()!
+        let endDay = startDay.addingTimeInterval(86400)
+        
+        let data = realm.objects(MainList.self).filter("date >= %@ AND date < %@", startDay, endDay)
+        
+//        let result = data.where {
+//            $0.isTodo == isTodo
+//        }.sorted(byKeyPath: "isDone")
+        
+        
+        return data.sorted(byKeyPath: "isDone")
+    }
     
     func create(_ item: MainList) {
         do {

@@ -9,23 +9,54 @@ import Foundation
 import RealmSwift
 
 class CollectionViewModel {
-    
-    let todoList = Repository.shared.fetchFilter(isTodo: true)
-    let goalList = Repository.shared.fetchFilter(isTodo: false)
 
-    func toggleTodo(indexPath: IndexPath) {
-        if todoList[indexPath.row].isDone {
-            Repository.shared.toggleDone(id: todoList[indexPath.row]._id, isDone: false)
+//    let todoList = Repository.shared.fetchFilter1(isTodo: true)
+//    let goalList = Repository.shared.fetchFilter1(isTodo: false)
+    
+    func todoList(date: Date) -> Results<MainList> {
+        return Repository.shared.fetchFilter(isTodo: true, date: date)
+    }
+    
+    func goalList(date: Date) -> Results<MainList> {
+        return Repository.shared.fetchFilter(isTodo: false, date: date)
+    }
+    
+    
+    
+    
+//    func toggleTodo(indexPath: IndexPath) {
+//        let todoList = todoList[indexPath.row]
+//        if todoList.isDone {
+//            Repository.shared.toggleDone(id: todoList._id, isDone: false)
+//        } else {
+//            Repository.shared.toggleDone(id: todoList._id, isDone: true)
+//        }
+//    }
+//
+//    func toggleGoal(indexPath: IndexPath) {
+//        let goalList = goalList[indexPath.row]
+//        if goalList.isDone {
+//            Repository.shared.toggleDone(id: goalList._id, isDone: false)
+//        } else {
+//            Repository.shared.toggleDone(id: goalList._id, isDone: true)
+//        }
+//    }
+    
+    func toggleTodo(date: Date, indexPath: IndexPath) {
+        let todoList = todoList(date: date)[indexPath.row]
+        if todoList.isDone {
+            Repository.shared.toggleDone(id: todoList._id, isDone: false)
         } else {
-            Repository.shared.toggleDone(id: todoList[indexPath.row]._id, isDone: true)
+            Repository.shared.toggleDone(id: todoList._id, isDone: true)
         }
     }
     
-    func toggleGoal(indexPath: IndexPath) {
-        if goalList[indexPath.row].isDone {
-            Repository.shared.toggleDone(id: goalList[indexPath.row]._id, isDone: false)
+    func toggleGoal(date: Date, indexPath: IndexPath) {
+        let goalList = goalList(date: date)[indexPath.row]
+        if goalList.isDone {
+            Repository.shared.toggleDone(id: goalList._id, isDone: false)
         } else {
-            Repository.shared.toggleDone(id: goalList[indexPath.row]._id, isDone: true)
+            Repository.shared.toggleDone(id: goalList._id, isDone: true)
         }
     }
     

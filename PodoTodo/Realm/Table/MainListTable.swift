@@ -30,7 +30,11 @@ class MainList: Object {
         self.contents = contents
         self.isDone = isDone
         self.isAlert = isAlert
-        self.date = date
+        
+        
+        self.date = date.dateToString().stringToDate() ?? Date()
+        
+        
     }
     
 }
