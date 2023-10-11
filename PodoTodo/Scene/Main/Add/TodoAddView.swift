@@ -34,6 +34,7 @@ class TodoAddViewController: BaseViewController {
     var status = Present.add
     var table: UITableView!
     var listID: ObjectId!
+    var calendarDate = Date()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,13 +51,13 @@ class TodoAddViewController: BaseViewController {
         switch status {
         case .add:
             guard let text = sender.text else { return }
-            Repository.shared.create(MainList(isTodo: true, contents: text))
+            Repository.shared.create(MainList(isTodo: true, contents: text, date: calendarDate))
 
             table.reloadData()
             dismiss(animated: true)
         case .edit:
             guard let text = sender.text else { return }
-            Repository.shared.update(id: listID, contents: text)
+            Repository.shared.update(id: listID, contents: text, date: calendarDate)
 
             table.reloadData()
             dismiss(animated: true)

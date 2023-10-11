@@ -12,7 +12,7 @@ protocol RepositoryType: AnyObject {
     func fetch() -> Results<MainList>
     func fetchFilter(isTodo: Bool, date: Date) -> Results<MainList>
     func create(_ item: MainList)
-    func update(id: ObjectId, contents: String)
+    func update(id: ObjectId, contents: String, date: Date)
     func delete(_ item: MainList)
 }
 
@@ -74,10 +74,10 @@ class Repository: RepositoryType {
         }
     }
     
-    func update(id: ObjectId, contents: String) {
+    func update(id: ObjectId, contents: String, date: Date) {
         do {
             try realm.write {
-                realm.create(MainList.self, value: ["_id": id, "contents": contents], update: .modified)
+                realm.create(MainList.self, value: ["_id": id, "contents": contents, "date": date], update: .modified)
             }
         } catch {
             print(error) //nslog로 기록 남기기, 집계하기 등 필요

@@ -59,6 +59,7 @@ class MainViewController: UIViewController {
     var todoTable: UITableView!
     var goalTable: UITableView!
     var tab: KindOfTab = .todo
+    var calendarDate = Date()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -103,6 +104,7 @@ class MainViewController: UIViewController {
             }
             vc.table = todoTable
             vc.status = .add
+            vc.calendarDate = calendarDate
             present(vc, animated: true)
         case .goal:
             let vc = GoalAddViewController()
@@ -116,6 +118,7 @@ class MainViewController: UIViewController {
                 sheet.detents = [.medium()]
             }
             vc.table = goalTable
+            vc.calendarDate = calendarDate
             present(vc, animated: true)
         }
         
@@ -170,5 +173,6 @@ extension MainViewController: FSCalendarDelegate, FSCalendarDataSource, FSCalend
     
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
         NotificationCenter.default.post(name: NSNotification.Name("selectedDate"), object: nil, userInfo: ["date": date])
+        calendarDate = date
     }
 }

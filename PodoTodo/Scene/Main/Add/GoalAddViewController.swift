@@ -42,6 +42,7 @@ class GoalAddViewController: BaseViewController {
     var table: UITableView!
     var listID: ObjectId!
     var status = Present.add
+    var calendarDate = Date()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -66,9 +67,10 @@ class GoalAddViewController: BaseViewController {
                 Repository.shared.create(MainList(isTodo: false, contents: text, date: date))
             }
         case .edit:
-            Repository.shared.update(id: listID, contents: text)
+            if let date = selectedDate {
+                Repository.shared.update(id: listID, contents: text, date: date)
+            }
         }
-        
         table.reloadData()
         dismiss(animated: true)
     }
@@ -133,7 +135,7 @@ class GoalAddViewController: BaseViewController {
             case .add:
                 Repository.shared.create(MainList(isTodo: false, contents: text, date: datePicker.date))
             case .edit:
-                Repository.shared.update(id: listID, contents: text)
+                Repository.shared.update(id: listID, contents: text, date: datePicker.date)
             }
             
             table.reloadData()
