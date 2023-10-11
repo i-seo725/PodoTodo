@@ -140,7 +140,15 @@ extension TableView: UITableViewDataSource, UITableViewDelegate {
             handler(true)
         }
         doneButton.backgroundColor = .thirdGrape
-        doneButton.image = UIImage(systemName: "checkmark")!
+        
+        switch tab {
+        case .todo:
+            doneButton.image = viewModel.todoList[indexPath.row].isDone ? UIImage(systemName: "return")! : UIImage(systemName: "checkmark")!
+        case .goal:
+            doneButton.image = viewModel.goalList[indexPath.row].isDone ? UIImage(systemName: "return")! : UIImage(systemName: "checkmark")!
+        }
+        
+        
         let swipeConfiguration = UISwipeActionsConfiguration(actions: [doneButton])
         
         
