@@ -35,31 +35,17 @@ class Repository: RepositoryType {
     //전체 데이터 가져오기(read)
     func fetch() -> Results<MainList> {
         let data = realm.objects(MainList.self)
+    
         return data
     }
-    
-    
-    func fetchFilter1(isTodo: Bool) -> Results<MainList> {
-
-        let data = realm.objects(MainList.self).where {
-
-            $0.isTodo == isTodo
-        }
-        let result = data.sorted(byKeyPath: "isDone")
-        return result
-    }
-    
     
     func fetchFilter(isTodo: Bool, date: Date) -> Results<MainList> {
         let startDay = date.dateToString().stringToDate()!
         let endDay = startDay.addingTimeInterval(86400)
         
-        let data = realm.objects(MainList.self).filter("date >= %@ AND date < %@", startDay, endDay)
-        
-//        let result = data.where {
-//            $0.isTodo == isTodo
-//        }.sorted(byKeyPath: "isDone")
-        
+        let data = realm.objects(MainList.self).where {
+            $0.date >= startDay && $0.date < endDay
+        }
         
         return data.sorted(byKeyPath: "isDone")
     }

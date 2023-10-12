@@ -8,7 +8,7 @@
 import Foundation
 import RealmSwift
 
-class CollectionViewModel {
+class ViewModel {
 
 //    let todoList = Repository.shared.fetchFilter1(isTodo: true)
 //    let goalList = Repository.shared.fetchFilter1(isTodo: false)
@@ -50,14 +50,4 @@ class CollectionViewModel {
             Repository.shared.toggleDone(id: todoList._id, isDone: true)
         }
     }
-    
-    func toggleGoal(date: Date, indexPath: IndexPath) {
-        let goalList = goalList(date: date)[indexPath.row]
-        if goalList.isDone {
-            Repository.shared.toggleDone(id: goalList._id, isDone: false)
-        } else {
-            Repository.shared.toggleDone(id: goalList._id, isDone: true)
-        }
-    }
-    
 }

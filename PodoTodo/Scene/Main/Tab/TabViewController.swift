@@ -20,11 +20,11 @@ class TabViewController: TabmanViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        vc = [todoTab, goalTab]
+        vc = [todoTab]
         configureTabbar()
         
         todoTable = todoTab.mainView.tableView
-        goalTable = goalTab.mainView.tableView
+//        goalTable = goalTab.mainView.tableView
     }
     
     func configureTabbar() {
@@ -68,7 +68,7 @@ extension TabViewController: PageboyViewControllerDataSource, TMBarDataSource {
     func barItem(for bar: Tabman.TMBar, at index: Int) -> Tabman.TMBarItemable {
         
         if index == 0 {
-            return TMBarItem(title: "할 일")
+            return TMBarItem(title: "오늘의 할 일")
         } else {
             return TMBarItem(title: "목표")
         }

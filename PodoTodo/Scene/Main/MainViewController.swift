@@ -10,9 +10,9 @@ import FSCalendar
 import Tabman
 import Pageboy
 
-class MainViewController: UIViewController {
+class MainViewController: BaseViewController {
     
-    let weather = WeatherView()
+//    let weather = WeatherView()
     let addButton = {
         let view = UIButton()
         view.layer.cornerRadius = 24
@@ -47,7 +47,6 @@ class MainViewController: UIViewController {
         view.appearance.weekdayFont = UIFont(name: Font.jamsilRegular.rawValue, size: 14)
         view.appearance.titleWeekendColor = UIColor.gray
         view.appearance.selectionColor = UIColor.secondGrape
-//        view.backgroundColor = UIColor.fourthGrape
         
         //today
         view.appearance.todayColor = UIColor.thirdGrape
@@ -57,20 +56,13 @@ class MainViewController: UIViewController {
     
     let containedView = TabViewController()
     var todoTable: UITableView!
-    var goalTable: UITableView!
-    var tab: KindOfTab = .todo
+//    var tab: KindOfTab = .todo
     var calendarDate = Date()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureView()
-        setConstraints()
-        calendar.dataSource = self
-        calendar.delegate = self
         setContainerView()
-        receiveNotification()
         todoTable = containedView.todoTable
-        goalTable = containedView.goalTable
         print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first)
     }
     
@@ -80,84 +72,45 @@ class MainViewController: UIViewController {
         tabView.addSubview(containedView.view)
         containedView.didMove(toParent: self)
     }
-    func configureView() {
-        view.backgroundColor = .white
+    override func configureView() {
+        super.configureView()
+        calendar.dataSource = self
+        calendar.delegate = self
         view.addSubview(calendar)
-        view.addSubview(weather)
         view.addSubview(tabView)
         view.addSubview(addButton)
         addButton.addTarget(self, action: #selector(addButtonTapped), for: .touchUpInside)
     }
     
     @objc func addButtonTapped() {
-        switch tab {
-        case .todo:
-            let vc = TodoAddViewController()
-            vc.modalPresentationStyle = .pageSheet
-            guard let sheet = vc.sheetPresentationController else { return }
-            if #available(iOS 16.0, *) {
-                sheet.detents = [.custom(resolver: { context in
-                    return 60
-                })]
-            } else {
-                sheet.detents = [.medium()]
-            }
-            vc.table = todoTable
-            vc.status = .add
-            vc.calendarDate = calendarDate
-            present(vc, animated: true)
-        case .goal:
-            let vc = GoalAddViewController()
-            vc.modalPresentationStyle = .pageSheet
-            guard let sheet = vc.sheetPresentationController else { return }
-            if #available(iOS 16.0, *) {
-                sheet.detents = [.custom(resolver: { context in
-                    return 120
-                })]
-            } else {
-                sheet.detents = [.medium()]
-            }
-            vc.table = goalTable
-            vc.calendarDate = calendarDate
-            present(vc, animated: true)
+        
+        let vc = TodoAddViewController()
+        vc.modalPresentationStyle = .pageSheet
+        guard let sheet = vc.sheetPresentationController else { return }
+        if #available(iOS 16.0, *) {
+            sheet.detents = [.custom(resolver: { context in
+                return 60
+            })]
+        } else {
+            sheet.detents = [.medium()]
         }
-        
-        
+        vc.table = todoTable
+        vc.status = .add
+        vc.calendarDate = calendarDate
+        present(vc, animated: true)
     }
     
-    func receiveNotification() {
-        NotificationCenter.default.addObserver(self, selector: #selector(receiveTodoValue), name: NSNotification.Name("todo"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(receiveGoalValue), name: NSNotification.Name("goal"), object: nil)
-    }
-    
-    @objc func receiveTodoValue(notification: NSNotification) {
-        guard let value = notification.userInfo?["tab"] as? KindOfTab else { return }
-        tab = value
-        
-    }
-    
-    @objc func receiveGoalValue(notification: NSNotification) {
-        guard let value = notification.userInfo?["tab"] as? KindOfTab else { return }
-        tab = value
-    }
-    
-    func setConstraints() {
+    override func setConstraints() {
         calendar.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide)
             make.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(8)
             make.height.equalTo(view.safeAreaLayoutGuide).multipliedBy(0.4)
         }
         
-        weather.snp.makeConstraints { make in
-            make.top.equalTo(calendar.snp.bottom).multipliedBy(0.6)
-            make.horizontalEdges.equalTo(calendar.snp.horizontalEdges)
-            make.height.equalTo(calendar.snp.height).multipliedBy(0.2)
-        }
-        
         tabView.snp.makeConstraints { make in
-            make.top.equalTo(weather.snp.bottom).multipliedBy(1.05)
+            make.top.equalTo(calendar.snp.bottom).multipliedBy(0.62)
             make.bottom.equalTo(view.safeAreaLayoutGuide)
-            make.horizontalEdges.equalTo(weather.snp.horizontalEdges)
+            make.horizontalEdges.equalTo(calendar.snp.horizontalEdges)
         }
         
         addButton.snp.makeConstraints { make in

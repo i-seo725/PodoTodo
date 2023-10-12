@@ -23,13 +23,6 @@ class TodoTab: UIViewController {
         editContents()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        NotificationCenter.default.post(name: NSNotification.Name("todo"), object: nil, userInfo: ["tab": KindOfTab.todo])
-        mainView.tab = .todo
-        mainView.tableView.reloadData()
-    }
-    
     func editContents() {
         mainView.handler = { tableView, text, id, _ in
             tableView.reloadData()

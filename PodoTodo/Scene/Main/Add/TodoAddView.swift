@@ -30,7 +30,7 @@ class TodoAddViewController: BaseViewController {
         return view
     }()
     
-    let viewModel = CollectionViewModel()
+    let viewModel = ViewModel()
     var status = Present.add
     var table: UITableView!
     var listID: ObjectId!
