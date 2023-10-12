@@ -53,10 +53,18 @@ class MainViewController: BaseViewController {
        
         return view
     }()
+    let groupButton = {
+        let view = UIButton()
+        let imageConfig = UIImage.SymbolConfiguration(pointSize: 20)
+        let image = UIImage(systemName: "list.bullet", withConfiguration: imageConfig)!
+        view.setImage(image, for: .normal)
+        view.tintColor = .firstGrape
+//        view.backgroundColor = .blue
+        return view
+    }()
     
     let containedView = TabViewController()
     var todoTable: UITableView!
-//    var tab: KindOfTab = .todo
     var calendarDate = Date()
     
     override func viewDidLoad() {
@@ -79,6 +87,7 @@ class MainViewController: BaseViewController {
         view.addSubview(calendar)
         view.addSubview(tabView)
         view.addSubview(addButton)
+        view.addSubview(groupButton)
         addButton.addTarget(self, action: #selector(addButtonTapped), for: .touchUpInside)
     }
     
@@ -105,6 +114,12 @@ class MainViewController: BaseViewController {
             make.top.equalTo(view.safeAreaLayoutGuide)
             make.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(8)
             make.height.equalTo(view.safeAreaLayoutGuide).multipliedBy(0.4)
+        }
+        
+        groupButton.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide).offset(12)
+            make.leading.equalTo(calendar.snp.leading)
+            make.size.equalTo(50)
         }
         
         tabView.snp.makeConstraints { make in
