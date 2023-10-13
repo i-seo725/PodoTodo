@@ -42,7 +42,6 @@ class TableViewHeaderCell: UITableViewHeaderFooterView {
     
     func makeTabGesture() {
         let recognizer = UITapGestureRecognizer()
-        recognizer.numberOfTapsRequired = 1
         contentView.addGestureRecognizer(recognizer)
         recognizer.addTarget(self, action: #selector(sectionViewTapped))
     }

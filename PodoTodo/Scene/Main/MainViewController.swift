@@ -49,6 +49,7 @@ class MainViewController: BaseViewController {
         
         //today
         view.appearance.todayColor = UIColor.thirdGrape
+        view.appearance.todaySelectionColor = UIColor.thirdGrape
        
         return view
     }()
@@ -58,7 +59,6 @@ class MainViewController: BaseViewController {
         let image = UIImage(systemName: "list.bullet", withConfiguration: imageConfig)!
         view.setImage(image, for: .normal)
         view.tintColor = .firstGrape
-//        view.backgroundColor = .blue
         return view
     }()
     
@@ -71,6 +71,7 @@ class MainViewController: BaseViewController {
         setContainerView()
         todoTable = containedView.todoTable
         configureNavigationTitle()
+        configureNavigationBar()
         print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first)
     }
     
@@ -148,6 +149,16 @@ class MainViewController: BaseViewController {
         }
         
         title = result
+    }
+    
+    func configureNavigationBar() {
+        let recognizer = UITapGestureRecognizer()
+        recognizer.addTarget(self, action: #selector(navigationBarTapped))
+        navigationController?.navigationBar.addGestureRecognizer(recognizer)
+    }
+    
+    @objc func navigationBarTapped(_ sender: UINavigationBar) {
+        todoCalendar.select(Date(), scrollToDate: true)
     }
 }
 
