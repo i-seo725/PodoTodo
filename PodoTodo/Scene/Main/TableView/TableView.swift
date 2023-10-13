@@ -42,6 +42,7 @@ class TableView: UIView {
         tableView.delegate = self
         tableView.layer.cornerRadius = 15
         tableView.backgroundColor = .white
+        tableView.rowHeight = UITableView.automaticDimension
     }
     
     required init?(coder: NSCoder) {
@@ -102,10 +103,6 @@ extension TableView: UITableViewDataSource, UITableViewDelegate {
         let id = todoList._id
         handler?(tableView, text, id, Date())
        
-    }
-
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 46
     }
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
