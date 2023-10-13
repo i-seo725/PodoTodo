@@ -138,11 +138,15 @@ class MainViewController: BaseViewController {
     func configureNavigationBar() {
         let recognizer = UITapGestureRecognizer()
         recognizer.addTarget(self, action: #selector(navigationBarTapped))
-        navigationController?.navigationBar.addGestureRecognizer(recognizer)
-        
+        if let navBar = navigationController?.navigationBar {
+            navBar.addGestureRecognizer(recognizer)
+            navBar.titleTextAttributes = [.font: UIFont(name: Font.jamsilRegular.rawValue, size: 18)]
+            navBar.backgroundColor = .white
+        }
         let listButton = UIBarButtonItem(image: UIImage(systemName: "list.bullet")!, style: .plain, target: self, action: #selector(listButtonTapped))
         listButton.tintColor = .firstGrape
         navigationItem.leftBarButtonItem = listButton
+        navigationItem.backButtonTitle = ""
     }
     
     @objc func navigationBarTapped() {
@@ -150,7 +154,7 @@ class MainViewController: BaseViewController {
     }
     
     @objc func listButtonTapped() {
-        print("그룹 클릭")
+        self.navigationController?.pushViewController(GroupAddViewController(), animated: true)
     }
 }
 

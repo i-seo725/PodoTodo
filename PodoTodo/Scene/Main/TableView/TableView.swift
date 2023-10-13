@@ -57,7 +57,7 @@ extension TableView: UITableViewDataSource, UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let view = TableViewHeaderCell()
+        let view = TableHeaderView()
         view.delegate = self
         view.expandImage.image = isOpen[section] ? UIImage(systemName: "chevron.up") : UIImage(systemName: "chevron.down")
         view.sectionIndex = section

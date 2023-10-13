@@ -12,7 +12,7 @@ protocol SectionViewDelegate: AnyObject {
     func sectionViewTapped(_ section: Int)
 }
 
-class TableViewHeaderCell: UITableViewHeaderFooterView {
+class TableHeaderView: UITableViewHeaderFooterView {
     
     var sectionIndex = 0
     var contentsLabel = {
