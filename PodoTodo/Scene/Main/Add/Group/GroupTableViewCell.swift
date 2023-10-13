@@ -19,7 +19,7 @@ class GroupTableViewCell: UITableViewCell {
     
     let groupNameTextField = {
         let view = UITextField()
-        view.isUserInteractionEnabled = false
+//        view.isUserInteractionEnabled = false
         view.borderStyle = .none
         view.placeholder = "그룹명을 입력해주세요"
         view.font = UIFont(name: Font.jamsilLight.rawValue, size: 15)
@@ -38,17 +38,44 @@ class GroupTableViewCell: UITableViewCell {
     
     func configureView() {
         contentView.addSubview(colorPickerButton)
+        colorPickerButton.addTarget(self, action: #selector(colorPicked), for: .valueChanged)
         colorPickerButton.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
             make.leading.equalToSuperview().inset(8)
         }
         
         contentView.addSubview(groupNameTextField)
+        groupNameTextField.delegate = self
         groupNameTextField.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
             make.leading.equalTo(colorPickerButton.snp.trailing).inset(-8)
             make.trailing.equalToSuperview().inset(8)
         }
+    }
+    
+    @objc func colorPicked(_ sender: UIColorWell) {
+        print(sender.selectedColor) //rgb + alpha값
+    }
+    
+}
+
+extension GroupTableViewCell: UITextFieldDelegate {
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        guard let text = textField.text else { return true }
+        if text.count > 20 {
+            return false
+        } else {
+            return true
+        }
+    }
+    
+}
+
+extension GroupTableViewCell: UIColorPickerViewControllerDelegate {
+    
+    func colorPickerViewController(_ viewController: UIColorPickerViewController, didSelect color: UIColor, continuously: Bool) {
+        print(color)
     }
     
 }

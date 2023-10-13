@@ -66,7 +66,9 @@ class TodoAddViewController: BaseViewController {
     }
     
     @objc func groupSelectButtonTapped() {
-        present(GroupAddViewController(), animated: true)
+        let vc = GroupAddViewController()
+        vc.status = .edit
+        present(vc, animated: true)
     }
     
     

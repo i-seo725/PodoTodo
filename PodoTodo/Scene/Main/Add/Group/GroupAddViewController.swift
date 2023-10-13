@@ -11,6 +11,7 @@ class GroupAddViewController: BaseViewController {
     
     let tableView = UITableView(frame: .zero, style: .insetGrouped)
     var cellCount: Int = 1
+    var status = Present.add
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,6 +45,7 @@ class GroupAddViewController: BaseViewController {
     }
     
     @objc func plusButtonTapped() {
+        status = .add
         cellCount += 1
         tableView.reloadData()
     }
@@ -57,7 +59,13 @@ extension GroupAddViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = GroupTableViewCell()
+        cell.selectionStyle = .none
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        
     }
     
 }
