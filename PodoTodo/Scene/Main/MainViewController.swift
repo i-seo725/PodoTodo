@@ -29,9 +29,9 @@ class MainViewController: BaseViewController {
         return view
     }()
     let tabView = UIView()
-    var calendar = {
-        let view = FSCalendar(frame: .zero)
-        view.scope = FSCalendarScope.week
+    var todoCalendar = {
+        let view = FSCalendar()
+        view.scope = .week
         view.locale = Locale(identifier: "us_US")
         
         //헤더 영역
@@ -82,9 +82,9 @@ class MainViewController: BaseViewController {
     }
     override func configureView() {
         super.configureView()
-        calendar.dataSource = self
-        calendar.delegate = self
-        view.addSubview(calendar)
+        view.addSubview(todoCalendar)
+        todoCalendar.delegate = self
+        todoCalendar.dataSource = self
         view.addSubview(tabView)
         view.addSubview(addButton)
         view.addSubview(groupButton)
@@ -108,9 +108,8 @@ class MainViewController: BaseViewController {
         vc.calendarDate = calendarDate
         present(vc, animated: true)
     }
-    
     override func setConstraints() {
-        calendar.snp.makeConstraints { make in
+        todoCalendar.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide)
             make.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(8)
             make.height.equalTo(view.safeAreaLayoutGuide).multipliedBy(0.4)
@@ -118,14 +117,14 @@ class MainViewController: BaseViewController {
         
         groupButton.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide).offset(12)
-            make.leading.equalTo(calendar.snp.leading)
+            make.leading.equalTo(todoCalendar.snp.leading)
             make.size.equalTo(50)
         }
         
         tabView.snp.makeConstraints { make in
-            make.top.equalTo(calendar.snp.bottom).multipliedBy(0.62)
+            make.top.equalTo(todoCalendar.snp.bottom).multipliedBy(0.62)
             make.bottom.equalTo(view.safeAreaLayoutGuide)
-            make.horizontalEdges.equalTo(calendar.snp.horizontalEdges)
+            make.horizontalEdges.equalTo(todoCalendar.snp.horizontalEdges)
         }
         
         addButton.snp.makeConstraints { make in
@@ -142,5 +141,12 @@ extension MainViewController: FSCalendarDelegate, FSCalendarDataSource, FSCalend
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
         NotificationCenter.default.post(name: NSNotification.Name("selectedDate"), object: nil, userInfo: ["date": date])
         calendarDate = date
+    }
+    
+    func calendar(_ calendar: FSCalendar, boundingRectWillChange bounds: CGRect, animated: Bool){
+//        todoCalendar.snp.updateConstraints { (make) in
+//            make.height.equalTo(bounds.height)
+//        }
+//        view.layoutIfNeeded()
     }
 }

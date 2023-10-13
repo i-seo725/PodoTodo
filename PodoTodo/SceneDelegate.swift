@@ -17,12 +17,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let scene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: scene)
         
-        let main = Tabbar.Main.vc //UINavigationController(rootViewController: Tabbar.Main.vc)
-        let second = Tabbar.Podo.vc //UINavigationController(rootViewController: Tabbar.Podo.vc)
+        let main = UINavigationController(rootViewController: Tabbar.Main.vc)
+        let second = UINavigationController(rootViewController: Tabbar.Podo.vc)
 
         let tabBarController = UITabBarController()
         tabBarController.setViewControllers([main, second], animated: true)
-        tabBarController.tabBar.tintColor = .black
+        tabBarController.tabBar.tintColor = .firstGrape
+        tabBarController.tabBar.backgroundColor = .white
 
         if let items = tabBarController.tabBar.items {
             items[0].image = Tabbar.Main.image

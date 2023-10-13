@@ -11,12 +11,11 @@ import RealmSwift
 
 class TableView: UIView {
     
-    let tableView = UITableView()
+    let tableView = UITableView(frame: .zero, style: .grouped)
     let viewModel = ViewModel()
-    //    var tab = KindOfTab.todo
     var handler: ((_ table: UITableView, _ contents: String, _ id: ObjectId, _ date: Date) -> ())?
     var calendarDate = Date()
-    
+    var isOpen = [true]
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -41,6 +40,8 @@ class TableView: UIView {
         }
         tableView.dataSource = self
         tableView.delegate = self
+        tableView.layer.cornerRadius = 15
+        tableView.backgroundColor = .white
     }
     
     required init?(coder: NSCoder) {
@@ -51,23 +52,37 @@ class TableView: UIView {
 
 extension TableView: UITableViewDataSource, UITableViewDelegate {
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.todoList(date: calendarDate).count
-        
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let view = TableViewHeaderCell()
+        view.delegate = self
+        view.expandImage.image = isOpen[section] ? UIImage(systemName: "chevron.up") : UIImage(systemName: "chevron.down")
+        view.sectionIndex = section
+        return view
     }
     
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 30
+    }
     
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if isOpen[section] {
+            return viewModel.todoList(date: calendarDate).count
+        } else {
+            return 0
+        }
+    }
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell()
+        
         var contents = cell.defaultContentConfiguration()
-        
-        
-        
-        contents.textProperties.font = UIFont(name: Font.jamsilLight.rawValue, size: 16)!
-        contents.secondaryTextProperties.font = UIFont(name: Font.jamsilThin.rawValue, size: 12)!
+        contents.textProperties.font = UIFont(name: Font.jamsilLight.rawValue, size: 15)!
         
         let todoList = viewModel.todoList(date: calendarDate)[indexPath.row]
-        
         if todoList.isDone == true {
             contents.attributedText = todoList.contents.strikeThrough()
         } else {
@@ -88,9 +103,9 @@ extension TableView: UITableViewDataSource, UITableViewDelegate {
         handler?(tableView, text, id, Date())
        
     }
-    
+
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 50
+        return 46
     }
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -122,5 +137,14 @@ extension TableView: UITableViewDataSource, UITableViewDelegate {
         return swipeConfiguration
     }
     
+    
+}
+
+extension TableView: SectionViewDelegate {
+    
+    func sectionViewTapped(_ section: Int) {
+        isOpen[section].toggle()
+        tableView.reloadData()
+    }
     
 }
