@@ -53,15 +53,6 @@ class MainViewController: BaseViewController {
        
         return view
     }()
-    let groupButton = {
-        let view = UIButton()
-        let imageConfig = UIImage.SymbolConfiguration(pointSize: 20)
-        let image = UIImage(systemName: "list.bullet", withConfiguration: imageConfig)!
-        view.setImage(image, for: .normal)
-        view.tintColor = .firstGrape
-        return view
-    }()
-    
     let containedView = TabViewController()
     var todoTable: UITableView!
     var calendarDate = Date()
@@ -88,7 +79,6 @@ class MainViewController: BaseViewController {
         todoCalendar.dataSource = self
         view.addSubview(tabView)
         view.addSubview(addButton)
-        view.addSubview(groupButton)
         addButton.addTarget(self, action: #selector(addButtonTapped), for: .touchUpInside)
     }
     
@@ -114,12 +104,6 @@ class MainViewController: BaseViewController {
             make.top.equalTo(view.safeAreaLayoutGuide)
             make.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(8)
             make.height.equalTo(view.safeAreaLayoutGuide).multipliedBy(0.4)
-        }
-        
-        groupButton.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide).offset(12)
-            make.leading.equalTo(todoCalendar.snp.leading)
-            make.size.equalTo(50)
         }
         
         tabView.snp.makeConstraints { make in
@@ -155,10 +139,18 @@ class MainViewController: BaseViewController {
         let recognizer = UITapGestureRecognizer()
         recognizer.addTarget(self, action: #selector(navigationBarTapped))
         navigationController?.navigationBar.addGestureRecognizer(recognizer)
+        
+        let listButton = UIBarButtonItem(image: UIImage(systemName: "list.bullet")!, style: .plain, target: self, action: #selector(listButtonTapped))
+        listButton.tintColor = .firstGrape
+        navigationItem.leftBarButtonItem = listButton
     }
     
-    @objc func navigationBarTapped(_ sender: UINavigationBar) {
+    @objc func navigationBarTapped() {
         todoCalendar.select(Date(), scrollToDate: true)
+    }
+    
+    @objc func listButtonTapped() {
+        print("그룹 클릭")
     }
 }
 
