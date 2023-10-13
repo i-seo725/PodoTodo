@@ -59,6 +59,7 @@ class MainViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setConstraints()
         setContainerView()
         todoTable = containedView.todoTable
         configureNavigationTitle()
@@ -101,13 +102,13 @@ class MainViewController: BaseViewController {
     }
     override func setConstraints() {
         todoCalendar.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide)
+            make.top.equalTo(view.safeAreaLayoutGuide).offset(16)
             make.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(8)
             make.height.equalTo(view.safeAreaLayoutGuide).multipliedBy(0.4)
         }
         
         tabView.snp.makeConstraints { make in
-            make.top.equalTo(todoCalendar.snp.bottom).multipliedBy(0.62)
+            make.top.equalTo(todoCalendar.snp.bottom).multipliedBy(0.5)
             make.bottom.equalTo(view.safeAreaLayoutGuide)
             make.horizontalEdges.equalTo(todoCalendar.snp.horizontalEdges)
         }
@@ -167,9 +168,9 @@ extension MainViewController: FSCalendarDelegate, FSCalendarDataSource, FSCalend
     }
     
     func calendar(_ calendar: FSCalendar, boundingRectWillChange bounds: CGRect, animated: Bool){
-//        todoCalendar.snp.updateConstraints { (make) in
+//        self.todoCalendar.snp.updateConstraints { (make) in
 //            make.height.equalTo(bounds.height)
 //        }
-//        view.layoutIfNeeded()
+//        self.view.layoutIfNeeded()
     }
 }

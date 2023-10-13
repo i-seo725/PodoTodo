@@ -65,7 +65,7 @@ class TableHeaderView: UITableViewHeaderFooterView {
     func setConstraints() {
         colorView.snp.makeConstraints { make in
             make.height.equalToSuperview()
-            make.width.equalTo(12)
+            make.width.equalTo(10)
             make.leading.equalToSuperview().inset(8)
         }
         
