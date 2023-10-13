@@ -35,12 +35,11 @@ class MainViewController: BaseViewController {
         view.locale = Locale(identifier: "us_US")
         
         //헤더 영역
-        view.headerHeight = 70
+        view.headerHeight = 0
         view.appearance.headerMinimumDissolvedAlpha = 0
         view.appearance.headerDateFormat = "YYYY년 MM월"
         view.appearance.headerTitleColor = UIColor.black
         view.appearance.headerTitleFont = UIFont(name: Font.jamsilRegular.rawValue, size: 18)
-        
         
         //날짜 영역
         view.appearance.weekdayTextColor = UIColor.black
@@ -71,6 +70,7 @@ class MainViewController: BaseViewController {
         super.viewDidLoad()
         setContainerView()
         todoTable = containedView.todoTable
+        configureNavigationTitle()
         print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first)
     }
     
@@ -134,11 +134,27 @@ class MainViewController: BaseViewController {
         }
     }
 
+    func configureNavigationTitle() {
+        
+        let formatter = DateFormatter()
+        formatter.locale = .autoupdatingCurrent
+        formatter.timeZone = TimeZone(abbreviation: "KST")
+        formatter.dateFormat = "yyyy년 MM월"
+        var result = ""
+        if let date = todoCalendar.selectedDate {
+            result = formatter.string(from: date)
+        } else {
+            result = formatter.string(from: Date())
+        }
+        
+        title = result
+    }
 }
 
 extension MainViewController: FSCalendarDelegate, FSCalendarDataSource, FSCalendarDelegateAppearance {
     
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
+        configureNavigationTitle()
         NotificationCenter.default.post(name: NSNotification.Name("selectedDate"), object: nil, userInfo: ["date": date])
         calendarDate = date
     }

@@ -14,7 +14,6 @@ extension Date {
         formatter.locale = .autoupdatingCurrent // Locale(identifier: "ko_KR")
         formatter.timeZone = TimeZone(abbreviation: "KST")
         formatter.dateFormat = "yyyy년 MM월 dd일"
-//        formatter.timeStyle = .none
         
         let result = formatter.string(from: self)
         return result
