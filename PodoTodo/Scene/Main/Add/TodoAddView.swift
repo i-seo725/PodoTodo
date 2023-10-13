@@ -45,6 +45,7 @@ class TodoAddViewController: BaseViewController {
         view.addSubview(textField)
         view.addSubview(groupSelectButton)
         textField.addTarget(self, action: #selector(enterButtonTapped), for: .editingDidEndOnExit)
+        groupSelectButton.addTarget(self, action: #selector(groupSelectButtonTapped), for: .touchUpInside)
     }
     
     @objc func enterButtonTapped(_ sender: UITextField) {
@@ -62,7 +63,10 @@ class TodoAddViewController: BaseViewController {
             table.reloadData()
             dismiss(animated: true)
         }
+    }
     
+    @objc func groupSelectButtonTapped() {
+        present(GroupAddViewController(), animated: true)
     }
     
     
