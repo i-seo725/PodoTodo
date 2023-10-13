@@ -144,7 +144,7 @@ extension TableView: SectionViewDelegate {
     
     func sectionViewTapped(_ section: Int) {
         isOpen[section].toggle()
-        tableView.reloadData()
+        tableView.reloadSections(IndexSet(section...section), with: .fade)
     }
     
 }
