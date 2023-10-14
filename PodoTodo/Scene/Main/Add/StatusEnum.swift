@@ -10,4 +10,5 @@ import Foundation
 enum Present {
     case add
     case edit
+    case select
 }

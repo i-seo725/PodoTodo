@@ -70,6 +70,8 @@ class GoalAddViewController: BaseViewController {
             if let date = selectedDate {
                 Repository.shared.update(id: listID, contents: text, date: date)
             }
+        case .select:
+            break
         }
         table.reloadData()
         dismiss(animated: true)
@@ -136,6 +138,8 @@ class GoalAddViewController: BaseViewController {
                 Repository.shared.create(MainList(isTodo: false, contents: text, date: datePicker.date))
             case .edit:
                 Repository.shared.update(id: listID, contents: text, date: datePicker.date)
+            case .select:
+                break
             }
             
             table.reloadData()

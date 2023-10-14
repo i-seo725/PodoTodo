@@ -59,12 +59,29 @@ extension GroupAddViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = GroupTableViewCell()
+        
         cell.selectionStyle = .none
+        
+        if status == .select {
+            cell.groupNameTextField.isUserInteractionEnabled = false
+            cell.colorPickerButton.isEnabled = false
+        } else if status == .add {
+            if indexPath.row == cellCount - 1 {
+                cell.groupNameTextField.isUserInteractionEnabled = true
+                cell.groupNameTextField.text = ""
+                cell.colorPickerButton.selectedColor = nil
+            }
+        }
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
+        let cell = GroupTableViewCell()
+        if status == .select {
+            print(cell.colorPickerButton.selectedColor)
+            dismiss(animated: true)
+        }
         
     }
     

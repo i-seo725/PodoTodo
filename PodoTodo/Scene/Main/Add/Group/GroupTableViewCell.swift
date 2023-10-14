@@ -19,7 +19,7 @@ class GroupTableViewCell: UITableViewCell {
     
     let groupNameTextField = {
         let view = UITextField()
-//        view.isUserInteractionEnabled = false
+        view.isUserInteractionEnabled = false
         view.borderStyle = .none
         view.placeholder = "그룹명을 입력해주세요"
         view.font = UIFont(name: Font.jamsilLight.rawValue, size: 15)
@@ -46,6 +46,7 @@ class GroupTableViewCell: UITableViewCell {
         
         contentView.addSubview(groupNameTextField)
         groupNameTextField.delegate = self
+        groupNameTextField.addTarget(self, action: #selector(enterButtonTapped), for: .editingDidEndOnExit)
         groupNameTextField.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
             make.leading.equalTo(colorPickerButton.snp.trailing).inset(-8)
@@ -57,13 +58,26 @@ class GroupTableViewCell: UITableViewCell {
         print(sender.selectedColor) //rgb + alpha값
     }
     
+    @objc func enterButtonTapped(_ sender: UITextField) {
+        if let text = sender.text {
+            if text.isEmpty {
+                
+            } else {
+                sender.resignFirstResponder()
+                sender.isUserInteractionEnabled = false
+                sender.text = text
+            }
+        }
+        
+    }
+    
 }
 
 extension GroupTableViewCell: UITextFieldDelegate {
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         guard let text = textField.text else { return true }
-        if text.count > 20 {
+        if text.count > 20 || text.isEmpty {
             return false
         } else {
             return true

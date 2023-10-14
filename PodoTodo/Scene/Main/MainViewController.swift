@@ -152,6 +152,8 @@ class MainViewController: BaseViewController {
     
     @objc func navigationBarTapped() {
         todoCalendar.select(Date(), scrollToDate: true)
+        configureNavigationTitle()
+        
     }
     
     @objc func listButtonTapped() {

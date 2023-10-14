@@ -62,12 +62,14 @@ class TodoAddViewController: BaseViewController {
 
             table.reloadData()
             dismiss(animated: true)
+        case .select:
+            return
         }
     }
     
     @objc func groupSelectButtonTapped() {
         let vc = GroupAddViewController()
-        vc.status = .edit
+        vc.status = .select
         present(vc, animated: true)
     }
     
