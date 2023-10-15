@@ -40,7 +40,6 @@ class TableView: UIView {
         }
         tableView.dataSource = self
         tableView.delegate = self
-        tableView.layer.cornerRadius = 15
         tableView.backgroundColor = .white
         tableView.rowHeight = UITableView.automaticDimension
     }

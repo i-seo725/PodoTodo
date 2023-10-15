@@ -30,7 +30,6 @@
 		F45DF3272AC81A93004D4667 /* Tabbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45DF3262AC81A93004D4667 /* Tabbar.swift */; };
 		F45DF32A2AC81D2A004D4667 /* PodoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45DF3292AC81D2A004D4667 /* PodoViewController.swift */; };
 		F45DF32C2AC87ED5004D4667 /* WeatherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45DF32B2AC87ED5004D4667 /* WeatherView.swift */; };
-		F45DF32F2ACBFF1B004D4667 /* Tabman in Frameworks */ = {isa = PBXBuildFile; productRef = F45DF32E2ACBFF1B004D4667 /* Tabman */; };
 		F45DF3322ACBFF67004D4667 /* TodoTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45DF3312ACBFF67004D4667 /* TodoTab.swift */; };
 		F45DF3342ACC00AC004D4667 /* GoalTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45DF3332ACC00AC004D4667 /* GoalTab.swift */; };
 		F46210F42ACFC16D001A5EA2 /* TodoAddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46210F32ACFC16D001A5EA2 /* TodoAddView.swift */; };
@@ -54,7 +53,6 @@
 		F49DDCE72ACDB0A60067EFE6 /* Grape.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49DDCE62ACDB0A60067EFE6 /* Grape.swift */; };
 		F49DDCE92ACDB7220067EFE6 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = F49DDCE82ACDB7220067EFE6 /* .gitignore */; };
 		F49DDCEC2ACDB7330067EFE6 /* APIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49DDCEB2ACDB7330067EFE6 /* APIKey.swift */; };
-		F4EE22262ACC06D50080535F /* TabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4EE22252ACC06D50080535F /* TabViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -102,7 +100,6 @@
 		F49DDCE62ACDB0A60067EFE6 /* Grape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grape.swift; sourceTree = "<group>"; };
 		F49DDCE82ACDB7220067EFE6 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		F49DDCEB2ACDB7330067EFE6 /* APIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
-		F4EE22252ACC06D50080535F /* TabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,7 +109,6 @@
 			files = (
 				F466D6092AD12ACA00819ED9 /* RealmSwift in Frameworks */,
 				F457C1252AC185E300B4D46C /* SnapKit in Frameworks */,
-				F45DF32F2ACBFF1B004D4667 /* Tabman in Frameworks */,
 				F457C11F2AC185C800B4D46C /* FSCalendar in Frameworks */,
 				F457C1222AC185D500B4D46C /* Alamofire in Frameworks */,
 				F466D6072AD12ACA00819ED9 /* Realm in Frameworks */,
@@ -244,7 +240,6 @@
 		F45DF3302ACBFF60004D4667 /* Tab */ = {
 			isa = PBXGroup;
 			children = (
-				F4EE22252ACC06D50080535F /* TabViewController.swift */,
 				F45DF3312ACBFF67004D4667 /* TodoTab.swift */,
 				F45DF3332ACC00AC004D4667 /* GoalTab.swift */,
 			);
@@ -336,7 +331,6 @@
 				F457C11E2AC185C800B4D46C /* FSCalendar */,
 				F457C1212AC185D500B4D46C /* Alamofire */,
 				F457C1242AC185E300B4D46C /* SnapKit */,
-				F45DF32E2ACBFF1B004D4667 /* Tabman */,
 				F466D6062AD12ACA00819ED9 /* Realm */,
 				F466D6082AD12ACA00819ED9 /* RealmSwift */,
 			);
@@ -373,7 +367,6 @@
 				F457C11D2AC185C800B4D46C /* XCRemoteSwiftPackageReference "FSCalendar" */,
 				F457C1202AC185D500B4D46C /* XCRemoteSwiftPackageReference "Alamofire" */,
 				F457C1232AC185E300B4D46C /* XCRemoteSwiftPackageReference "SnapKit" */,
-				F45DF32D2ACBFF1B004D4667 /* XCRemoteSwiftPackageReference "Tabman" */,
 				F466D6052AD12ACA00819ED9 /* XCRemoteSwiftPackageReference "realm-swift" */,
 			);
 			productRefGroup = F457C1072AC1854500B4D46C /* Products */;
@@ -426,7 +419,6 @@
 				F45DF32C2AC87ED5004D4667 /* WeatherView.swift in Sources */,
 				F466D6002AD10F7F00819ED9 /* GoalAddViewController.swift in Sources */,
 				F466DBA62AD8294400E2B306 /* GroupAddViewController.swift in Sources */,
-				F4EE22262ACC06D50080535F /* TabViewController.swift in Sources */,
 				F49DDCE32ACD88210067EFE6 /* ListCollectionView.swift in Sources */,
 				F466DBA82AD8479D00E2B306 /* PodoViewModel.swift in Sources */,
 				F457C10A2AC1854500B4D46C /* AppDelegate.swift in Sources */,
@@ -702,14 +694,6 @@
 				minimumVersion = 5.0.0;
 			};
 		};
-		F45DF32D2ACBFF1B004D4667 /* XCRemoteSwiftPackageReference "Tabman" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/uias/Tabman.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 3.0.0;
-			};
-		};
 		F466D6052AD12ACA00819ED9 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/realm/realm-swift.git";
@@ -735,11 +719,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = F457C1232AC185E300B4D46C /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
-		};
-		F45DF32E2ACBFF1B004D4667 /* Tabman */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = F45DF32D2ACBFF1B004D4667 /* XCRemoteSwiftPackageReference "Tabman" */;
-			productName = Tabman;
 		};
 		F466D6062AD12ACA00819ED9 /* Realm */ = {
 			isa = XCSwiftPackageProductDependency;

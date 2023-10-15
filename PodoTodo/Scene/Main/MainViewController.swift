@@ -7,12 +7,17 @@
 
 import UIKit
 import FSCalendar
-import Tabman
-import Pageboy
 
 class MainViewController: BaseViewController {
     
-//    let weather = WeatherView()
+    let todoLabel = {
+        let view = UILabel()
+        view.text = "오늘의 할 일"
+        view.font = UIFont(name: Font.jamsilRegular.rawValue, size: 15)!
+        return view
+    }()
+    
+    let todoUnderlineView = UIView()
     let addButton = {
         let view = UIButton()
         view.layer.cornerRadius = 24
@@ -28,7 +33,6 @@ class MainViewController: BaseViewController {
         view.layer.shadowRadius = 3
         return view
     }()
-    let tabView = UIView()
     var todoCalendar = {
         let view = FSCalendar()
         view.scope = .week
@@ -53,32 +57,29 @@ class MainViewController: BaseViewController {
        
         return view
     }()
-    let containedView = TabViewController()
+    
+    let tableView = TableView()
     var todoTable: UITableView!
     var calendarDate = Date()
+    let viewModel = ViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setConstraints()
-        setContainerView()
-        todoTable = containedView.todoTable
         configureNavigationTitle()
         configureNavigationBar()
         print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first)
     }
     
-    func setContainerView() {
-        containedView.view.frame = .zero
-        self.addChild(containedView)
-        tabView.addSubview(containedView.view)
-        containedView.didMove(toParent: self)
-    }
     override func configureView() {
         super.configureView()
         view.addSubview(todoCalendar)
         todoCalendar.delegate = self
         todoCalendar.dataSource = self
-        view.addSubview(tabView)
+        view.addSubview(todoLabel)
+        view.addSubview(todoUnderlineView)
+        todoUnderlineView.backgroundColor = .firstGrape
+        view.addSubview(tableView)
         view.addSubview(addButton)
         addButton.addTarget(self, action: #selector(addButtonTapped), for: .touchUpInside)
     }
@@ -100,6 +101,7 @@ class MainViewController: BaseViewController {
         vc.calendarDate = calendarDate
         present(vc, animated: true)
     }
+    
     override func setConstraints() {
         todoCalendar.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide).offset(16)
@@ -107,16 +109,27 @@ class MainViewController: BaseViewController {
             make.height.equalTo(view.safeAreaLayoutGuide).multipliedBy(0.4)
         }
         
-        tabView.snp.makeConstraints { make in
+        todoLabel.snp.makeConstraints { make in
             make.top.equalTo(todoCalendar.snp.bottom).multipliedBy(0.5)
-            make.bottom.equalTo(view.safeAreaLayoutGuide)
-            make.horizontalEdges.equalTo(todoCalendar.snp.horizontalEdges)
+            make.centerX.equalToSuperview()
+        }
+        
+        todoUnderlineView.snp.makeConstraints { make in
+            make.top.equalTo(todoLabel.snp.bottom).offset(12)
+            make.horizontalEdges.equalTo(todoLabel)
+            make.height.equalTo(4)
         }
         
         addButton.snp.makeConstraints { make in
             make.size.equalTo(48)
             make.trailing.equalTo(view.safeAreaLayoutGuide).multipliedBy(0.92)
             make.bottom.equalTo(view.safeAreaLayoutGuide).multipliedBy(0.92)
+        }
+        
+        tableView.snp.makeConstraints { make in
+            make.top.equalTo(todoUnderlineView.snp.bottom).offset(8)
+            make.horizontalEdges.equalToSuperview().inset(8)
+            make.bottom.equalTo(view.safeAreaLayoutGuide)
         }
     }
 
@@ -153,7 +166,8 @@ class MainViewController: BaseViewController {
     @objc func navigationBarTapped() {
         todoCalendar.select(Date(), scrollToDate: true)
         configureNavigationTitle()
-        
+        viewModel.todoList(date: todoCalendar.selectedDate!)
+        tableView.tableView.reloadData()
     }
     
     @objc func listButtonTapped() {
