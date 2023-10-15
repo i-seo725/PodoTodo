@@ -135,7 +135,7 @@ extension GroupManagementViewController: UITableViewDelegate, UITableViewDataSou
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        let groupID = GroupRepository.shared.fetch()[indexPath.section]._id
+        let groupID = GroupRepository.shared.fetch()[indexPath.row]._id
         
         if editingStyle == .delete {
             

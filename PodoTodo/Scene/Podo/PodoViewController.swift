@@ -13,11 +13,11 @@ class PodoViewController: BaseViewController {
     
     let grape = {
         let view = UIImageView()
-        view.image = UIImage(named: Grape.empty.rawValue)!
+        view.image = UIImage(named: Grape.Purple.empty.rawValue)!
         view.contentMode = .scaleAspectFit
         return view
     }()
-    var podo = 0
+    var podo = 11
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,15 +46,23 @@ class PodoViewController: BaseViewController {
     func fillPodo() {
         let todo = TodoRepository.shared.fetchFilterOneDay(date: Date())
         let validate: [MainList] = todo.filter { $0.isDone == false }
+        let grapeArray = Grape.Purple.allCases
         
         if validate.isEmpty {
-            podo += 1
-            grape.image = UIImage(named: Grape.Purple.one.rawValue)!
+            if podo > 10 {
+                podo = 0
+            } else {
+                podo += 1
+                grape.image = UIImage(named: grapeArray[podo].rawValue)!
+            }
         } else {
-            podo -= 1
-            grape.image = UIImage(named: Grape.empty.rawValue)!
+            if podo < 1 {
+                return
+            } else {
+                podo -= 1
+                grape.image = UIImage(named: grapeArray[podo].rawValue)!
+            }
         }
-        
     }
     
 }

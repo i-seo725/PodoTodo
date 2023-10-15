@@ -7,10 +7,10 @@
 
 import UIKit
 
-enum Grape: String {
-    case empty
+enum Grape {
     
-    enum Purple: String {
+    enum Purple: String, CaseIterable {
+        case empty
         case one = "purple_1"
         case two = "purple_2"
         case three = "purple_3"
@@ -20,7 +20,7 @@ enum Grape: String {
         case seven = "purple_7"
         case eight = "purple_8"
         case nine = "purple_9"
-        case ten = "purple_10"
+//        case ten = "purple_10"
         case complete = "purple_complete"
     }
     
