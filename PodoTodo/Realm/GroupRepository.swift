@@ -55,6 +55,16 @@ class GroupRepository {
         }
     }
     
+    func isOpenUpdate(id: ObjectId, isOpen: Bool) {
+        do {
+            try realm.write {
+                realm.create(GroupList.self, value: ["_id": id, "isOpen": isOpen], update: .modified)
+            }
+        } catch {
+            print(error) //nslog로 기록 남기기, 집계하기 등 필요
+        }
+    }
+    
     func delete(_ item: GroupList) {
         do {
             try realm.write {

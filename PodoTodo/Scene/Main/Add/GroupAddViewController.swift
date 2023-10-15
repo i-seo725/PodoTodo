@@ -82,8 +82,8 @@ class GroupAddViewController: BaseViewController {
  
             dismiss(animated: true)
         case .edit:
-            guard let text = sender.text else { return }
-            GroupRepository.shared.create(GroupList(groupName: text, color: selectedColor))
+            guard let text = sender.text, let listID else { return }
+            GroupRepository.shared.update(id: listID, groupName: text, color: selectedColor)
 
             table.reloadData()
             dismiss(animated: true)

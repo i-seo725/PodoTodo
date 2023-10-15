@@ -9,10 +9,10 @@ import Foundation
 import RealmSwift
 
 protocol RepositoryType: AnyObject {
-    func fetchFilter(isTodo: Bool, date: Date) -> Results<MainList>
-    func create(_ item: MainList)
-    func update(id: ObjectId, contents: String, date: Date)
-    func delete(_ item: MainList)
+//    func fetchFilter(isTodo: Bool, date: Date) -> Results<MainList>
+//    func create(_ item: MainList)
+//    func update(id: ObjectId, contents: String, date: Date, group: ObjectId)
+//    func delete(_ item: MainList)
 }
 
 class TodoRepository: RepositoryType {
@@ -31,7 +31,18 @@ class TodoRepository: RepositoryType {
         }
     }
     
-    func fetchFilter(isTodo: Bool, date: Date) -> Results<MainList> {
+    func fetchFilter(isTodo: Bool, date: Date, group: ObjectId) -> Results<MainList> {
+        let startDay = date.dateToString().stringToDate()!
+        let endDay = startDay.addingTimeInterval(86400)
+        
+        let data = realm.objects(MainList.self).where {
+            $0.date >= startDay && $0.date < endDay && $0.group == group
+        }
+        
+        return data.sorted(byKeyPath: "isDone")
+    }
+    
+    func fetchFilterOneDay(date: Date) -> Results<MainList> {
         let startDay = date.dateToString().stringToDate()!
         let endDay = startDay.addingTimeInterval(86400)
         
@@ -59,14 +70,21 @@ class TodoRepository: RepositoryType {
         }
     }
     
-    func update(id: ObjectId, contents: String, date: Date) {
+    func update(id: ObjectId, contents: String, date: Date, group: ObjectId) {
         do {
             try realm.write {
-                realm.create(MainList.self, value: ["_id": id, "contents": contents, "date": date], update: .modified)
+                realm.create(MainList.self, value: ["_id": id, "contents": contents, "date": date, "group": group], update: .modified)
             }
         } catch {
             print(error) //nslog로 기록 남기기, 집계하기 등 필요
         }
+    }
+    
+    func fetchGroup(group: ObjectId) -> Results<MainList> {
+        let data = realm.objects(MainList.self).where {
+            $0.group == group
+        }
+        return data
     }
     
     func toggleDone(id: ObjectId, isDone: Bool) {

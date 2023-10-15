@@ -95,13 +95,6 @@ extension GroupManagementViewController: UITableViewDelegate, UITableViewDataSou
         let cell = GroupTableViewCell()
         cell.selectionStyle = .none
         
-        if GroupRepository.shared.fetch().count == 0 {
-            cell.colorView.backgroundColor = .thirdGrape
-            cell.groupNameLabel.text = "기본 그룹"
-            GroupRepository.shared.create(GroupList(groupName: "기본 그룹", color: UIColor.thirdGrape.hexString!))
-            return cell
-        }
-        
         let groupList = GroupRepository.shared.fetch()[indexPath.row]
         guard let color = groupList.color else { return cell }
         cell.colorView.backgroundColor = color.hexStringToUIColor()
@@ -111,6 +104,8 @@ extension GroupManagementViewController: UITableViewDelegate, UITableViewDataSou
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let groupID = GroupRepository.shared.fetch()[indexPath.row]._id
+        
         if status == .edit {
             let vc = GroupAddViewController()
             vc.modalPresentationStyle = .pageSheet
@@ -124,15 +119,36 @@ extension GroupManagementViewController: UITableViewDelegate, UITableViewDataSou
             }
             vc.table = tableView
             vc.status = .edit
-            vc.listID = GroupRepository.shared.fetch()[indexPath.row]._id
+            vc.listID = groupID
             
             present(vc, animated: true)
             
         } else if status == .select {
+            NotificationCenter.default.post(name: NSNotification.Name("groupID"), object: nil, userInfo: ["groupID": groupID])
             dismiss(animated: true)
         }
         
+    }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        let groupID = GroupRepository.shared.fetch()[indexPath.section]._id
         
+        if editingStyle == .delete {
+            
+            if TodoRepository.shared.fetchGroup(group: groupID).count != 0 {
+                let alert = UIAlertController(title: "주의", message: "해당 그룹에 등록된 투두가 있어 그룹을 삭제할 수 없습니다", preferredStyle: .alert)
+                let ok = UIAlertAction(title: "확인", style: .default)
+                alert.addAction(ok)
+                present(alert, animated: true)
+            } else {
+                GroupRepository.shared.delete(GroupRepository.shared.fetch()[indexPath.row])
+                tableView.reloadData()
+            }
+        }
     }
     
 }

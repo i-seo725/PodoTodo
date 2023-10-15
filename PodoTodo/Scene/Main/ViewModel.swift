@@ -13,16 +13,20 @@ class ViewModel {
 //    let todoList = Repository.shared.fetchFilter1(isTodo: true)
 //    let goalList = Repository.shared.fetchFilter1(isTodo: false)
     
-    func todoList(date: Date) -> Results<MainList> {
-        return TodoRepository.shared.fetchFilter(isTodo: true, date: date)
+    func allTodoList(date: Date) -> Results<MainList> {
+        return TodoRepository.shared.fetchFilterOneDay(date: date)
     }
     
-    func goalList(date: Date) -> Results<MainList> {
-        return TodoRepository.shared.fetchFilter(isTodo: false, date: date)
+    func todoList(date: Date, groupID: ObjectId) -> Results<MainList> {
+        return TodoRepository.shared.fetchFilter(isTodo: true, date: date, group: groupID)
     }
     
-    func toggleTodo(date: Date, indexPath: IndexPath) {
-        let todoList = todoList(date: date)[indexPath.row]
+    func goalList(date: Date, groupID: ObjectId) -> Results<MainList> {
+        return TodoRepository.shared.fetchFilter(isTodo: false, date: date, group: groupID)
+    }
+    
+    func toggleTodo(date: Date, indexPath: IndexPath, groupID: ObjectId) {
+        let todoList = todoList(date: date, groupID: groupID)[indexPath.row]
         if todoList.isDone {
             TodoRepository.shared.toggleDone(id: todoList._id, isDone: false)
         } else {

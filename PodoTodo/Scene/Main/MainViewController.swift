@@ -60,7 +60,6 @@ class MainViewController: BaseViewController {
     
     let todoTable = UITableView(frame: .zero, style: .grouped)
     var calendarDate = Date()
-    var isOpen = [true]
     let viewModel = ViewModel()
     
     override func viewDidLoad() {
@@ -69,6 +68,11 @@ class MainViewController: BaseViewController {
         configureNavigationTitle()
         configureNavigationBar()
         print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        todoTable.reloadData()
     }
     
     override func configureView() {
@@ -185,7 +189,7 @@ extension MainViewController: FSCalendarDelegate, FSCalendarDataSource, FSCalend
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
         configureNavigationTitle()
         calendarDate = date
-        viewModel.todoList(date: date)
+        viewModel.allTodoList(date: date)
         todoTable.reloadData()
     }
     
@@ -201,24 +205,36 @@ extension MainViewController: FSCalendarDelegate, FSCalendarDataSource, FSCalend
 extension MainViewController: UITableViewDataSource, UITableViewDelegate {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        if GroupRepository.shared.fetch().count == 0 {
+            GroupRepository.shared.create(GroupList(groupName: "기본 그룹", color: UIColor.thirdGrape.hexString))
+        }
+        return GroupRepository.shared.fetch().count
     }
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let view = TableHeaderView()
+        let isOpen = GroupRepository.shared.fetch()[section].isOpen
         view.delegate = self
-        view.expandImage.image = isOpen[section] ? UIImage(systemName: "chevron.up") : UIImage(systemName: "chevron.down")
+        view.expandImage.image = isOpen ? UIImage(systemName: "chevron.up") : UIImage(systemName: "chevron.down")
+        view.contentsLabel.text = GroupRepository.shared.fetch()[section].groupName
+         
         view.sectionIndex = section
+        
+        if let color = GroupRepository.shared.fetch()[section].color?.hexStringToUIColor() {
+            view.colorView.backgroundColor = color
+        }
         return view
     }
     
+    
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 30
+        return 36
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if isOpen[section] {
-            return viewModel.todoList(date: calendarDate).count
+        let group = GroupRepository.shared.fetch()[section]
+        if group.isOpen {
+            return TodoRepository.shared.fetchFilter(isTodo: true, date: calendarDate, group: group._id).count
         } else {
             return 0
         }
@@ -230,7 +246,7 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
         var contents = cell.defaultContentConfiguration()
         contents.textProperties.font = UIFont(name: Font.jamsilLight.rawValue, size: 15)!
         
-        let todoList = viewModel.todoList(date: calendarDate)[indexPath.row]
+        let todoList = TodoRepository.shared.fetchFilter(isTodo: true, date: calendarDate, group: GroupRepository.shared.fetch()[indexPath.section]._id)[indexPath.row]
         
         if todoList.isDone == true {
             contents.attributedText = todoList.contents.strikeThrough()
@@ -245,7 +261,7 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let todoList = viewModel.todoList(date: calendarDate)[indexPath.row]
+        let todoList = viewModel.todoList(date: calendarDate, groupID: GroupRepository.shared.fetch()[indexPath.section]._id)[indexPath.row]
         
         let vc = TodoAddViewController()
         vc.modalPresentationStyle = .pageSheet
@@ -272,7 +288,7 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            TodoRepository.shared.delete(viewModel.todoList(date: calendarDate)[indexPath.row])
+            TodoRepository.shared.delete(viewModel.todoList(date: calendarDate, groupID: GroupRepository.shared.fetch()[indexPath.section]._id)[indexPath.row])
             tableView.reloadData()
         }
         
@@ -280,15 +296,16 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
+        let groupID = GroupRepository.shared.fetch()[indexPath.section]._id
         let doneButton = UIContextualAction(style: .normal, title: nil) { action, view, handler in
             
-            self.viewModel.toggleTodo(date: self.calendarDate, indexPath: indexPath)
+            self.viewModel.toggleTodo(date: self.calendarDate, indexPath: indexPath, groupID: groupID)
             self.todoTable.reloadData()
             
             handler(true)
         }
         doneButton.backgroundColor = .thirdGrape
-        doneButton.image = viewModel.todoList(date: calendarDate)[indexPath.row].isDone ? UIImage(systemName: "return")! : UIImage(systemName: "checkmark")!
+        doneButton.image = viewModel.todoList(date: calendarDate, groupID: groupID)[indexPath.row].isDone ? UIImage(systemName: "return")! : UIImage(systemName: "checkmark")!
         
         let swipeConfiguration = UISwipeActionsConfiguration(actions: [doneButton])
         
@@ -301,7 +318,8 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
 extension MainViewController: SectionViewDelegate {
     
     func sectionViewTapped(_ section: Int) {
-        isOpen[section].toggle()
+        let group = GroupRepository.shared.fetch()[section]
+        GroupRepository.shared.isOpenUpdate(id: group._id, isOpen: !group.isOpen)
         todoTable.reloadSections(IndexSet(section...section), with: .fade)
     }
     
