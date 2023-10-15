@@ -58,9 +58,9 @@ class MainViewController: BaseViewController {
         return view
     }()
     
-    let tableView = TableView()
-    var todoTable: UITableView!
+    let todoTable = UITableView(frame: .zero, style: .grouped)
     var calendarDate = Date()
+    var isOpen = [true]
     let viewModel = ViewModel()
     
     override func viewDidLoad() {
@@ -79,7 +79,10 @@ class MainViewController: BaseViewController {
         view.addSubview(todoLabel)
         view.addSubview(todoUnderlineView)
         todoUnderlineView.backgroundColor = .firstGrape
-        view.addSubview(tableView)
+        view.addSubview(todoTable)
+        todoTable.dataSource = self
+        todoTable.delegate = self
+        todoTable.rowHeight = UITableView.automaticDimension
         view.addSubview(addButton)
         addButton.addTarget(self, action: #selector(addButtonTapped), for: .touchUpInside)
     }
@@ -126,7 +129,7 @@ class MainViewController: BaseViewController {
             make.bottom.equalTo(view.safeAreaLayoutGuide).multipliedBy(0.92)
         }
         
-        tableView.snp.makeConstraints { make in
+        todoTable.snp.makeConstraints { make in
             make.top.equalTo(todoUnderlineView.snp.bottom).offset(8)
             make.horizontalEdges.equalToSuperview().inset(8)
             make.bottom.equalTo(view.safeAreaLayoutGuide)
@@ -146,7 +149,7 @@ class MainViewController: BaseViewController {
             result = formatter.string(from: Date())
         }
         
-        title = result
+        navigationItem.title = result
     }
     
     func configureNavigationBar() {
@@ -166,8 +169,8 @@ class MainViewController: BaseViewController {
     @objc func navigationBarTapped() {
         todoCalendar.select(Date(), scrollToDate: true)
         configureNavigationTitle()
-        viewModel.todoList(date: todoCalendar.selectedDate!)
-        tableView.tableView.reloadData()
+        calendarDate = Date()
+        todoTable.reloadData()
     }
     
     @objc func listButtonTapped() {
@@ -179,8 +182,9 @@ extension MainViewController: FSCalendarDelegate, FSCalendarDataSource, FSCalend
     
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
         configureNavigationTitle()
-        NotificationCenter.default.post(name: NSNotification.Name("selectedDate"), object: nil, userInfo: ["date": date])
         calendarDate = date
+        viewModel.todoList(date: date)
+        todoTable.reloadData()
     }
     
     func calendar(_ calendar: FSCalendar, boundingRectWillChange bounds: CGRect, animated: Bool){
@@ -189,4 +193,100 @@ extension MainViewController: FSCalendarDelegate, FSCalendarDataSource, FSCalend
 //        }
 //        self.view.layoutIfNeeded()
     }
+}
+
+
+extension MainViewController: UITableViewDataSource, UITableViewDelegate {
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let view = TableHeaderView()
+        view.delegate = self
+        view.expandImage.image = isOpen[section] ? UIImage(systemName: "chevron.up") : UIImage(systemName: "chevron.down")
+        view.sectionIndex = section
+        return view
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 30
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if isOpen[section] {
+            return viewModel.todoList(date: calendarDate).count
+        } else {
+            return 0
+        }
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = UITableViewCell()
+        
+        var contents = cell.defaultContentConfiguration()
+        contents.textProperties.font = UIFont(name: Font.jamsilLight.rawValue, size: 15)!
+        
+        let todoList = viewModel.todoList(date: calendarDate)[indexPath.row]
+        
+        if todoList.isDone == true {
+            contents.attributedText = todoList.contents.strikeThrough()
+        } else {
+            contents.text = todoList.contents
+        }
+        
+        cell.contentConfiguration = contents
+        
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let todoList = viewModel.todoList(date: calendarDate)[indexPath.row]
+        
+        let text = todoList.contents
+        let id = todoList._id
+       
+    }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            Repository.shared.delete(viewModel.todoList(date: calendarDate)[indexPath.row])
+            tableView.reloadData()
+        }
+        
+    }
+    
+    func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        
+        let doneButton = UIContextualAction(style: .normal, title: nil) { action, view, handler in
+            
+            self.viewModel.toggleTodo(date: self.calendarDate, indexPath: indexPath)
+            self.todoTable.reloadData()
+            
+            handler(true)
+        }
+        doneButton.backgroundColor = .thirdGrape
+        doneButton.image = viewModel.todoList(date: calendarDate)[indexPath.row].isDone ? UIImage(systemName: "return")! : UIImage(systemName: "checkmark")!
+        
+        let swipeConfiguration = UISwipeActionsConfiguration(actions: [doneButton])
+        
+        return swipeConfiguration
+    }
+    
+    
+}
+
+extension MainViewController: SectionViewDelegate {
+    
+    func sectionViewTapped(_ section: Int) {
+        isOpen[section].toggle()
+        todoTable.reloadSections(IndexSet(section...section), with: .fade)
+    }
+    
 }

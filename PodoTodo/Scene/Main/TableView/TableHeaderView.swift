@@ -48,7 +48,6 @@ class TableHeaderView: UITableViewHeaderFooterView {
     
     @objc func sectionViewTapped() {
         delegate?.sectionViewTapped(sectionIndex)
-        print(sectionIndex)
     }
     
     required init?(coder: NSCoder) {
