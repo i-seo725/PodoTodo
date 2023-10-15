@@ -12,7 +12,6 @@ class TodoAddViewController: BaseViewController {
 
     let textField = {
         let view = UITextField()
-        view.placeholder = "할 일을 입력해주세요"
         view.borderStyle = .roundedRect
         view.clearButtonMode = .whileEditing
         view.font = UIFont(name: Font.jamsilLight.rawValue, size: 14)
@@ -32,7 +31,6 @@ class TodoAddViewController: BaseViewController {
 
     let dateTextField = {
         let view = UITextField()
-        view.text = Date().dateToString()
         view.font = UIFont(name: Font.jamsilLight.rawValue, size: 14)
         view.borderStyle = .roundedRect
         return view
@@ -43,7 +41,6 @@ class TodoAddViewController: BaseViewController {
     var table: UITableView!
     var listID: ObjectId!
     var status = Present.add
-    var calendarDate = Date()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,8 +54,26 @@ class TodoAddViewController: BaseViewController {
         view.addSubview(groupSelectButton)
         view.addSubview(dateTextField)
         textField.addTarget(self, action: #selector(enterButtonClicked), for: .editingDidEndOnExit)
+        groupSelectButton.addTarget(self, action: #selector(groupSelectButtonTapped), for: .touchUpInside)
+        updateViewByStatus()
     }
-
+    
+    func updateViewByStatus() {
+        if status == .add {
+            textField.placeholder = "할 일을 입력해주세요"
+            dateTextField.text = selectedDate.dateToString()
+        } else if status == .edit {
+            guard let id = listID else {
+                print("아이디 못받아옴")
+                return
+            }
+            if let list = TodoRepository.shared.fetchFilterWithID(id: id).first {
+                textField.text = list.contents
+                dateTextField.text = list.date.dateToString()
+            }
+        }
+    }
+    
     @objc func enterButtonClicked(_ sender: UITextField) {
 
         guard let text = sender.text else { return }
@@ -70,6 +85,12 @@ class TodoAddViewController: BaseViewController {
         }
         table.reloadData()
         dismiss(animated: true)
+    }
+    
+    @objc func groupSelectButtonTapped() {
+        let vc = GroupManagementViewController()
+        vc.status = .select
+        present(vc, animated: true)
     }
 
     override func setConstraints() {

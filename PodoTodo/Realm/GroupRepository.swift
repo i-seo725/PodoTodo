@@ -28,6 +28,13 @@ class GroupRepository {
         return data
     }
     
+    func fetchFilter(id: ObjectId) -> Results<GroupList> {
+        let data = realm.objects(GroupList.self).where {
+            $0._id == id
+        }
+        return data
+    }
+    
     func create(_ item: GroupList) {
         do {
             try realm.write {

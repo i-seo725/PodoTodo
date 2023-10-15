@@ -42,6 +42,13 @@ class TodoRepository: RepositoryType {
         return data.sorted(byKeyPath: "isDone")
     }
     
+    func fetchFilterWithID(isTodo: Bool = true, id: ObjectId) -> Results<MainList> {
+        let data = realm.objects(MainList.self).where {
+            $0._id == id
+        }
+        return data
+    }
+    
     func create(_ item: MainList) {
         do {
             try realm.write {

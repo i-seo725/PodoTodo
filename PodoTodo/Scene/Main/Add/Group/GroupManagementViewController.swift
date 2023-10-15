@@ -11,7 +11,7 @@ import RealmSwift
 class GroupManagementViewController: BaseViewController {
     
     let tableView = UITableView(frame: .zero, style: .insetGrouped)
-    var status = Present.add
+    var status = Present.edit
     var selectedColor: String? = nil
     
     override func viewDidLoad() {
@@ -111,8 +111,27 @@ extension GroupManagementViewController: UITableViewDelegate, UITableViewDataSou
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if status == .edit {
+            let vc = GroupAddViewController()
+            vc.modalPresentationStyle = .pageSheet
+            guard let sheet = vc.sheetPresentationController else { return }
+            if #available(iOS 16.0, *) {
+                sheet.detents = [.custom(resolver: { context in
+                    return 60
+                })]
+            } else {
+                sheet.detents = [.medium()]
+            }
+            vc.table = tableView
+            vc.status = .edit
+            vc.listID = GroupRepository.shared.fetch()[indexPath.row]._id
+            
+            present(vc, animated: true)
+            
+        } else if status == .select {
+            dismiss(animated: true)
+        }
         
-        dismiss(animated: true)
         
     }
     

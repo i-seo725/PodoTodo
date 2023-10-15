@@ -13,7 +13,6 @@ class GroupAddViewController: BaseViewController {
 
     let textField = {
         let view = UITextField()
-        view.placeholder = "그룹명을 입력해주세요"
         view.borderStyle = .roundedRect
         view.clearButtonMode = .whileEditing
         view.font = UIFont(name: Font.jamsilLight.rawValue, size: 14)
@@ -27,7 +26,7 @@ class GroupAddViewController: BaseViewController {
     let viewModel = ViewModel()
     var status = Present.add
     var table: UITableView!
-    var listID: ObjectId!
+    var listID: ObjectId?
     var selectedColor = UIColor.thirdGrape.hexString
 
     override func viewDidLoad() {
@@ -39,8 +38,26 @@ class GroupAddViewController: BaseViewController {
         view.addSubview(textField)
         view.addSubview(colorSelectButton)
         textField.addTarget(self, action: #selector(enterButtonTapped), for: .editingDidEndOnExit)
+        textField.delegate = self
         colorSelectButton.addTarget(self, action: #selector(colorSelected), for: .valueChanged)
         colorSelectButton.supportsAlpha = false
+        updateViewByStatus()
+    }
+    
+    func updateViewByStatus() {
+        if status == .add {
+            textField.placeholder = "그룹명을 입력해주세요"
+            colorSelectButton.selectedColor = nil
+        } else if status == .edit {
+            guard let id = listID else {
+                print("아이디 못받아옴")
+                return
+            }
+            if let list = GroupRepository.shared.fetchFilter(id: id).first, let color = list.color {
+                textField.text = list.groupName
+                colorSelectButton.selectedColor = color.hexStringToUIColor()
+            }
+        }
     }
 
     @objc func enterButtonTapped(_ sender: UITextField) {

@@ -101,7 +101,7 @@ class MainViewController: BaseViewController {
         }
         vc.table = todoTable
         vc.status = .add
-        vc.calendarDate = calendarDate
+        vc.selectedDate = calendarDate
         present(vc, animated: true)
     }
     
@@ -174,6 +174,8 @@ class MainViewController: BaseViewController {
     }
     
     @objc func listButtonTapped() {
+        let vc = GroupManagementViewController()
+        vc.status = .edit
         self.navigationController?.pushViewController(GroupManagementViewController(), animated: true)
     }
 }
@@ -245,9 +247,23 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
         
         let todoList = viewModel.todoList(date: calendarDate)[indexPath.row]
         
-        let text = todoList.contents
-        let id = todoList._id
+        let vc = TodoAddViewController()
+        vc.modalPresentationStyle = .pageSheet
+        guard let sheet = vc.sheetPresentationController else { return }
+        if #available(iOS 16.0, *) {
+            sheet.detents = [.custom(resolver: { context in
+                return 120
+            })]
+        } else {
+            sheet.detents = [.medium()]
+        }
+        vc.table = todoTable
+        vc.status = .edit
+        vc.selectedDate = calendarDate
+        vc.listID = todoList._id
+        present(vc, animated: true)
        
+        tableView.reloadData()
     }
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
