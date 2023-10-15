@@ -32,23 +32,24 @@
 		F45DF32C2AC87ED5004D4667 /* WeatherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45DF32B2AC87ED5004D4667 /* WeatherView.swift */; };
 		F45DF3322ACBFF67004D4667 /* TodoTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45DF3312ACBFF67004D4667 /* TodoTab.swift */; };
 		F45DF3342ACC00AC004D4667 /* GoalTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45DF3332ACC00AC004D4667 /* GoalTab.swift */; };
-		F46210F42ACFC16D001A5EA2 /* TodoAddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46210F32ACFC16D001A5EA2 /* TodoAddView.swift */; };
+		F46210F42ACFC16D001A5EA2 /* GroupAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46210F32ACFC16D001A5EA2 /* GroupAddViewController.swift */; };
 		F46210FD2AD07BA0001A5EA2 /* KindOfTabEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46210FC2AD07BA0001A5EA2 /* KindOfTabEnum.swift */; };
-		F466D6002AD10F7F00819ED9 /* GoalAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F466D5FF2AD10F7F00819ED9 /* GoalAddViewController.swift */; };
+		F466D6002AD10F7F00819ED9 /* TodoAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F466D5FF2AD10F7F00819ED9 /* TodoAddViewController.swift */; };
 		F466D6042AD12A1D00819ED9 /* MainListTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F466D6032AD12A1D00819ED9 /* MainListTable.swift */; };
 		F466D6072AD12ACA00819ED9 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = F466D6062AD12ACA00819ED9 /* Realm */; };
 		F466D6092AD12ACA00819ED9 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = F466D6082AD12ACA00819ED9 /* RealmSwift */; };
-		F466D6102AD131F800819ED9 /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = F466D60F2AD131F800819ED9 /* Repository.swift */; };
+		F466D6102AD131F800819ED9 /* TodoRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = F466D60F2AD131F800819ED9 /* TodoRepository.swift */; };
 		F466D6132AD266C900819ED9 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F466D6122AD266C900819ED9 /* ViewModel.swift */; };
-		F466DB872AD2FFD200E2B306 /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = F466DB862AD2FFD200E2B306 /* Group.swift */; };
+		F466DB872AD2FFD200E2B306 /* GroupList.swift in Sources */ = {isa = PBXBuildFile; fileRef = F466DB862AD2FFD200E2B306 /* GroupList.swift */; };
 		F466DB892AD30E9300E2B306 /* Results+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F466DB882AD30E9300E2B306 /* Results+Extension.swift */; };
 		F466DB8B2AD43AE300E2B306 /* TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F466DB8A2AD43AE300E2B306 /* TableView.swift */; };
 		F466DB8F2AD47F8B00E2B306 /* StatusEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = F466DB8E2AD47F8B00E2B306 /* StatusEnum.swift */; };
 		F466DB912AD5236900E2B306 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F466DB902AD5236900E2B306 /* Date+Extension.swift */; };
-		F466DBA62AD8294400E2B306 /* GroupAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F466DBA52AD8294400E2B306 /* GroupAddViewController.swift */; };
+		F466DBA62AD8294400E2B306 /* GroupManagementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F466DBA52AD8294400E2B306 /* GroupManagementViewController.swift */; };
 		F466DBA82AD8479D00E2B306 /* PodoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F466DBA72AD8479D00E2B306 /* PodoViewModel.swift */; };
 		F466DBAB2AD9739C00E2B306 /* TableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F466DBAA2AD9739C00E2B306 /* TableHeaderView.swift */; };
 		F466DBAE2AD9ACD600E2B306 /* GroupTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F466DBAD2AD9ACD600E2B306 /* GroupTableViewCell.swift */; };
+		F466DBB02ADC2DC600E2B306 /* GroupRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = F466DBAF2ADC2DC600E2B306 /* GroupRepository.swift */; };
 		F49DDCE32ACD88210067EFE6 /* ListCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49DDCE22ACD88210067EFE6 /* ListCollectionView.swift */; };
 		F49DDCE72ACDB0A60067EFE6 /* Grape.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49DDCE62ACDB0A60067EFE6 /* Grape.swift */; };
 		F49DDCE92ACDB7220067EFE6 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = F49DDCE82ACDB7220067EFE6 /* .gitignore */; };
@@ -81,21 +82,22 @@
 		F45DF32B2AC87ED5004D4667 /* WeatherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherView.swift; sourceTree = "<group>"; };
 		F45DF3312ACBFF67004D4667 /* TodoTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoTab.swift; sourceTree = "<group>"; };
 		F45DF3332ACC00AC004D4667 /* GoalTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalTab.swift; sourceTree = "<group>"; };
-		F46210F32ACFC16D001A5EA2 /* TodoAddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoAddView.swift; sourceTree = "<group>"; };
+		F46210F32ACFC16D001A5EA2 /* GroupAddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupAddViewController.swift; sourceTree = "<group>"; };
 		F46210FC2AD07BA0001A5EA2 /* KindOfTabEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KindOfTabEnum.swift; sourceTree = "<group>"; };
-		F466D5FF2AD10F7F00819ED9 /* GoalAddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalAddViewController.swift; sourceTree = "<group>"; };
+		F466D5FF2AD10F7F00819ED9 /* TodoAddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoAddViewController.swift; sourceTree = "<group>"; };
 		F466D6032AD12A1D00819ED9 /* MainListTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainListTable.swift; sourceTree = "<group>"; };
-		F466D60F2AD131F800819ED9 /* Repository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Repository.swift; sourceTree = "<group>"; };
+		F466D60F2AD131F800819ED9 /* TodoRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoRepository.swift; sourceTree = "<group>"; };
 		F466D6122AD266C900819ED9 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
-		F466DB862AD2FFD200E2B306 /* Group.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
+		F466DB862AD2FFD200E2B306 /* GroupList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupList.swift; sourceTree = "<group>"; };
 		F466DB882AD30E9300E2B306 /* Results+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Results+Extension.swift"; sourceTree = "<group>"; };
 		F466DB8A2AD43AE300E2B306 /* TableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableView.swift; sourceTree = "<group>"; };
 		F466DB8E2AD47F8B00E2B306 /* StatusEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusEnum.swift; sourceTree = "<group>"; };
 		F466DB902AD5236900E2B306 /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
-		F466DBA52AD8294400E2B306 /* GroupAddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupAddViewController.swift; sourceTree = "<group>"; };
+		F466DBA52AD8294400E2B306 /* GroupManagementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupManagementViewController.swift; sourceTree = "<group>"; };
 		F466DBA72AD8479D00E2B306 /* PodoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodoViewModel.swift; sourceTree = "<group>"; };
 		F466DBAA2AD9739C00E2B306 /* TableHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableHeaderView.swift; sourceTree = "<group>"; };
 		F466DBAD2AD9ACD600E2B306 /* GroupTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupTableViewCell.swift; sourceTree = "<group>"; };
+		F466DBAF2ADC2DC600E2B306 /* GroupRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupRepository.swift; sourceTree = "<group>"; };
 		F49DDCE22ACD88210067EFE6 /* ListCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCollectionView.swift; sourceTree = "<group>"; };
 		F49DDCE62ACDB0A60067EFE6 /* Grape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grape.swift; sourceTree = "<group>"; };
 		F49DDCE82ACDB7220067EFE6 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
@@ -218,6 +220,7 @@
 		F45DF3212AC81A53004D4667 /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				F466D6122AD266C900819ED9 /* ViewModel.swift */,
 				F466D6112AD266C000819ED9 /* TableView */,
 				F466D5FE2AD10F4300819ED9 /* Add */,
 				F45DF3302ACBFF60004D4667 /* Tab */,
@@ -250,8 +253,8 @@
 			isa = PBXGroup;
 			children = (
 				F466DBAC2AD9ACB500E2B306 /* Group */,
-				F46210F32ACFC16D001A5EA2 /* TodoAddView.swift */,
-				F466D5FF2AD10F7F00819ED9 /* GoalAddViewController.swift */,
+				F46210F32ACFC16D001A5EA2 /* GroupAddViewController.swift */,
+				F466D5FF2AD10F7F00819ED9 /* TodoAddViewController.swift */,
 				F466DB8E2AD47F8B00E2B306 /* StatusEnum.swift */,
 			);
 			path = Add;
@@ -260,7 +263,8 @@
 		F466D6012AD129AB00819ED9 /* Realm */ = {
 			isa = PBXGroup;
 			children = (
-				F466D60F2AD131F800819ED9 /* Repository.swift */,
+				F466DBAF2ADC2DC600E2B306 /* GroupRepository.swift */,
+				F466D60F2AD131F800819ED9 /* TodoRepository.swift */,
 				F466D6022AD129B400819ED9 /* Table */,
 			);
 			path = Realm;
@@ -270,7 +274,7 @@
 			isa = PBXGroup;
 			children = (
 				F466D6032AD12A1D00819ED9 /* MainListTable.swift */,
-				F466DB862AD2FFD200E2B306 /* Group.swift */,
+				F466DB862AD2FFD200E2B306 /* GroupList.swift */,
 			);
 			path = Table;
 			sourceTree = "<group>";
@@ -279,8 +283,6 @@
 			isa = PBXGroup;
 			children = (
 				F466DBA92AD9738800E2B306 /* old */,
-				F466D6122AD266C900819ED9 /* ViewModel.swift */,
-				F466DB8A2AD43AE300E2B306 /* TableView.swift */,
 				F466DBAA2AD9739C00E2B306 /* TableHeaderView.swift */,
 			);
 			path = TableView;
@@ -289,6 +291,7 @@
 		F466DBA92AD9738800E2B306 /* old */ = {
 			isa = PBXGroup;
 			children = (
+				F466DB8A2AD43AE300E2B306 /* TableView.swift */,
 				F49DDCE22ACD88210067EFE6 /* ListCollectionView.swift */,
 			);
 			path = old;
@@ -297,7 +300,7 @@
 		F466DBAC2AD9ACB500E2B306 /* Group */ = {
 			isa = PBXGroup;
 			children = (
-				F466DBA52AD8294400E2B306 /* GroupAddViewController.swift */,
+				F466DBA52AD8294400E2B306 /* GroupManagementViewController.swift */,
 				F466DBAD2AD9ACD600E2B306 /* GroupTableViewCell.swift */,
 			);
 			path = Group;
@@ -405,11 +408,11 @@
 			files = (
 				F45DF32A2AC81D2A004D4667 /* PodoViewController.swift in Sources */,
 				F45DF3322ACBFF67004D4667 /* TodoTab.swift in Sources */,
-				F46210F42ACFC16D001A5EA2 /* TodoAddView.swift in Sources */,
-				F466DB872AD2FFD200E2B306 /* Group.swift in Sources */,
+				F46210F42ACFC16D001A5EA2 /* GroupAddViewController.swift in Sources */,
+				F466DB872AD2FFD200E2B306 /* GroupList.swift in Sources */,
 				F466D6042AD12A1D00819ED9 /* MainListTable.swift in Sources */,
 				F45DF3342ACC00AC004D4667 /* GoalTab.swift in Sources */,
-				F466D6102AD131F800819ED9 /* Repository.swift in Sources */,
+				F466D6102AD131F800819ED9 /* TodoRepository.swift in Sources */,
 				F45DF31F2AC6CDBC004D4667 /* String+Extension.swift in Sources */,
 				F45DF30F2AC6C431004D4667 /* BaseViewController.swift in Sources */,
 				F457C10E2AC1854500B4D46C /* MainViewController.swift in Sources */,
@@ -417,8 +420,8 @@
 				F466D6132AD266C900819ED9 /* ViewModel.swift in Sources */,
 				F45DF3272AC81A93004D4667 /* Tabbar.swift in Sources */,
 				F45DF32C2AC87ED5004D4667 /* WeatherView.swift in Sources */,
-				F466D6002AD10F7F00819ED9 /* GoalAddViewController.swift in Sources */,
-				F466DBA62AD8294400E2B306 /* GroupAddViewController.swift in Sources */,
+				F466D6002AD10F7F00819ED9 /* TodoAddViewController.swift in Sources */,
+				F466DBA62AD8294400E2B306 /* GroupManagementViewController.swift in Sources */,
 				F49DDCE32ACD88210067EFE6 /* ListCollectionView.swift in Sources */,
 				F466DBA82AD8479D00E2B306 /* PodoViewModel.swift in Sources */,
 				F457C10A2AC1854500B4D46C /* AppDelegate.swift in Sources */,
@@ -432,6 +435,7 @@
 				F45DF3252AC81A76004D4667 /* Observable.swift in Sources */,
 				F466DB912AD5236900E2B306 /* Date+Extension.swift in Sources */,
 				F457C10C2AC1854500B4D46C /* SceneDelegate.swift in Sources */,
+				F466DBB02ADC2DC600E2B306 /* GroupRepository.swift in Sources */,
 				F45DF30C2AC6C351004D4667 /* Font.swift in Sources */,
 				F466DBAE2AD9ACD600E2B306 /* GroupTableViewCell.swift in Sources */,
 			);

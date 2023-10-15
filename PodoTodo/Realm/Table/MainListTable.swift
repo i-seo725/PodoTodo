@@ -17,8 +17,7 @@ class MainList: Object {
     @Persisted(primaryKey: true) var _id: ObjectId
     @Persisted var isTodo: Bool
     @Persisted var contents: String
-//    @Persisted var group: List<Group>
-//    @Persisted var temp: String = "기본 그룹"
+    @Persisted var group: String
     @Persisted var date: Date
     @Persisted var checklist: String?
     @Persisted var isDone: Bool

@@ -9,16 +9,15 @@ import Foundation
 import RealmSwift
 
 protocol RepositoryType: AnyObject {
-    func fetch() -> Results<MainList>
     func fetchFilter(isTodo: Bool, date: Date) -> Results<MainList>
     func create(_ item: MainList)
     func update(id: ObjectId, contents: String, date: Date)
     func delete(_ item: MainList)
 }
 
-class Repository: RepositoryType {
+class TodoRepository: RepositoryType {
     
-    static let shared = Repository()
+    static let shared = TodoRepository()
     private init() { }
     
     private let realm = try! Realm()
@@ -30,13 +29,6 @@ class Repository: RepositoryType {
         } catch {
             print(error)
         }
-    }
-    
-    //전체 데이터 가져오기(read)
-    func fetch() -> Results<MainList> {
-        let data = realm.objects(MainList.self)
-    
-        return data
     }
     
     func fetchFilter(isTodo: Bool, date: Date) -> Results<MainList> {

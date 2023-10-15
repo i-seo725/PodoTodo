@@ -94,7 +94,7 @@ class MainViewController: BaseViewController {
         guard let sheet = vc.sheetPresentationController else { return }
         if #available(iOS 16.0, *) {
             sheet.detents = [.custom(resolver: { context in
-                return 60
+                return 120
             })]
         } else {
             sheet.detents = [.medium()]
@@ -174,7 +174,7 @@ class MainViewController: BaseViewController {
     }
     
     @objc func listButtonTapped() {
-        self.navigationController?.pushViewController(GroupAddViewController(), animated: true)
+        self.navigationController?.pushViewController(GroupManagementViewController(), animated: true)
     }
 }
 
@@ -256,7 +256,7 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            Repository.shared.delete(viewModel.todoList(date: calendarDate)[indexPath.row])
+            TodoRepository.shared.delete(viewModel.todoList(date: calendarDate)[indexPath.row])
             tableView.reloadData()
         }
         

@@ -10,18 +10,9 @@ import SnapKit
 
 class GroupTableViewCell: UITableViewCell {
     
-    let colorPickerButton = {
-        let view = UIColorWell()
-        view.supportsAlpha = false
-        view.selectedColor = .thirdGrape
-        return view
-    }()
-    
-    let groupNameTextField = {
-        let view = UITextField()
-        view.isUserInteractionEnabled = false
-        view.borderStyle = .none
-        view.placeholder = "그룹명을 입력해주세요"
+    let colorView = UIView()
+    let groupNameLabel = {
+        let view = UILabel()
         view.font = UIFont(name: Font.jamsilLight.rawValue, size: 15)
         view.text = "20자 제한 주기"
         return view
@@ -37,59 +28,29 @@ class GroupTableViewCell: UITableViewCell {
     }
     
     func configureView() {
-        contentView.addSubview(colorPickerButton)
-        colorPickerButton.addTarget(self, action: #selector(colorPicked), for: .valueChanged)
-        colorPickerButton.snp.makeConstraints { make in
+        contentView.addSubview(colorView)
+        colorView.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
+            make.size.equalTo(26)
             make.leading.equalToSuperview().inset(8)
         }
+        colorView.layer.cornerRadius = 13
         
-        contentView.addSubview(groupNameTextField)
-        groupNameTextField.delegate = self
-        groupNameTextField.addTarget(self, action: #selector(enterButtonTapped), for: .editingDidEndOnExit)
-        groupNameTextField.snp.makeConstraints { make in
+        contentView.addSubview(groupNameLabel)
+        groupNameLabel.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
-            make.leading.equalTo(colorPickerButton.snp.trailing).inset(-8)
+            make.leading.equalTo(colorView.snp.trailing).inset(-8)
             make.trailing.equalToSuperview().inset(8)
         }
     }
     
     @objc func colorPicked(_ sender: UIColorWell) {
-        print(sender.selectedColor) //rgb + alpha값
+        //        print(sender.selectedColor?.cgColor.components)
+        let a = sender.selectedColor?.hexString
+        print(a)
     }
-    
-    @objc func enterButtonTapped(_ sender: UITextField) {
-        if let text = sender.text {
-            if text.isEmpty {
-                
-            } else {
-                sender.resignFirstResponder()
-                sender.isUserInteractionEnabled = false
-                sender.text = text
-            }
-        }
-        
-    }
-    
-}
 
-extension GroupTableViewCell: UITextFieldDelegate {
     
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        guard let text = textField.text else { return true }
-        if text.count > 20 || text.isEmpty {
-            return false
-        } else {
-            return true
-        }
-    }
     
-}
-
-extension GroupTableViewCell: UIColorPickerViewControllerDelegate {
-    
-    func colorPickerViewController(_ viewController: UIColorPickerViewController, didSelect color: UIColor, continuously: Bool) {
-        print(color)
-    }
     
 }

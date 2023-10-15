@@ -11,7 +11,7 @@ class PodoViewModel {
     
     func checkTodo(date: Date) {
         
-        let todo = Repository.shared.fetchFilter(isTodo: true, date: date)
+        let todo = TodoRepository.shared.fetchFilter(isTodo: true, date: date)
         
         for item in todo {
             if item.isDone == false {
