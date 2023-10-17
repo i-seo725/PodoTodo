@@ -13,6 +13,7 @@ extension UIColor {
     class var secondGrape: UIColor { return UIColor(named: "secondGrape")! }
     class var thirdGrape: UIColor { return UIColor(named: "thirdGrape")! }
     class var fourthGrape: UIColor { return UIColor(named: "fourthGrape")! }
+    class var background: UIColor { return UIColor(named: "background")! }
     
     var hexString: String? {
         guard let components = self.cgColor.components else { return nil }

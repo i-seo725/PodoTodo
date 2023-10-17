@@ -23,7 +23,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let tabBarController = UITabBarController()
         tabBarController.setViewControllers([main, second], animated: true)
         tabBarController.tabBar.tintColor = .firstGrape
-        tabBarController.tabBar.backgroundColor = .white
+        tabBarController.tabBar.backgroundColor = .background
 
         if let items = tabBarController.tabBar.items {
             items[0].image = Tabbar.Main.image

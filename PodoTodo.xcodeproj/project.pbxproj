@@ -50,6 +50,7 @@
 		F466DBAB2AD9739C00E2B306 /* TableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F466DBAA2AD9739C00E2B306 /* TableHeaderView.swift */; };
 		F466DBAE2AD9ACD600E2B306 /* GroupTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F466DBAD2AD9ACD600E2B306 /* GroupTableViewCell.swift */; };
 		F466DBB02ADC2DC600E2B306 /* GroupRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = F466DBAF2ADC2DC600E2B306 /* GroupRepository.swift */; };
+		F466DBB22ADE601000E2B306 /* GrapeList.swift in Sources */ = {isa = PBXBuildFile; fileRef = F466DBB12ADE601000E2B306 /* GrapeList.swift */; };
 		F49DDCE32ACD88210067EFE6 /* ListCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49DDCE22ACD88210067EFE6 /* ListCollectionView.swift */; };
 		F49DDCE72ACDB0A60067EFE6 /* Grape.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49DDCE62ACDB0A60067EFE6 /* Grape.swift */; };
 		F49DDCE92ACDB7220067EFE6 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = F49DDCE82ACDB7220067EFE6 /* .gitignore */; };
@@ -98,6 +99,7 @@
 		F466DBAA2AD9739C00E2B306 /* TableHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableHeaderView.swift; sourceTree = "<group>"; };
 		F466DBAD2AD9ACD600E2B306 /* GroupTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupTableViewCell.swift; sourceTree = "<group>"; };
 		F466DBAF2ADC2DC600E2B306 /* GroupRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupRepository.swift; sourceTree = "<group>"; };
+		F466DBB12ADE601000E2B306 /* GrapeList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrapeList.swift; sourceTree = "<group>"; };
 		F49DDCE22ACD88210067EFE6 /* ListCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCollectionView.swift; sourceTree = "<group>"; };
 		F49DDCE62ACDB0A60067EFE6 /* Grape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grape.swift; sourceTree = "<group>"; };
 		F49DDCE82ACDB7220067EFE6 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
@@ -275,6 +277,7 @@
 			children = (
 				F466D6032AD12A1D00819ED9 /* MainListTable.swift */,
 				F466DB862AD2FFD200E2B306 /* GroupList.swift */,
+				F466DBB12ADE601000E2B306 /* GrapeList.swift */,
 			);
 			path = Table;
 			sourceTree = "<group>";
@@ -427,6 +430,7 @@
 				F457C10A2AC1854500B4D46C /* AppDelegate.swift in Sources */,
 				F466DB8B2AD43AE300E2B306 /* TableView.swift in Sources */,
 				F45DF3122AC6C6D9004D4667 /* UIColor+Extension.swift in Sources */,
+				F466DBB22ADE601000E2B306 /* GrapeList.swift in Sources */,
 				F466DBAB2AD9739C00E2B306 /* TableHeaderView.swift in Sources */,
 				F466DB892AD30E9300E2B306 /* Results+Extension.swift in Sources */,
 				F466DB8F2AD47F8B00E2B306 /* StatusEnum.swift in Sources */,

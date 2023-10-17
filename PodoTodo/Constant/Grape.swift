@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 enum Grape {
     
@@ -25,6 +26,7 @@ enum Grape {
     }
     
     enum Green: String {
+        case empty
         case one = "green_1"
         case two = "green_2"
         case three = "green_3"
@@ -34,7 +36,7 @@ enum Grape {
         case seven = "green_7"
         case eight = "green_8"
         case nine = "green_9"
-        case ten = "green_10"
+//        case ten = "green_10"
         case complete = "green_complete"
     }
 }

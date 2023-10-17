@@ -13,7 +13,7 @@ class GroupTableViewCell: UITableViewCell {
     let colorView = UIView()
     let groupNameLabel = {
         let view = UILabel()
-        view.font = UIFont(name: Font.jamsilLight.rawValue, size: 15)
+        view.font = UIFont(name: Font.jamsilLight.rawValue, size: 13)
         view.text = "20자 제한 주기"
         return view
     }()
@@ -31,10 +31,10 @@ class GroupTableViewCell: UITableViewCell {
         contentView.addSubview(colorView)
         colorView.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
-            make.size.equalTo(26)
+            make.size.equalTo(20)
             make.leading.equalToSuperview().inset(8)
         }
-        colorView.layer.cornerRadius = 13
+        colorView.layer.cornerRadius = 10
         
         contentView.addSubview(groupNameLabel)
         groupNameLabel.snp.makeConstraints { make in

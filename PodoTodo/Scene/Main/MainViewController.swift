@@ -43,7 +43,7 @@ class MainViewController: BaseViewController {
         view.appearance.headerMinimumDissolvedAlpha = 0
         view.appearance.headerDateFormat = "YYYY년 MM월"
         view.appearance.headerTitleColor = UIColor.black
-        view.appearance.headerTitleFont = UIFont(name: Font.jamsilRegular.rawValue, size: 18)
+//        view.appearance.headerTitleFont = UIFont(name: Font.jamsilRegular.rawValue, size: 18)
         
         //날짜 영역
         view.appearance.weekdayTextColor = UIColor.black
@@ -84,11 +84,21 @@ class MainViewController: BaseViewController {
         view.addSubview(todoUnderlineView)
         todoUnderlineView.backgroundColor = .firstGrape
         view.addSubview(todoTable)
+        configureTableView()
+        view.addSubview(addButton)
+        addButton.addTarget(self, action: #selector(addButtonTapped), for: .touchUpInside)
+    }
+    
+    func configureTableView() {
         todoTable.dataSource = self
         todoTable.delegate = self
         todoTable.rowHeight = UITableView.automaticDimension
-        view.addSubview(addButton)
-        addButton.addTarget(self, action: #selector(addButtonTapped), for: .touchUpInside)
+        todoTable.backgroundColor = .white
+        todoTable.separatorStyle = .none
+        todoTable.layer.cornerRadius = 20
+        
+        todoTable.layer.borderColor = UIColor.darkGray.withAlphaComponent(0.3).cgColor
+        todoTable.layer.borderWidth = 0.7
     }
     
     @objc func addButtonTapped() {
@@ -111,13 +121,13 @@ class MainViewController: BaseViewController {
     
     override func setConstraints() {
         todoCalendar.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide).offset(16)
+            make.top.equalTo(view.safeAreaLayoutGuide).offset(12)
             make.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(8)
-            make.height.equalTo(view.safeAreaLayoutGuide).multipliedBy(0.4)
+            make.height.equalTo(400)//.multipliedBy(0.4)
         }
         
         todoLabel.snp.makeConstraints { make in
-            make.top.equalTo(todoCalendar.snp.bottom).multipliedBy(0.5)
+            make.top.equalTo(todoCalendar.snp.bottom).multipliedBy(1)
             make.centerX.equalToSuperview()
         }
         
@@ -134,8 +144,8 @@ class MainViewController: BaseViewController {
         }
         
         todoTable.snp.makeConstraints { make in
-            make.top.equalTo(todoUnderlineView.snp.bottom).offset(8)
-            make.horizontalEdges.equalToSuperview().inset(8)
+            make.top.equalTo(todoUnderlineView.snp.bottom).offset(16)
+            make.horizontalEdges.equalToSuperview().inset(20)
             make.bottom.equalTo(view.safeAreaLayoutGuide)
         }
     }
@@ -161,8 +171,8 @@ class MainViewController: BaseViewController {
         recognizer.addTarget(self, action: #selector(navigationBarTapped))
         if let navBar = navigationController?.navigationBar {
             navBar.addGestureRecognizer(recognizer)
-            navBar.titleTextAttributes = [.font: UIFont(name: Font.jamsilRegular.rawValue, size: 18)]
-            navBar.backgroundColor = .white
+            navBar.titleTextAttributes = [.font: UIFont(name: Font.jamsilRegular.rawValue, size: 16)!]
+            navBar.backgroundColor = .background
         }
         let listButton = UIBarButtonItem(image: UIImage(systemName: "list.bullet")!, style: .plain, target: self, action: #selector(listButtonTapped))
         listButton.tintColor = .firstGrape
@@ -182,6 +192,26 @@ class MainViewController: BaseViewController {
         vc.status = .edit
         self.navigationController?.pushViewController(GroupManagementViewController(), animated: true)
     }
+    
+    private lazy var swipeUp = {
+        let view = UISwipeGestureRecognizer(target: self, action: #selector(swipedUpAndDown))
+        view.direction = .up
+        return view
+    }()
+
+    private lazy var swipeDown = {
+        let view = UISwipeGestureRecognizer(target: self, action: #selector(swipedUpAndDown))
+        view.direction = .down
+        return view
+    }()
+    
+    @objc private func swipedUpAndDown(_ sender: UISwipeGestureRecognizer) {
+        if sender.direction == .up {
+            todoCalendar.setScope(.week, animated: true)
+        } else if sender.direction == .down {
+            todoCalendar.setScope(.month, animated: true)
+        }
+    }
 }
 
 extension MainViewController: FSCalendarDelegate, FSCalendarDataSource, FSCalendarDelegateAppearance {
@@ -194,10 +224,10 @@ extension MainViewController: FSCalendarDelegate, FSCalendarDataSource, FSCalend
     }
     
     func calendar(_ calendar: FSCalendar, boundingRectWillChange bounds: CGRect, animated: Bool){
-//        self.todoCalendar.snp.updateConstraints { (make) in
-//            make.height.equalTo(bounds.height)
-//        }
-//        self.view.layoutIfNeeded()
+        self.todoCalendar.snp.updateConstraints { (make) in
+            make.height.equalTo(bounds.height)
+        }
+        self.view.layoutIfNeeded()
     }
 }
 
@@ -221,14 +251,14 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
         view.sectionIndex = section
         
         if let color = GroupRepository.shared.fetch()[section].color?.hexStringToUIColor() {
-            view.colorView.backgroundColor = color
+            view.underlineView.backgroundColor = color
         }
         return view
     }
     
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 36
+        return 50
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -244,7 +274,8 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
         let cell = UITableViewCell()
         
         var contents = cell.defaultContentConfiguration()
-        contents.textProperties.font = UIFont(name: Font.jamsilLight.rawValue, size: 15)!
+        contents.textProperties.font = UIFont(name: Font.jamsilLight.rawValue, size: 12)!
+        
         
         let todoList = TodoRepository.shared.fetchFilter(isTodo: true, date: calendarDate, group: GroupRepository.shared.fetch()[indexPath.section]._id)[indexPath.row]
         
