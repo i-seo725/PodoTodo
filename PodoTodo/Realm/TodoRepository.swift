@@ -31,6 +31,11 @@ class TodoRepository: RepositoryType {
         }
     }
     
+    func fetch() -> Results<MainList> {
+        let data = realm.objects(MainList.self)
+        return data
+    }
+    
     func fetchFilter(isTodo: Bool, date: Date, group: ObjectId) -> Results<MainList> {
         let startDay = date.dateToString().stringToDate()!
         let endDay = startDay.addingTimeInterval(86400)

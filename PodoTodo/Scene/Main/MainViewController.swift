@@ -87,6 +87,8 @@ class MainViewController: BaseViewController {
         configureTableView()
         view.addSubview(addButton)
         addButton.addTarget(self, action: #selector(addButtonTapped), for: .touchUpInside)
+        todoCalendar.addGestureRecognizer(swipeUp)
+        todoCalendar.addGestureRecognizer(swipeDown)
     }
     
     func configureTableView() {
@@ -123,7 +125,7 @@ class MainViewController: BaseViewController {
         todoCalendar.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide).offset(12)
             make.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(8)
-            make.height.equalTo(400)//.multipliedBy(0.4)
+            make.height.equalTo(350)//.multipliedBy(0.4)
         }
         
         todoLabel.snp.makeConstraints { make in
@@ -228,6 +230,24 @@ extension MainViewController: FSCalendarDelegate, FSCalendarDataSource, FSCalend
             make.height.equalTo(bounds.height)
         }
         self.view.layoutIfNeeded()
+    }
+    
+    func calendar(_ calendar: FSCalendar, numberOfEventsFor date: Date) -> Int {
+        let dateArray: [Date] = TodoRepository.shared.fetch().map { $0.date }
+        
+        if dateArray.contains(date){
+            return 1
+        } else {
+            return 0
+        }
+    }
+    
+    func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, eventDefaultColorsFor date: Date) -> [UIColor]? {
+        return [UIColor.secondGrape]
+    }
+    
+    func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, eventSelectionColorsFor date: Date) -> [UIColor]? {
+        return [UIColor.thirdGrape]
     }
 }
 
