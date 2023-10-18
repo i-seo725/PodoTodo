@@ -47,19 +47,10 @@ class GroupManagementViewController: BaseViewController {
     
     @objc func plusButtonTapped() {
         let vc = GroupAddViewController()
-        vc.modalPresentationStyle = .pageSheet
-        guard let sheet = vc.sheetPresentationController else { return }
-        if #available(iOS 16.0, *) {
-            sheet.detents = [.custom(resolver: { context in
-                return 60
-            })]
-        } else {
-            sheet.detents = [.medium()]
-        }
         vc.table = tableView
         vc.status = .add
         
-        present(vc, animated: true)
+        presentSheetView(vc, height: 55)
     }
     
     @objc func enterButtonTapped(_ sender: UITextField) {
@@ -108,20 +99,11 @@ extension GroupManagementViewController: UITableViewDelegate, UITableViewDataSou
         
         if status == .edit {
             let vc = GroupAddViewController()
-            vc.modalPresentationStyle = .pageSheet
-            guard let sheet = vc.sheetPresentationController else { return }
-            if #available(iOS 16.0, *) {
-                sheet.detents = [.custom(resolver: { context in
-                    return 60
-                })]
-            } else {
-                sheet.detents = [.medium()]
-            }
             vc.table = tableView
             vc.status = .edit
             vc.listID = groupID
-            
-            present(vc, animated: true)
+           
+            presentSheetView(vc, height: 55)
             
         } else if status == .select {
             NotificationCenter.default.post(name: NSNotification.Name("groupID"), object: nil, userInfo: ["groupID": groupID])

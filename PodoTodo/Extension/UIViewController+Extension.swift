@@ -9,13 +9,13 @@ import UIKit
 
 extension UIViewController {
     
-    func presentSheetView(_ vc: UIViewController) {
+    func presentSheetView(_ vc: UIViewController, height: CGFloat) {
         
         vc.modalPresentationStyle = .pageSheet
         guard let sheet = vc.sheetPresentationController else { return }
         if #available(iOS 16.0, *) {
             sheet.detents = [.custom(resolver: { context in
-                return 120
+                return height
             })]
         } else {
             sheet.detents = [.medium()]

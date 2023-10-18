@@ -114,7 +114,7 @@ class MainViewController: BaseViewController {
         vc.status = .add
         vc.selectedDate = calendarDate
         
-        presentSheetView(vc)
+        presentSheetView(vc, height: 120)
     }
     
     override func setConstraints() {
@@ -307,25 +307,16 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
         let todoList = viewModel.todoList(date: calendarDate, groupID: GroupRepository.shared.fetch()[indexPath.section]._id)[indexPath.row]
         
         let vc = TodoAddViewController()
-        vc.modalPresentationStyle = .pageSheet
-        guard let sheet = vc.sheetPresentationController else { return }
-        if #available(iOS 16.0, *) {
-            sheet.detents = [.custom(resolver: { context in
-                return 120
-            })]
-        } else {
-            sheet.detents = [.medium()]
-        }
         vc.table = todoTable
         vc.status = .edit
         vc.selectedDate = calendarDate
         vc.listID = todoList._id
-        present(vc, animated: true)
-       
+        
+        presentSheetView(vc, height: 120)
+        
         tableView.reloadData()
     }
     
