@@ -28,12 +28,12 @@ class PodoViewController: BaseViewController {
     }()
     let underlineView = UIView()
     
-    var podo = 11
+    var savedPodo = UserDefaults.standard.integer(forKey: "podo")
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-       
+        print(savedPodo)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -73,22 +73,23 @@ class PodoViewController: BaseViewController {
         let todo = TodoRepository.shared.fetchFilterOneDay(date: Date())
         let validate: [MainList] = todo.filter { $0.isDone == false }
         let grapeArray = Grape.Purple.allCases
+        var podo = savedPodo
         
-        if validate.isEmpty {
-            if podo > 10 {
-                podo = 0
-            } else {
-                podo += 1
-                grape.image = UIImage(named: grapeArray[podo].rawValue)!
-            }
-        } else {
-            if podo < 1 {
-                return
-            } else {
-                podo -= 1
-                grape.image = UIImage(named: grapeArray[podo].rawValue)!
-            }
+        guard validate.isEmpty && todo.count != 0 else {
+            podo = savedPodo
+            grape.image = UIImage(named: grapeArray[podo].rawValue)!
+            return
         }
+        
+        podo = savedPodo + 1
+        if podo > 10 {
+            UserDefaults.standard.set(0, forKey: "podo")
+            podo = 0
+        } else {
+            UserDefaults.standard.set(podo, forKey: "podo")
+//            savedPodo = UserDefaults.standard.integer(forKey: "podo")
+        }
+        grape.image = UIImage(named: grapeArray[podo].rawValue)!
     }
     
 }
