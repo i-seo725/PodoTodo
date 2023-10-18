@@ -15,10 +15,7 @@ class PodoViewController: BaseViewController {
         let view = UIImageView()
         view.image = UIImage(named: Grape.Purple.empty.rawValue)!
         view.contentMode = .scaleAspectFit
-        view.backgroundColor = .white
-        view.layer.borderColor = UIColor.fourthGrape.cgColor
-        view.layer.borderWidth = 0.7
-        view.layer.cornerRadius = 10
+        view.backgroundColor = .clear
         return view
     }()
     let label = {
@@ -33,7 +30,7 @@ class PodoViewController: BaseViewController {
     func collectionViewLayout() -> UICollectionViewLayout {
         
         let layout = UICollectionViewFlowLayout()
-        let size = (UIScreen.main.bounds.width - 32) / 3
+        let size = (UIScreen.main.bounds.width - 32) / 5
         layout.itemSize = CGSize(width: size, height: size)
         layout.minimumInteritemSpacing = 0
         return layout
@@ -54,7 +51,7 @@ class PodoViewController: BaseViewController {
         view.addSubview(label)
         view.addSubview(underlineView)
         view.addSubview(podoCollection)
-        podoCollection.backgroundColor = .fourthGrape
+        podoCollection.backgroundColor = .clear
         underlineView.backgroundColor = .firstGrape
         navigationItem.title = "포도알 스티커"
         if let navBar = navigationController?.navigationBar {
@@ -68,13 +65,13 @@ class PodoViewController: BaseViewController {
     
     override func setConstraints() {
         grape.snp.makeConstraints { make in
-            make.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(16)
-            make.top.equalTo(view.safeAreaLayoutGuide).offset(12)
-            make.height.equalTo(view.safeAreaLayoutGuide).multipliedBy(0.6)
+            make.centerX.equalToSuperview().multipliedBy(0.9)
+            make.top.equalTo(view.safeAreaLayoutGuide)//.offset(4)
+            make.height.equalTo(view.safeAreaLayoutGuide).multipliedBy(0.7)
         }
         
         label.snp.makeConstraints { make in
-            make.top.equalTo(grape.snp.bottom).offset(20)
+            make.top.equalTo(grape.snp.bottom)//.offset(10)
             make.centerX.equalToSuperview()
         }
         
@@ -85,8 +82,8 @@ class PodoViewController: BaseViewController {
         }
         
         podoCollection.snp.makeConstraints { make in
-            make.top.equalTo(underlineView.snp.bottom).offset(10)
-            make.horizontalEdges.equalTo(grape)
+            make.top.equalTo(underlineView.snp.bottom).offset(16)
+            make.horizontalEdges.equalToSuperview().inset(16)
             make.bottom.equalToSuperview()
         }
     }

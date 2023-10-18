@@ -16,7 +16,6 @@ class MainViewController: BaseViewController {
         view.font = UIFont.jamsilTitle
         return view
     }()
-    
     let todoUnderlineView = UIView()
     let addButton = {
         let view = UIButton()
@@ -57,7 +56,6 @@ class MainViewController: BaseViewController {
        
         return view
     }()
-    
     let todoTable = UITableView(frame: .zero, style: .grouped)
     var calendarDate = Date()
     let viewModel = ViewModel()
@@ -98,7 +96,6 @@ class MainViewController: BaseViewController {
         todoTable.backgroundColor = .white
         todoTable.separatorStyle = .none
         todoTable.layer.cornerRadius = 20
-        
         todoTable.layer.borderColor = UIColor.darkGray.withAlphaComponent(0.3).cgColor
         todoTable.layer.borderWidth = 0.7
     }
@@ -188,7 +185,7 @@ class MainViewController: BaseViewController {
     @objc func listButtonTapped() {
         let vc = GroupManagementViewController()
         vc.status = .edit
-        self.navigationController?.pushViewController(GroupManagementViewController(), animated: true)
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     private lazy var swipeUp = {
@@ -233,6 +230,7 @@ extension MainViewController: FSCalendarDelegate, FSCalendarDataSource, FSCalend
         
         if dateArray.contains(date){
             return 1
+            calendar.reloadData()
         } else {
             return 0
         }
