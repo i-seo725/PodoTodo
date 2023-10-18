@@ -22,10 +22,9 @@ class TodoAddViewController: BaseViewController {
 
     let groupSelectButton = {
         let view = UIButton()
-        let imageConfig = UIImage.SymbolConfiguration(pointSize: 24, weight: .light)
-        let image = UIImage(systemName: "list.bullet", withConfiguration: imageConfig)
-        view.setImage(image, for: .normal)
-        view.tintColor = .firstGrape
+        view.backgroundColor = .thirdGrape
+        view.layer.borderColor = UIColor.lightGray.cgColor
+        view.layer.borderWidth = 2
         return view
     }()
 
@@ -39,7 +38,7 @@ class TodoAddViewController: BaseViewController {
     let datePicker = UIDatePicker()
     var selectedDate = Date()
     var listID: ObjectId!
-    var groupID: ObjectId!
+    var groupID: ObjectId?
     var status = Present.add
     var handler: (() -> Void)?
     
@@ -67,12 +66,16 @@ class TodoAddViewController: BaseViewController {
         view.addSubview(dateTextField)
         textField.addTarget(self, action: #selector(enterButtonClicked), for: .editingDidEndOnExit)
         groupSelectButton.addTarget(self, action: #selector(groupSelectButtonTapped), for: .touchUpInside)
+        groupSelectButton.layer.cornerRadius = 14
         updateViewByStatus()
     }
     
     @objc func receiveGroupID(notification: NSNotification) {
         guard let id = notification.userInfo?["groupID"] as? ObjectId else { return }
         groupID = id
+        
+        guard let selected = GroupRepository.shared.fetchFilter(id: id).first else { return }
+        groupSelectButton.backgroundColor = selected.color?.hexStringToUIColor()
     }
     
     func updateViewByStatus() {
@@ -97,6 +100,7 @@ class TodoAddViewController: BaseViewController {
         let vc = GroupManagementViewController()
         vc.status = .select
         present(vc, animated: true)
+        
     }
 
     override func setConstraints() {
@@ -106,17 +110,16 @@ class TodoAddViewController: BaseViewController {
             make.trailing.equalTo(view.safeAreaLayoutGuide).inset(20)
             make.height.equalTo(50)
         }
-        groupSelectButton.snp.makeConstraints { make in
-            make.trailing.equalTo(textField.snp.leading).offset(-8)
-            make.size.equalTo(50)
-            make.top.equalTo(textField.snp.top)
-        }
         dateTextField.snp.makeConstraints { make in
             make.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(20)
             make.height.equalTo(50)
             make.top.equalTo(textField.snp.bottom).offset(8)
         }
-
+        groupSelectButton.snp.makeConstraints { make in
+            make.leading.equalTo(dateTextField.snp.leading).inset(8)
+            make.size.equalTo(28)
+            make.centerY.equalTo(textField)
+        }
     }
 
     func setDatePicker(){
@@ -143,7 +146,7 @@ class TodoAddViewController: BaseViewController {
     }
 
     @objc func doneButtonTapped() {
-        guard let text = textField.text else {
+        guard let text = textField.text, let groupID else {
             dateTextField.text = datePicker.date.dateToString()
             dateTextField.resignFirstResponder()
             selectedDate = datePicker.date
@@ -171,7 +174,7 @@ class TodoAddViewController: BaseViewController {
     
     @objc func enterButtonClicked(_ sender: UITextField) {
 
-        guard let text = sender.text else { return }
+        guard let text = sender.text, let groupID else { return }
         
         if status == .add {
             TodoRepository.shared.create(MainList(isTodo: true, contents: text, date: selectedDate, group: groupID))

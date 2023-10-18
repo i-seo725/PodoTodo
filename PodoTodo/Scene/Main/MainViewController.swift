@@ -235,7 +235,7 @@ extension MainViewController: FSCalendarDelegate, FSCalendarDataSource, FSCalend
         let dateArray: [Date] = TodoRepository.shared.fetch().map { $0.date }
         
         if dateArray.contains(date){
-            calendar.reloadData()
+//            calendar.reloadData()
             return 1
         } else {
             return 0
