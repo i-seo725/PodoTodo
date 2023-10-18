@@ -48,8 +48,8 @@ class PodoViewController: BaseViewController {
     
     override func configureView() {
         super.configureView()
-        addSubviews()
-        configureCollectionView()
+        addSubViews()
+        configureColelctionView()
         underlineView.backgroundColor = .firstGrape
         navigationItem.title = "포도알 스티커"
         if let navBar = navigationController?.navigationBar {
@@ -59,16 +59,18 @@ class PodoViewController: BaseViewController {
         
     }
     
-    func addSubviews() {
+    func addSubViews() {
         view.addSubview(grape)
         view.addSubview(label)
         view.addSubview(underlineView)
         view.addSubview(podoCollection)
     }
     
-    func configureCollectionView() {
+    func configureColelctionView() {
         podoCollection.backgroundColor = .white
-        podoCollection.layer.cornerRadius = 15
+        podoCollection.layer.cornerRadius = 20
+        podoCollection.layer.borderColor = UIColor.darkGray.withAlphaComponent(0.3).cgColor
+        podoCollection.layer.borderWidth = 0.7
         podoCollection.delegate = self
         podoCollection.dataSource = self
         podoCollection.layer.borderColor = UIColor.darkGray.withAlphaComponent(0.3).cgColor
@@ -80,7 +82,7 @@ class PodoViewController: BaseViewController {
         grape.snp.makeConstraints { make in
             make.centerX.equalToSuperview().multipliedBy(0.9)
             make.top.equalTo(view.safeAreaLayoutGuide)//.offset(4)
-            make.height.equalTo(view.safeAreaLayoutGuide).multipliedBy(0.7)
+            make.height.equalTo(view.safeAreaLayoutGuide).multipliedBy(0.6)
         }
         
         label.snp.makeConstraints { make in
