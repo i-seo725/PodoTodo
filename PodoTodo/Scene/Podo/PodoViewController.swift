@@ -24,7 +24,7 @@ class PodoViewController: BaseViewController {
     let label = {
         let view = UILabel()
         view.text = "수집한 포도알"
-        view.font = UIFont(name: Font.jamsilRegular.rawValue, size: 15)
+        view.font = UIFont.jamsilTitle
         return view
     }()
     let underlineView = UIView()
@@ -58,7 +58,7 @@ class PodoViewController: BaseViewController {
         underlineView.backgroundColor = .firstGrape
         navigationItem.title = "포도알 스티커"
         if let navBar = navigationController?.navigationBar {
-            navBar.titleTextAttributes = [.font: UIFont(name: Font.jamsilRegular.rawValue, size: 16)!]
+            navBar.titleTextAttributes = [.font: UIFont.jamsilNav]
             navBar.backgroundColor = .background
         }
         podoCollection.delegate = self

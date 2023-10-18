@@ -13,7 +13,7 @@ class MainViewController: BaseViewController {
     let todoLabel = {
         let view = UILabel()
         view.text = "오늘의 할 일"
-        view.font = UIFont(name: Font.jamsilRegular.rawValue, size: 15)!
+        view.font = UIFont.jamsilTitle
         return view
     }()
     
@@ -43,11 +43,11 @@ class MainViewController: BaseViewController {
         view.appearance.headerMinimumDissolvedAlpha = 0
         view.appearance.headerDateFormat = "YYYY년 MM월"
         view.appearance.headerTitleColor = UIColor.black
-//        view.appearance.headerTitleFont = UIFont(name: Font.jamsilRegular.rawValue, size: 18)
+//        view.appearance.headerTitleFont = UIFont.jamsilTitle
         
         //날짜 영역
         view.appearance.weekdayTextColor = UIColor.black
-        view.appearance.weekdayFont = UIFont(name: Font.jamsilRegular.rawValue, size: 14)
+        view.appearance.weekdayFont = UIFont.jamsilSubTitle
         view.appearance.titleWeekendColor = UIColor.gray
         view.appearance.selectionColor = UIColor.secondGrape
         
@@ -77,20 +77,20 @@ class MainViewController: BaseViewController {
     
     override func configureView() {
         super.configureView()
-        view.addSubview(todoCalendar)
-        todoCalendar.delegate = self
-        todoCalendar.dataSource = self
-        view.addSubview(todoLabel)
-        view.addSubview(todoUnderlineView)
-        todoUnderlineView.backgroundColor = .firstGrape
-        view.addSubview(todoTable)
+        addSubViews()
         configureTableView()
-        view.addSubview(addButton)
+        configureCalendar()
+        todoUnderlineView.backgroundColor = .firstGrape
         addButton.addTarget(self, action: #selector(addButtonTapped), for: .touchUpInside)
-        todoCalendar.addGestureRecognizer(swipeUp)
-        todoCalendar.addGestureRecognizer(swipeDown)
     }
     
+    func addSubViews() {
+        view.addSubview(todoCalendar)
+        view.addSubview(todoLabel)
+        view.addSubview(todoUnderlineView)
+        view.addSubview(todoTable)
+        view.addSubview(addButton)
+    }
     func configureTableView() {
         todoTable.dataSource = self
         todoTable.delegate = self
@@ -102,23 +102,19 @@ class MainViewController: BaseViewController {
         todoTable.layer.borderColor = UIColor.darkGray.withAlphaComponent(0.3).cgColor
         todoTable.layer.borderWidth = 0.7
     }
-    
+    func configureCalendar() {
+        todoCalendar.delegate = self
+        todoCalendar.dataSource = self
+        todoCalendar.addGestureRecognizer(swipeUp)
+        todoCalendar.addGestureRecognizer(swipeDown)
+    }
     @objc func addButtonTapped() {
-        
         let vc = TodoAddViewController()
-        vc.modalPresentationStyle = .pageSheet
-        guard let sheet = vc.sheetPresentationController else { return }
-        if #available(iOS 16.0, *) {
-            sheet.detents = [.custom(resolver: { context in
-                return 120
-            })]
-        } else {
-            sheet.detents = [.medium()]
-        }
         vc.table = todoTable
         vc.status = .add
         vc.selectedDate = calendarDate
-        present(vc, animated: true)
+        
+        presentSheetView(vc)
     }
     
     override func setConstraints() {
@@ -173,7 +169,7 @@ class MainViewController: BaseViewController {
         recognizer.addTarget(self, action: #selector(navigationBarTapped))
         if let navBar = navigationController?.navigationBar {
             navBar.addGestureRecognizer(recognizer)
-            navBar.titleTextAttributes = [.font: UIFont(name: Font.jamsilRegular.rawValue, size: 16)!]
+            navBar.titleTextAttributes = [.font: UIFont.jamsilNav]
             navBar.backgroundColor = .background
         }
         let listButton = UIBarButtonItem(image: UIImage(systemName: "list.bullet")!, style: .plain, target: self, action: #selector(listButtonTapped))
@@ -294,7 +290,7 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
         let cell = UITableViewCell()
         
         var contents = cell.defaultContentConfiguration()
-        contents.textProperties.font = UIFont(name: Font.jamsilLight.rawValue, size: 12)!
+        contents.textProperties.font = UIFont.jamsilContent
         
         
         let todoList = TodoRepository.shared.fetchFilter(isTodo: true, date: calendarDate, group: GroupRepository.shared.fetch()[indexPath.section]._id)[indexPath.row]

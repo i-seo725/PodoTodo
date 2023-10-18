@@ -14,7 +14,7 @@ class TodoAddViewController: BaseViewController {
         let view = UITextField()
         view.borderStyle = .roundedRect
         view.clearButtonMode = .whileEditing
-        view.font = UIFont(name: Font.jamsilLight.rawValue, size: 14)
+        view.font = UIFont.jamsilContent
         view.textColor = .black
         view.becomeFirstResponder()
         return view
@@ -31,7 +31,7 @@ class TodoAddViewController: BaseViewController {
 
     let dateTextField = {
         let view = UITextField()
-        view.font = UIFont(name: Font.jamsilLight.rawValue, size: 14)
+        view.font = UIFont.jamsilContent
         view.borderStyle = .roundedRect
         return view
     }()
@@ -47,6 +47,7 @@ class TodoAddViewController: BaseViewController {
         super.viewDidLoad()
         setDatePicker()
         setupToolbar()
+        print(status)
     }
     
     override func viewWillAppear(_ animated: Bool) {

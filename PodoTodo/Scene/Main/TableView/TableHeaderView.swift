@@ -19,7 +19,7 @@ class TableHeaderView: UITableViewHeaderFooterView {
         let view = UILabel()
         view.text = "기본 그룹"
         view.numberOfLines = 1
-        view.font = UIFont(name: Font.jamsilRegular.rawValue, size: 13)
+        view.font = UIFont.jamsilSubTitle
         return view
     }()
     let underlineView = UIView()

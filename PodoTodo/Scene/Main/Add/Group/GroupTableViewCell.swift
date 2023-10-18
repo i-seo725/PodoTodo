@@ -13,7 +13,7 @@ class GroupTableViewCell: UITableViewCell {
     let colorView = UIView()
     let groupNameLabel = {
         let view = UILabel()
-        view.font = UIFont(name: Font.jamsilLight.rawValue, size: 13)
+        view.font = UIFont.jamsilContent
         view.text = "20자 제한 주기"
         return view
     }()

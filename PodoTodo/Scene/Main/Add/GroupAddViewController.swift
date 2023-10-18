@@ -15,7 +15,7 @@ class GroupAddViewController: BaseViewController {
         let view = UITextField()
         view.borderStyle = .roundedRect
         view.clearButtonMode = .whileEditing
-        view.font = UIFont(name: Font.jamsilLight.rawValue, size: 14)
+        view.font = UIFont.jamsilContent
         view.textColor = .black
         view.becomeFirstResponder()
         return view

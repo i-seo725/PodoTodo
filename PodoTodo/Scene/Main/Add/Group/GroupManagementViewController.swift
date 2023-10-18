@@ -36,7 +36,7 @@ class GroupManagementViewController: BaseViewController {
         if let navBar = navigationController?.navigationBar {
             navBar.tintColor = .firstGrape
             navBar.backgroundColor = .clear
-            navBar.titleTextAttributes = [.font: UIFont(name: Font.jamsilRegular.rawValue, size: 16)!]
+            navBar.titleTextAttributes = [.font: UIFont.jamsilNav]
         }
         
         title = "그룹 관리"
