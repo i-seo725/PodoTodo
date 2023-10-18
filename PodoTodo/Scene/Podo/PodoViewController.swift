@@ -31,20 +31,12 @@ class PodoViewController: BaseViewController {
     lazy var podoCollection = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout())
     var savedPodo = UserDefaults.standard.integer(forKey: "podo")
     func collectionViewLayout() -> UICollectionViewLayout {
+        
         let layout = UICollectionViewFlowLayout()
-        if let size = view.window?.windowScene?.screen.bounds.width {
-            layout.itemSize = .init(width: (size - 56) / 5, height: (size - 56) / 5)
-            layout.minimumLineSpacing = 8
-            print("@@")
-            return layout
-        } else {
-            layout.itemSize = CGSize(width: 40, height: 40)
-            layout.minimumLineSpacing = 8
-            print("!!")
-            return layout
-        }
-        
-        
+        let size = (UIScreen.main.bounds.width - 32) / 3
+        layout.itemSize = CGSize(width: size, height: size)
+        layout.minimumInteritemSpacing = 0
+        return layout
     }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -69,6 +61,9 @@ class PodoViewController: BaseViewController {
             navBar.titleTextAttributes = [.font: UIFont(name: Font.jamsilRegular.rawValue, size: 16)!]
             navBar.backgroundColor = .background
         }
+        podoCollection.delegate = self
+        podoCollection.dataSource = self
+        podoCollection.register(PodoCollectionViewCell.self, forCellWithReuseIdentifier: "podoCell")
     }
     
     override func setConstraints() {
@@ -117,6 +112,19 @@ class PodoViewController: BaseViewController {
 //            savedPodo = UserDefaults.standard.integer(forKey: "podo")
         }
         grape.image = UIImage(named: grapeArray[podo].rawValue)!
+    }
+    
+}
+
+extension PodoViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 10
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "podoCell", for: indexPath) as? PodoCollectionViewCell else { return UICollectionViewCell() }
+        return cell
     }
     
 }

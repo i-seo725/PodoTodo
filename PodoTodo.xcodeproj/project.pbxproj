@@ -51,6 +51,7 @@
 		F466DBAE2AD9ACD600E2B306 /* GroupTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F466DBAD2AD9ACD600E2B306 /* GroupTableViewCell.swift */; };
 		F466DBB02ADC2DC600E2B306 /* GroupRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = F466DBAF2ADC2DC600E2B306 /* GroupRepository.swift */; };
 		F466DBB22ADE601000E2B306 /* GrapeList.swift in Sources */ = {isa = PBXBuildFile; fileRef = F466DBB12ADE601000E2B306 /* GrapeList.swift */; };
+		F466DBB42AE021A500E2B306 /* PodoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F466DBB32AE021A500E2B306 /* PodoCollectionViewCell.swift */; };
 		F49DDCE32ACD88210067EFE6 /* ListCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49DDCE22ACD88210067EFE6 /* ListCollectionView.swift */; };
 		F49DDCE72ACDB0A60067EFE6 /* Grape.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49DDCE62ACDB0A60067EFE6 /* Grape.swift */; };
 		F49DDCE92ACDB7220067EFE6 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = F49DDCE82ACDB7220067EFE6 /* .gitignore */; };
@@ -100,6 +101,7 @@
 		F466DBAD2AD9ACD600E2B306 /* GroupTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupTableViewCell.swift; sourceTree = "<group>"; };
 		F466DBAF2ADC2DC600E2B306 /* GroupRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupRepository.swift; sourceTree = "<group>"; };
 		F466DBB12ADE601000E2B306 /* GrapeList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrapeList.swift; sourceTree = "<group>"; };
+		F466DBB32AE021A500E2B306 /* PodoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodoCollectionViewCell.swift; sourceTree = "<group>"; };
 		F49DDCE22ACD88210067EFE6 /* ListCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCollectionView.swift; sourceTree = "<group>"; };
 		F49DDCE62ACDB0A60067EFE6 /* Grape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grape.swift; sourceTree = "<group>"; };
 		F49DDCE82ACDB7220067EFE6 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
@@ -238,6 +240,7 @@
 			children = (
 				F45DF3292AC81D2A004D4667 /* PodoViewController.swift */,
 				F466DBA72AD8479D00E2B306 /* PodoViewModel.swift */,
+				F466DBB32AE021A500E2B306 /* PodoCollectionViewCell.swift */,
 			);
 			path = Podo;
 			sourceTree = "<group>";
@@ -421,6 +424,7 @@
 				F457C10E2AC1854500B4D46C /* MainViewController.swift in Sources */,
 				F49DDCEC2ACDB7330067EFE6 /* APIKey.swift in Sources */,
 				F466D6132AD266C900819ED9 /* ViewModel.swift in Sources */,
+				F466DBB42AE021A500E2B306 /* PodoCollectionViewCell.swift in Sources */,
 				F45DF3272AC81A93004D4667 /* Tabbar.swift in Sources */,
 				F45DF32C2AC87ED5004D4667 /* WeatherView.swift in Sources */,
 				F466D6002AD10F7F00819ED9 /* TodoAddViewController.swift in Sources */,
