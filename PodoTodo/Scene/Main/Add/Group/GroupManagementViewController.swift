@@ -13,10 +13,16 @@ class GroupManagementViewController: BaseViewController {
     let tableView = UITableView(frame: .zero, style: .insetGrouped)
     var status = Present.edit
     var selectedColor: String? = nil
+    var handler: (() -> Void)?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureNavigationBar()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        handler?()
     }
     
     override func configureView() {
@@ -47,9 +53,10 @@ class GroupManagementViewController: BaseViewController {
     
     @objc func plusButtonTapped() {
         let vc = GroupAddViewController()
-        vc.table = tableView
         vc.status = .add
-        
+        vc.handler? = {
+            self.tableView.reloadData()
+        }
         presentSheetView(vc, height: 55)
     }
     
@@ -99,9 +106,11 @@ extension GroupManagementViewController: UITableViewDelegate, UITableViewDataSou
         
         if status == .edit {
             let vc = GroupAddViewController()
-            vc.table = tableView
             vc.status = .edit
             vc.listID = groupID
+            vc.handler? = {
+                tableView.reloadData()
+            }
            
             presentSheetView(vc, height: 55)
             

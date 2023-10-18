@@ -70,7 +70,7 @@ class MainViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        todoTable.reloadData()
+//        todoTable.reloadData()
     }
     
     override func configureView() {
@@ -107,10 +107,12 @@ class MainViewController: BaseViewController {
     }
     @objc func addButtonTapped() {
         let vc = TodoAddViewController()
-        vc.table = todoTable
         vc.status = .add
         vc.selectedDate = calendarDate
-        
+      
+        vc.handler = {
+            self.todoTable.reloadData()
+        }
         presentSheetView(vc, height: 120)
     }
     
@@ -185,6 +187,9 @@ class MainViewController: BaseViewController {
     @objc func listButtonTapped() {
         let vc = GroupManagementViewController()
         vc.status = .edit
+        vc.handler? = {
+            self.todoTable.reloadData()
+        }
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -229,8 +234,8 @@ extension MainViewController: FSCalendarDelegate, FSCalendarDataSource, FSCalend
         let dateArray: [Date] = TodoRepository.shared.fetch().map { $0.date }
         
         if dateArray.contains(date){
-            return 1
             calendar.reloadData()
+            return 1
         } else {
             return 0
         }
@@ -308,7 +313,6 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
         let todoList = viewModel.todoList(date: calendarDate, groupID: GroupRepository.shared.fetch()[indexPath.section]._id)[indexPath.row]
         
         let vc = TodoAddViewController()
-        vc.table = todoTable
         vc.status = .edit
         vc.selectedDate = calendarDate
         vc.listID = todoList._id

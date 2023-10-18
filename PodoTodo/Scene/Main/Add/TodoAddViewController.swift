@@ -38,11 +38,11 @@ class TodoAddViewController: BaseViewController {
 
     let datePicker = UIDatePicker()
     var selectedDate = Date()
-    var table: UITableView!
     var listID: ObjectId!
     var groupID: ObjectId!
     var status = Present.add
-
+    var handler: (() -> Void)?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setDatePicker()
@@ -91,18 +91,7 @@ class TodoAddViewController: BaseViewController {
         }
     }
     
-    @objc func enterButtonClicked(_ sender: UITextField) {
 
-        guard let text = sender.text else { return }
-        
-        if status == .add {
-            TodoRepository.shared.create(MainList(isTodo: true, contents: text, date: selectedDate, group: groupID))
-        } else if status == .edit {
-            TodoRepository.shared.update(id: listID, contents: text, date: selectedDate, group: groupID)
-        }
-        table.reloadData()
-        dismiss(animated: true)
-    }
     
     @objc func groupSelectButtonTapped() {
         let vc = GroupManagementViewController()
@@ -174,10 +163,24 @@ class TodoAddViewController: BaseViewController {
             case .select:
                 break
             }
-
-            table.reloadData()
+            
+            handler?()
             dismiss(animated: true)
         }
+    }
+    
+    @objc func enterButtonClicked(_ sender: UITextField) {
+
+        guard let text = sender.text else { return }
+        
+        if status == .add {
+            TodoRepository.shared.create(MainList(isTodo: true, contents: text, date: selectedDate, group: groupID))
+        } else if status == .edit {
+            TodoRepository.shared.update(id: listID, contents: text, date: selectedDate, group: groupID)
+        }
+        
+        handler?()
+        dismiss(animated: true)
     }
 
 }

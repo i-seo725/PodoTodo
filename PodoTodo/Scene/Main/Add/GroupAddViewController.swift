@@ -25,10 +25,10 @@ class GroupAddViewController: BaseViewController {
 
     let viewModel = ViewModel()
     var status = Present.add
-    var table: UITableView!
     var listID: ObjectId?
     var selectedColor = UIColor.thirdGrape.hexString
-
+    var handler: (() -> Void)?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -74,18 +74,17 @@ class GroupAddViewController: BaseViewController {
                 present(alert, animated: true)
             } else if let selectedColor {
                 GroupRepository.shared.create(GroupList(groupName: text, color: selectedColor))
-                table.reloadData()
             } else {
                 GroupRepository.shared.create(GroupList(groupName: text, color: "#9D76C1"))
-                table.reloadData()
             }
  
+            handler?()
             dismiss(animated: true)
         case .edit:
             guard let text = sender.text, let listID else { return }
             GroupRepository.shared.update(id: listID, groupName: text, color: selectedColor)
 
-            table.reloadData()
+            handler?()
             dismiss(animated: true)
         case .select:
             return
