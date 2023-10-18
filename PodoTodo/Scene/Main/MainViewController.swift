@@ -76,8 +76,8 @@ class MainViewController: BaseViewController {
     override func configureView() {
         super.configureView()
         addSubViews()
-        configureTableView()
         configureCalendar()
+        configureTableView()
         todoUnderlineView.backgroundColor = .firstGrape
         addButton.addTarget(self, action: #selector(addButtonTapped), for: .touchUpInside)
     }
@@ -104,6 +104,7 @@ class MainViewController: BaseViewController {
         todoCalendar.dataSource = self
         todoCalendar.addGestureRecognizer(swipeUp)
         todoCalendar.addGestureRecognizer(swipeDown)
+        todoCalendar.allowsSelection = true
     }
     @objc func addButtonTapped() {
         let vc = TodoAddViewController()
@@ -120,11 +121,11 @@ class MainViewController: BaseViewController {
         todoCalendar.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide).offset(12)
             make.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(8)
-            make.height.equalTo(350)//.multipliedBy(0.4)
+            make.height.equalTo(380)//.multipliedBy(0.4)
         }
         
         todoLabel.snp.makeConstraints { make in
-            make.top.equalTo(todoCalendar.snp.bottom).multipliedBy(1)
+            make.top.equalTo(todoCalendar.snp.bottom).offset(8)
             make.centerX.equalToSuperview()
         }
         

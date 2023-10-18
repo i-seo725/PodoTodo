@@ -30,9 +30,10 @@ class PodoViewController: BaseViewController {
     func collectionViewLayout() -> UICollectionViewLayout {
         
         let layout = UICollectionViewFlowLayout()
-        let size = (UIScreen.main.bounds.width - 32) / 5
+        let size = (UIScreen.main.bounds.width - 42) / 5
         layout.itemSize = CGSize(width: size, height: size)
         layout.minimumInteritemSpacing = 0
+        layout.sectionInset = UIEdgeInsets(top: 8, left: 4, bottom: 4, right: 6)
         return layout
     }
     override func viewDidLoad() {
@@ -47,19 +48,31 @@ class PodoViewController: BaseViewController {
     
     override func configureView() {
         super.configureView()
-        view.addSubview(grape)
-        view.addSubview(label)
-        view.addSubview(underlineView)
-        view.addSubview(podoCollection)
-        podoCollection.backgroundColor = .clear
+        addSubviews()
+        configureCollectionView()
         underlineView.backgroundColor = .firstGrape
         navigationItem.title = "포도알 스티커"
         if let navBar = navigationController?.navigationBar {
             navBar.titleTextAttributes = [.font: UIFont.jamsilNav]
             navBar.backgroundColor = .background
         }
+        
+    }
+    
+    func addSubviews() {
+        view.addSubview(grape)
+        view.addSubview(label)
+        view.addSubview(underlineView)
+        view.addSubview(podoCollection)
+    }
+    
+    func configureCollectionView() {
+        podoCollection.backgroundColor = .white
+        podoCollection.layer.cornerRadius = 15
         podoCollection.delegate = self
         podoCollection.dataSource = self
+        podoCollection.layer.borderColor = UIColor.darkGray.withAlphaComponent(0.3).cgColor
+        podoCollection.layer.borderWidth = 0.7
         podoCollection.register(PodoCollectionViewCell.self, forCellWithReuseIdentifier: "podoCell")
     }
     
@@ -84,7 +97,7 @@ class PodoViewController: BaseViewController {
         podoCollection.snp.makeConstraints { make in
             make.top.equalTo(underlineView.snp.bottom).offset(16)
             make.horizontalEdges.equalToSuperview().inset(16)
-            make.bottom.equalToSuperview()
+            make.height.equalTo(170)
         }
     }
     
