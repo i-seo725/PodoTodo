@@ -51,7 +51,6 @@ class TodoAddViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-//        todoTable.reloadData()
         NotificationCenter.default.addObserver(self, selector: #selector(receiveGroupID), name: NSNotification.Name("groupID"), object: nil)
     }
     
@@ -100,6 +99,7 @@ class TodoAddViewController: BaseViewController {
     @objc func groupSelectButtonTapped() {
         let vc = GroupManagementViewController()
         vc.status = .select
+//        let nav = UINavigationController(rootViewController: vc)
         present(vc, animated: true)
         
     }

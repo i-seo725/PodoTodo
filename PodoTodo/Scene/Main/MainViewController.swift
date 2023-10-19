@@ -7,6 +7,7 @@
 
 import UIKit
 import FSCalendar
+import SnapKit
 
 class MainViewController: BaseViewController {
     
@@ -41,8 +42,10 @@ class MainViewController: BaseViewController {
         view.headerHeight = 0
         view.appearance.headerMinimumDissolvedAlpha = 0
         view.appearance.headerDateFormat = "YYYY년 MM월"
+        view.appearance.headerTitleAlignment = .natural
         view.appearance.headerTitleColor = UIColor.black
-//        view.appearance.headerTitleFont = UIFont.jamsilTitle
+        view.appearance.headerTitleFont = UIFont.jamsilTitle
+        
         
         //날짜 영역
         view.appearance.weekdayTextColor = UIColor.black
@@ -63,7 +66,7 @@ class MainViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setConstraints()
-        configureNavigationTitle()
+        configureNavigationTitle(Date())
         configureNavigationBar()
         print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first)
     }
@@ -119,9 +122,9 @@ class MainViewController: BaseViewController {
     
     override func setConstraints() {
         todoCalendar.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide).offset(12)
+            make.top.equalTo(view.safeAreaLayoutGuide)//.offset(-30)
             make.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(8)
-            make.height.equalTo(380)//.multipliedBy(0.4)
+            make.height.equalTo(350)//.multipliedBy(0.4)
         }
         
         todoLabel.snp.makeConstraints { make in
@@ -148,19 +151,14 @@ class MainViewController: BaseViewController {
         }
     }
 
-    func configureNavigationTitle() {
-        
+    func configureNavigationTitle(_ date: Date) {
+
         let formatter = DateFormatter()
         formatter.locale = .autoupdatingCurrent
         formatter.timeZone = TimeZone(abbreviation: "KST")
         formatter.dateFormat = "yyyy년 MM월"
-        var result = ""
-        if let date = todoCalendar.selectedDate {
-            result = formatter.string(from: date)
-        } else {
-            result = formatter.string(from: Date())
-        }
         
+        var result = formatter.string(from: date)
         navigationItem.title = result
     }
     
@@ -170,7 +168,7 @@ class MainViewController: BaseViewController {
         if let navBar = navigationController?.navigationBar {
             navBar.addGestureRecognizer(recognizer)
             navBar.titleTextAttributes = [.font: UIFont.jamsilNav]
-            navBar.backgroundColor = .background
+            navBar.backgroundColor = .clear
         }
         let listButton = UIBarButtonItem(image: UIImage(systemName: "list.bullet")!, style: .plain, target: self, action: #selector(listButtonTapped))
         listButton.tintColor = .firstGrape
@@ -180,7 +178,7 @@ class MainViewController: BaseViewController {
     
     @objc func navigationBarTapped() {
         todoCalendar.select(Date(), scrollToDate: true)
-        configureNavigationTitle()
+        configureNavigationTitle(Date())
         calendarDate = Date()
         todoTable.reloadData()
     }
@@ -217,8 +215,12 @@ class MainViewController: BaseViewController {
 
 extension MainViewController: FSCalendarDelegate, FSCalendarDataSource, FSCalendarDelegateAppearance {
     
+    func calendarCurrentPageDidChange(_ calendar: FSCalendar) {
+        let currentPage = todoCalendar.currentPage
+        configureNavigationTitle(currentPage)
+    }
+    
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
-        configureNavigationTitle()
         calendarDate = date
         viewModel.allTodoList(date: date)
         todoTable.reloadData()
