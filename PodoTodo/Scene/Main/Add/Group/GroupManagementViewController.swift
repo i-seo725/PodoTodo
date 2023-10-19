@@ -20,11 +20,6 @@ class GroupManagementViewController: BaseViewController {
         configureNavigationBar()
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        handler?()
-    }
-    
     override func configureView() {
         super.configureView()
         view.addSubview(tableView)

@@ -51,6 +51,7 @@ class TodoAddViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+//        todoTable.reloadData()
         NotificationCenter.default.addObserver(self, selector: #selector(receiveGroupID), name: NSNotification.Name("groupID"), object: nil)
     }
     
@@ -164,7 +165,7 @@ class TodoAddViewController: BaseViewController {
             case .edit:
                 TodoRepository.shared.update(id: listID, contents: text, date: datePicker.date, group: groupID)
             case .select:
-                break
+                return
             }
             
             handler?()
