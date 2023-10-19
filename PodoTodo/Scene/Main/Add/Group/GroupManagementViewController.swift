@@ -54,16 +54,15 @@ class GroupManagementViewController: BaseViewController {
     @objc func plusButtonTapped() {
         let vc = GroupAddViewController()
         vc.status = .add
-        vc.handler? = {
-            self.tableView.reloadData()
-        }
+        vc.groupDelegate = self
+        
         presentSheetView(vc, height: 55)
     }
     
     @objc func enterButtonTapped(_ sender: UITextField) {
         guard let text = sender.text else { return }
         if text.isEmpty {
-            let alert = UIAlertController(title: "주의", message: "그룹명은 비워둘 수 없습니다", preferredStyle: .alert)
+            let alert = UIAlertController(title: "그룹명은 비워둘 수 없습니다", message: nil, preferredStyle: .alert)
             let ok = UIAlertAction(title: "확인", style: .default) { _ in
                 sender.becomeFirstResponder()
             }
@@ -108,10 +107,7 @@ extension GroupManagementViewController: UITableViewDelegate, UITableViewDataSou
             let vc = GroupAddViewController()
             vc.status = .edit
             vc.listID = groupID
-            vc.handler? = {
-                tableView.reloadData()
-            }
-           
+            vc.groupDelegate = self
             presentSheetView(vc, height: 55)
             
         } else if status == .select {
@@ -140,6 +136,14 @@ extension GroupManagementViewController: UITableViewDelegate, UITableViewDataSou
                 tableView.reloadData()
             }
         }
+    }
+    
+}
+
+extension GroupManagementViewController: GroupAddProtocol {
+    
+    func groupTableReload() {
+        tableView.reloadData()
     }
     
 }

@@ -9,6 +9,10 @@ import UIKit
 import SnapKit
 import RealmSwift
 
+protocol GroupAddProtocol: AnyObject {
+    func groupTableReload()
+}
+
 class GroupAddViewController: BaseViewController {
 
     let textField = {
@@ -22,12 +26,11 @@ class GroupAddViewController: BaseViewController {
     }()
 
     let colorSelectButton = UIColorWell()
-
     let viewModel = ViewModel()
     var status = Present.add
     var listID: ObjectId?
     var selectedColor = UIColor.thirdGrape.hexString
-    var handler: (() -> Void)?
+    weak var groupDelegate: GroupAddProtocol?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -78,13 +81,13 @@ class GroupAddViewController: BaseViewController {
                 GroupRepository.shared.create(GroupList(groupName: text, color: "#9D76C1"))
             }
  
-            handler?()
+            groupDelegate?.groupTableReload()
             dismiss(animated: true)
         case .edit:
             guard let text = sender.text, let listID else { return }
             GroupRepository.shared.update(id: listID, groupName: text, color: selectedColor)
 
-            handler?()
+            groupDelegate?.groupTableReload()
             dismiss(animated: true)
         case .select:
             return
