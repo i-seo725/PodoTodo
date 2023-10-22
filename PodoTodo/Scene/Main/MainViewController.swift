@@ -116,6 +116,7 @@ class MainViewController: BaseViewController {
       
         vc.handler = {
             self.todoTable.reloadData()
+            self.todoCalendar.reloadData()
         }
         presentSheetView(vc, height: 120)
     }
@@ -124,7 +125,7 @@ class MainViewController: BaseViewController {
         todoCalendar.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide)//.offset(-30)
             make.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(8)
-            make.height.equalTo(350)//.multipliedBy(0.4)
+            make.height.equalTo(330)//.multipliedBy(0.4)
         }
         
         todoLabel.snp.makeConstraints { make in
@@ -223,9 +224,11 @@ extension MainViewController: FSCalendarDelegate, FSCalendarDataSource, FSCalend
     
     func calendar(_ calendar: FSCalendar, numberOfEventsFor date: Date) -> Int {
         let dateArray: [Date] = TodoRepository.shared.fetch().map { $0.date }
+        print(dateArray, "저장된 날짜")
         
-        if dateArray.contains(date){
-//            calendar.reloadData()
+        guard let calendarDate = date.dateToString().stringToDate() else { return 0 }
+        
+        if dateArray.contains(calendarDate){
             return 1
         } else {
             return 0
@@ -237,7 +240,7 @@ extension MainViewController: FSCalendarDelegate, FSCalendarDataSource, FSCalend
     }
     
     func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, eventSelectionColorsFor date: Date) -> [UIColor]? {
-        return [UIColor.thirdGrape]
+        return [UIColor.secondGrape]
     }
 }
 
@@ -324,6 +327,7 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
         if editingStyle == .delete {
             TodoRepository.shared.delete(viewModel.todoList(date: calendarDate, groupID: GroupRepository.shared.fetch()[indexPath.section]._id)[indexPath.row])
             tableView.reloadData()
+            todoCalendar.reloadData()
         }
         
     }
