@@ -65,9 +65,24 @@ class TodoAddViewController: BaseViewController {
         view.addSubview(groupSelectButton)
         view.addSubview(dateTextField)
         textField.addTarget(self, action: #selector(enterButtonClicked), for: .editingDidEndOnExit)
+        configureGroupButton()
+        updateViewByStatus()
+    }
+    
+    func configureGroupButton() {
         groupSelectButton.addTarget(self, action: #selector(groupSelectButtonTapped), for: .touchUpInside)
         groupSelectButton.layer.cornerRadius = 14
-        updateViewByStatus()
+        
+        guard let groupID else {
+            if let id = GroupRepository.shared.fetchDefault().first?._id, let color = GroupRepository.shared.fetchFilter(id: id).first?.color?.hexStringToUIColor() {
+                groupSelectButton.backgroundColor = color
+            }
+            return
+        }
+            if let color = GroupRepository.shared.fetchFilter(id: groupID).first?.color?.hexStringToUIColor() {
+                groupSelectButton.backgroundColor = color
+            }
+        
     }
     
     @objc func receiveGroupID(notification: NSNotification) {
@@ -175,7 +190,20 @@ class TodoAddViewController: BaseViewController {
     
     @objc func enterButtonClicked(_ sender: UITextField) {
 
-        guard let text = sender.text, let groupID else { return }
+        guard let text = sender.text else { return }
+        guard let groupID else {
+            if let id = GroupRepository.shared.fetchDefault().first?._id {
+                if status == .add {
+                    TodoRepository.shared.create(MainList(isTodo: true, contents: text, date: selectedDate, group: id))
+                } else if status == .edit {
+                    TodoRepository.shared.update(id: listID, contents: text, date: selectedDate, group: id)
+                }
+                handler?()
+                dismiss(animated: true)
+                return
+            }
+            return
+        }
         
         if status == .add {
             TodoRepository.shared.create(MainList(isTodo: true, contents: text, date: selectedDate, group: groupID))

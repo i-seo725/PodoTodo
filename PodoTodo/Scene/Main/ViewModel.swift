@@ -13,6 +13,18 @@ class ViewModel {
 //    let todoList = Repository.shared.fetchFilter1(isTodo: true)
 //    let goalList = Repository.shared.fetchFilter1(isTodo: false)
     
+    func configureNavigationTitle(_ date: Date) -> String {
+
+        let formatter = DateFormatter()
+        formatter.locale = .autoupdatingCurrent
+        formatter.timeZone = TimeZone(abbreviation: "KST")
+        formatter.dateFormat = "yyyy년 MM월"
+        
+        let result = formatter.string(from: date)
+        return result
+    }
+    
+    
     func allTodoList(date: Date) -> Results<MainList> {
         return TodoRepository.shared.fetchFilterOneDay(date: date)
     }

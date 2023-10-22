@@ -65,9 +65,7 @@ class MainViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setConstraints()
-        configureNavigationTitle(Date())
-        configureNavigationBar()
+        
         print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first)
     }
     
@@ -81,6 +79,8 @@ class MainViewController: BaseViewController {
         addSubViews()
         configureCalendar()
         configureTableView()
+        navigationItem.title = viewModel.configureNavigationTitle(Date())
+        configureNavigationBar()
         todoUnderlineView.backgroundColor = .firstGrape
         addButton.addTarget(self, action: #selector(addButtonTapped), for: .touchUpInside)
     }
@@ -99,8 +99,8 @@ class MainViewController: BaseViewController {
         todoTable.backgroundColor = .white
         todoTable.separatorStyle = .none
         todoTable.layer.cornerRadius = 20
-        todoTable.layer.borderColor = UIColor.darkGray.withAlphaComponent(0.3).cgColor
-        todoTable.layer.borderWidth = 0.7
+//        todoTable.layer.borderColor = UIColor.darkGray.withAlphaComponent(0.3).cgColor
+//        todoTable.layer.borderWidth = 0.7
     }
     func configureCalendar() {
         todoCalendar.delegate = self
@@ -145,21 +145,10 @@ class MainViewController: BaseViewController {
         }
         
         todoTable.snp.makeConstraints { make in
-            make.top.equalTo(todoUnderlineView.snp.bottom).offset(16)
-            make.horizontalEdges.equalToSuperview().inset(20)
+            make.top.equalTo(todoUnderlineView.snp.bottom).offset(14)
+            make.horizontalEdges.equalToSuperview().inset(16)
             make.bottom.equalTo(view.safeAreaLayoutGuide)
         }
-    }
-
-    func configureNavigationTitle(_ date: Date) {
-
-        let formatter = DateFormatter()
-        formatter.locale = .autoupdatingCurrent
-        formatter.timeZone = TimeZone(abbreviation: "KST")
-        formatter.dateFormat = "yyyy년 MM월"
-        
-        var result = formatter.string(from: date)
-        navigationItem.title = result
     }
     
     func configureNavigationBar() {
@@ -178,7 +167,7 @@ class MainViewController: BaseViewController {
     
     @objc func navigationBarTapped() {
         todoCalendar.select(Date(), scrollToDate: true)
-        configureNavigationTitle(Date())
+        navigationItem.title = viewModel.configureNavigationTitle(Date())
         calendarDate = Date()
         todoTable.reloadData()
     }
@@ -197,7 +186,6 @@ class MainViewController: BaseViewController {
         view.direction = .up
         return view
     }()
-
     private lazy var swipeDown = {
         let view = UISwipeGestureRecognizer(target: self, action: #selector(swipedUpAndDown))
         view.direction = .down
@@ -217,7 +205,7 @@ extension MainViewController: FSCalendarDelegate, FSCalendarDataSource, FSCalend
     
     func calendarCurrentPageDidChange(_ calendar: FSCalendar) {
         let currentPage = todoCalendar.currentPage
-        configureNavigationTitle(currentPage)
+        navigationItem.title = viewModel.configureNavigationTitle(currentPage)
     }
     
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
@@ -258,7 +246,7 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         if GroupRepository.shared.fetch().count == 0 {
-            GroupRepository.shared.create(GroupList(groupName: "기본 그룹", color: UIColor.thirdGrape.hexString))
+            GroupRepository.shared.create(GroupList(groupName: "기본 그룹", color: UIColor.thirdGrape.hexString, isDefault: true))
         }
         return GroupRepository.shared.fetch().count
     }
@@ -319,7 +307,10 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
         vc.status = .edit
         vc.selectedDate = calendarDate
         vc.listID = todoList._id
-        
+        vc.groupID = todoList.group
+        vc.handler = {
+            tableView.reloadData()
+        }
         presentSheetView(vc, height: 120)
         
         tableView.reloadData()

@@ -14,10 +14,12 @@ class GroupList: Object {
     @Persisted var groupName: String
     @Persisted var color: String?
     @Persisted var isOpen: Bool = true
+    @Persisted var isDefault: Bool = false
 
-    convenience init(groupName: String, color: String?) {
+    convenience init(groupName: String, color: String?, isDefault: Bool = false) {
         self.init()
         self.groupName = groupName
         self.color = color
+        self.isDefault = isDefault
     }
 }

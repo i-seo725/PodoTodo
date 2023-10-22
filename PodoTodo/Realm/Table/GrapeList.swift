@@ -12,15 +12,15 @@ class GrapeList: Object {
     
     @Persisted(primaryKey: true) var _id: ObjectId
     @Persisted var isCurrent: Bool
-    @Persisted var fillCount: Int?
+    @Persisted var fillCount: Int
     @Persisted var completeDate: Date?
-    @Persisted var color: String
+    @Persisted var color: Grape
     
-    convenience init(isCurrent: Bool, fillCount: Int?, completeDate: Date?, color: String) {
+    convenience init(isCurrent: Bool, fillCount: Int = 0, completeDate: Date?, color: Grape = .purple) {
         self.init()
         self.isCurrent = isCurrent
         self.fillCount = fillCount
-        self.completeDate = completeDate
+        self.completeDate = completeDate?.dateToString().stringToDate()
         self.color = color
     }
     

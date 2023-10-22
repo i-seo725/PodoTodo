@@ -35,6 +35,13 @@ class GroupRepository {
         return data
     }
     
+    func fetchDefault() -> Results<GroupList> {
+        let data = realm.objects(GroupList.self).where {
+            $0.isDefault == true
+        }
+        return data
+    }
+    
     func create(_ item: GroupList) {
         do {
             try realm.write {

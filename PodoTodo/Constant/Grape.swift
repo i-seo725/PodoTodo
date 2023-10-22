@@ -8,7 +8,10 @@
 import UIKit
 import RealmSwift
 
-enum Grape {
+enum Grape: String, PersistableEnum {
+    
+    case purple
+    case green
     
     enum Purple: String, CaseIterable {
         case empty
@@ -36,7 +39,7 @@ enum Grape {
         case seven = "green_7"
         case eight = "green_8"
         case nine = "green_9"
-//        case ten = "green_10"
+        case ten = "green_10"
         case complete = "green_complete"
     }
 }
