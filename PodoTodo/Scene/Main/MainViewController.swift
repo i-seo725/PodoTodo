@@ -71,7 +71,7 @@ class MainViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-//        todoTable.reloadData()
+        todoTable.reloadData()
     }
     
     override func configureView() {

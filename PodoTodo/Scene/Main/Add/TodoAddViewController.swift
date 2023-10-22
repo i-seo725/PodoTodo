@@ -162,18 +162,33 @@ class TodoAddViewController: BaseViewController {
     }
 
     @objc func doneButtonTapped() {
-        guard let text = textField.text, let groupID else {
+        guard let text = textField.text else {
             dateTextField.text = datePicker.date.dateToString()
             dateTextField.resignFirstResponder()
             selectedDate = datePicker.date
             return
         }
-
-        if text == "" {
+        
+        if text.isEmpty {
             dateTextField.text = datePicker.date.dateToString()
             dateTextField.resignFirstResponder()
             selectedDate = datePicker.date
         } else {
+            guard let groupID else {
+                if let id = GroupRepository.shared.fetchDefault().first?._id {
+                    switch status {
+                    case .add:
+                        TodoRepository.shared.create(MainList(isTodo: true, contents: text, date: datePicker.date, group: id))
+                    case .edit:
+                        TodoRepository.shared.update(id: listID, contents: text, date: datePicker.date, group: id)
+                    case .select:
+                        return
+                    }
+                }
+                handler?()
+                dismiss(animated: true)
+                return
+            }
             switch status {
             case .add:
                 TodoRepository.shared.create(MainList(isTodo: true, contents: text, date: datePicker.date, group: groupID))
@@ -182,11 +197,13 @@ class TodoAddViewController: BaseViewController {
             case .select:
                 return
             }
-            
             handler?()
             dismiss(animated: true)
         }
+        
+
     }
+
     
     @objc func enterButtonClicked(_ sender: UITextField) {
 
