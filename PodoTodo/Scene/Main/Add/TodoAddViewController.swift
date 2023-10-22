@@ -156,7 +156,8 @@ class TodoAddViewController: BaseViewController {
 
     @objc func dateChange(_ sender: UIDatePicker) {
         dateTextField.text = sender.date.dateToString()
-        selectedDate = sender.date
+        guard let date = sender.date.dateToString().stringToDate() else { return }
+        selectedDate = date
     }
 
     func setupToolbar() {
@@ -196,11 +197,12 @@ class TodoAddViewController: BaseViewController {
                 dismiss(animated: true)
                 return
             }
+            guard let date = datePicker.date.dateToString().stringToDate() else { return }
             switch status {
             case .add:
-                TodoRepository.shared.create(MainList(isTodo: true, contents: text, date: datePicker.date, group: groupID))
+                TodoRepository.shared.create(MainList(isTodo: true, contents: text, date: date, group: groupID))
             case .edit:
-                TodoRepository.shared.update(id: listID, contents: text, date: datePicker.date, group: groupID)
+                TodoRepository.shared.update(id: listID, contents: text, date: date, group: groupID)
             case .select:
                 return
             }

@@ -313,6 +313,7 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
         vc.groupID = todoList.group
         vc.handler = {
             tableView.reloadData()
+            self.todoCalendar.reloadData()
         }
         presentSheetView(vc, height: 120)
         
