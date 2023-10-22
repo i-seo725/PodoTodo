@@ -57,7 +57,7 @@ class GroupManagementViewController: BaseViewController {
     @objc func enterButtonTapped(_ sender: UITextField) {
         guard let text = sender.text else { return }
         if text.isEmpty {
-            let alert = UIAlertController(title: "그룹명은 비워둘 수 없습니다", message: nil, preferredStyle: .alert)
+            let alert = UIAlertController(title: "그룹명은 비워둘 수 없습니다", message: "그룹명을 입력해주세요", preferredStyle: .alert)
             let ok = UIAlertAction(title: "확인", style: .default) { _ in
                 sender.becomeFirstResponder()
             }
@@ -121,10 +121,25 @@ extension GroupManagementViewController: UITableViewDelegate, UITableViewDataSou
         
         if editingStyle == .delete {
             
-            if TodoRepository.shared.fetchGroup(group: groupID).count != 0 {
-                let alert = UIAlertController(title: "주의", message: "해당 그룹에 등록된 투두가 있어 그룹을 삭제할 수 없습니다", preferredStyle: .alert)
+            if groupID == GroupRepository.shared.fetchDefault().first!._id {
+                let alert = UIAlertController(title: "기본 그룹은 삭제할 수 없습니다", message: nil, preferredStyle: .alert)
                 let ok = UIAlertAction(title: "확인", style: .default)
                 alert.addAction(ok)
+                present(alert, animated: true)
+            }
+            if TodoRepository.shared.fetchGroup(group: groupID).count != 0 {
+                let alert = UIAlertController(title: "그룹을 삭제하시겠습니까?", message: "해당 그룹에 속한 모든 Todo가 함께 삭제됩니다", preferredStyle: .alert)
+                let cancel = UIAlertAction(title: "취소", style: .cancel)
+                let ok = UIAlertAction(title: "확인", style: .destructive) { _ in
+                    let deleteList = TodoRepository.shared.fetchGroup(group: groupID)
+                    for item in deleteList {
+                        TodoRepository.shared.delete(item)
+                    }
+                    GroupRepository.shared.delete(GroupRepository.shared.fetch()[indexPath.row])
+                    tableView.reloadData()
+                }
+                alert.addAction(ok)
+                alert.addAction(cancel)
                 present(alert, animated: true)
             } else {
                 GroupRepository.shared.delete(GroupRepository.shared.fetch()[indexPath.row])
