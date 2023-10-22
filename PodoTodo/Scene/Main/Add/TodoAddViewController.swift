@@ -146,6 +146,13 @@ class TodoAddViewController: BaseViewController {
         datePicker.addTarget(self, action: #selector(dateChange), for: .valueChanged)
         dateTextField.inputView = datePicker
     }
+    
+    func emptyTodo() {
+        let alert = UIAlertController(title: "Todo를 추가하시겠습니까?", message: "Todo는 비워둘 수 없습니다 내용을 입력해주세요", preferredStyle: .alert)
+        let ok = UIAlertAction(title: "확인", style: .default)
+        alert.addAction(ok)
+        present(alert, animated: true)
+    }
 
     @objc func dateChange(_ sender: UIDatePicker) {
         dateTextField.text = sender.date.dateToString()
@@ -208,6 +215,10 @@ class TodoAddViewController: BaseViewController {
     @objc func enterButtonClicked(_ sender: UITextField) {
 
         guard let text = sender.text else { return }
+        if text.isEmpty {
+            emptyTodo()
+            return
+        }
         guard let groupID else {
             if let id = GroupRepository.shared.fetchDefault().first?._id {
                 if status == .add {
