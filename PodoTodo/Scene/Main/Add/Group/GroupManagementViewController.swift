@@ -126,6 +126,7 @@ extension GroupManagementViewController: UITableViewDelegate, UITableViewDataSou
                 let ok = UIAlertAction(title: "확인", style: .default)
                 alert.addAction(ok)
                 present(alert, animated: true)
+                return
             }
             if TodoRepository.shared.fetchGroup(group: groupID).count != 0 {
                 let alert = UIAlertController(title: "그룹을 삭제하시겠습니까?", message: "해당 그룹에 속한 모든 Todo가 함께 삭제됩니다", preferredStyle: .alert)
