@@ -97,10 +97,8 @@ class MainViewController: BaseViewController {
         todoTable.delegate = self
         todoTable.rowHeight = UITableView.automaticDimension
         todoTable.backgroundColor = .white
-        todoTable.separatorStyle = .none
         todoTable.layer.cornerRadius = 20
-//        todoTable.layer.borderColor = UIColor.darkGray.withAlphaComponent(0.3).cgColor
-//        todoTable.layer.borderWidth = 0.7
+
     }
     func configureCalendar() {
         todoCalendar.delegate = self
@@ -285,12 +283,12 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell()
-        
         var contents = cell.defaultContentConfiguration()
         contents.textProperties.font = UIFont.jamsilContent
         
+        let groupID = GroupRepository.shared.fetch()[indexPath.section]._id
         
-        let todoList = TodoRepository.shared.fetchFilter(isTodo: true, date: calendarDate, group: GroupRepository.shared.fetch()[indexPath.section]._id)[indexPath.row]
+        let todoList = TodoRepository.shared.fetchFilter(isTodo: true, date: calendarDate, group: groupID)[indexPath.row]
         
         if todoList.isDone == true {
             contents.attributedText = todoList.contents.strikeThrough()
@@ -326,8 +324,9 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
+            
             TodoRepository.shared.delete(viewModel.todoList(date: calendarDate, groupID: GroupRepository.shared.fetch()[indexPath.section]._id)[indexPath.row])
-            tableView.reloadData()
+            tableView.reloadSections(IndexSet(indexPath.section...indexPath.section), with: .automatic)
             todoCalendar.reloadData()
         }
         
@@ -339,7 +338,7 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
         let doneButton = UIContextualAction(style: .normal, title: nil) { action, view, handler in
             
             self.viewModel.toggleTodo(date: self.calendarDate, indexPath: indexPath, groupID: groupID)
-            self.todoTable.reloadData()
+            self.todoTable.reloadSections(IndexSet(indexPath.section...indexPath.section), with: .automatic)
             
             handler(true)
         }

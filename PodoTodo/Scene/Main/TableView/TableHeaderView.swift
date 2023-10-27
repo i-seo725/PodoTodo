@@ -89,9 +89,10 @@ class TableHeaderView: UITableViewHeaderFooterView {
         
         underlineView.snp.makeConstraints { make in
             make.bottom.equalToSuperview()
-            make.height.equalTo(3)
-            make.leading.equalTo(contentsLabel.snp.leading)
-            make.trailing.equalTo(expandImage.snp.trailing)
+            make.height.equalTo(1.5)
+//            make.leading.equalTo(contentsLabel.snp.leading)
+//            make.trailing.equalTo(expandImage.snp.trailing)
+            make.horizontalEdges.equalToSuperview()
         }
     }
     
