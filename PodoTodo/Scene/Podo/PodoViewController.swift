@@ -28,10 +28,11 @@ class PodoViewController: BaseViewController {
     let underlineView = UIView()
     lazy var podoCollection = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout())
     let viewModel = PodoViewModel()
+    let itemSize = (UIScreen.main.bounds.width - 42) / 5
     func collectionViewLayout() -> UICollectionViewLayout {
         
         let layout = UICollectionViewFlowLayout()
-        let size = (UIScreen.main.bounds.width - 42) / 5
+        let size = itemSize
         layout.itemSize = CGSize(width: size, height: size)
         layout.minimumInteritemSpacing = 0
         layout.sectionInset = UIEdgeInsets(top: 8, left: 4, bottom: 4, right: 6)
@@ -105,37 +106,9 @@ class PodoViewController: BaseViewController {
         podoCollection.snp.makeConstraints { make in
             make.top.equalTo(underlineView.snp.bottom).offset(16)
             make.horizontalEdges.equalToSuperview().inset(16)
-            make.height.equalTo(170)
+            make.height.equalTo(itemSize * 2.35)
         }
     }
-    
-//    func fillPodo() {
-//        let todo = TodoRepository.shared.fetchFilterOneDay(date: Date())
-//        let validate: [MainList] = todo.filter { $0.isDone == true }
-//        let grapeArray = Grape.Purple.allCases
-//        var count = viewModel.currentPodoCount()
-//        let today = count
-//        var podo = count
-//        
-//        guard validate.isEmpty && todo.count == 0 else {
-//            
-//            // 오늘의 투두를 모두 완료했을 때
-//            podo = count + 1
-//            if podo >= 0 && podo <= 10 {
-//                viewModel.updatePodo(isCurrent: true, fillCount: podo, completeDate: nil)
-//            } else {    // 11 이상이 될 때
-//                podo = 0
-//                viewModel.updatePodo(isCurrent: false, fillCount: podo, completeDate: Date())
-//                viewModel.createPodo()
-//            }
-//            grape.image = UIImage(named: grapeArray[podo].rawValue)!
-//            return
-//        }
-//        //오늘의 투두를 모두 완성하지 못했을 때
-//        podo = today
-//        viewModel.updatePodo(isCurrent: true, fillCount: podo, completeDate: nil)
-//        grape.image = UIImage(named: grapeArray[podo].rawValue)!
-//    }
     
 }
 
@@ -147,6 +120,15 @@ extension PodoViewController: UICollectionViewDelegate, UICollectionViewDataSour
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "podoCell", for: indexPath) as? PodoCollectionViewCell else { return UICollectionViewCell() }
+        
+        let count = viewModel.podoList.count - 1
+        print(count)
+        if indexPath.item < count {
+            cell.podoImageView.image = UIImage(named: Grape.Purple.complete.rawValue)
+        } else {
+            cell.podoImageView.image = UIImage(named: Grape.Purple.empty.rawValue)
+        }
+        
         return cell
     }
     
