@@ -21,7 +21,7 @@ class PodoViewController: BaseViewController {
     }()
     let label = {
         let view = UILabel()
-        view.text = "수집한 포도알"
+        view.text = "수집한 포도송이"
         view.font = UIFont.jamsilTitle
         return view
     }()
@@ -76,12 +76,8 @@ class PodoViewController: BaseViewController {
     func configureColelctionView() {
         podoCollection.backgroundColor = .white
         podoCollection.layer.cornerRadius = 20
-        podoCollection.layer.borderColor = UIColor.darkGray.withAlphaComponent(0.3).cgColor
-        podoCollection.layer.borderWidth = 0.7
         podoCollection.delegate = self
         podoCollection.dataSource = self
-        podoCollection.layer.borderColor = UIColor.darkGray.withAlphaComponent(0.3).cgColor
-        podoCollection.layer.borderWidth = 0.7
         podoCollection.register(PodoCollectionViewCell.self, forCellWithReuseIdentifier: "podoCell")
     }
     
