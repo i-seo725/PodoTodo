@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		F41EB7FE2AE18E9D00B83A7D /* GrapeRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = F41EB7FD2AE18E9D00B83A7D /* GrapeRepository.swift */; };
-		F41EB8002AE5FFC300B83A7D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F41EB7FF2AE5FFC300B83A7D /* GoogleService-Info.plist */; };
 		F41EB8032AE6006D00B83A7D /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = F41EB8022AE6006D00B83A7D /* FirebaseAnalyticsWithoutAdIdSupport */; };
 		F457C10A2AC1854500B4D46C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F457C1092AC1854500B4D46C /* AppDelegate.swift */; };
 		F457C10C2AC1854500B4D46C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F457C10B2AC1854500B4D46C /* SceneDelegate.swift */; };
@@ -65,7 +64,6 @@
 
 /* Begin PBXFileReference section */
 		F41EB7FD2AE18E9D00B83A7D /* GrapeRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrapeRepository.swift; sourceTree = "<group>"; };
-		F41EB7FF2AE5FFC300B83A7D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		F457C1062AC1854500B4D46C /* PodoTodo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PodoTodo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F457C1092AC1854500B4D46C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F457C10B2AC1854500B4D46C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -163,7 +161,6 @@
 				F457C1092AC1854500B4D46C /* AppDelegate.swift */,
 				F457C10B2AC1854500B4D46C /* SceneDelegate.swift */,
 				F457C1122AC1854600B4D46C /* Assets.xcassets */,
-				F41EB7FF2AE5FFC300B83A7D /* GoogleService-Info.plist */,
 				F457C1142AC1854600B4D46C /* LaunchScreen.storyboard */,
 				F457C1172AC1854600B4D46C /* Info.plist */,
 				F49DDCE82ACDB7220067EFE6 /* .gitignore */,
@@ -416,7 +413,6 @@
 				F45DF31A2AC6CC54004D4667 /* Localizable.strings in Resources */,
 				F45DF3082AC6C113004D4667 /* The Jamsil OTF 5 Bold.otf in Resources */,
 				F45DF3072AC6C113004D4667 /* The Jamsil OTF 2 Light.otf in Resources */,
-				F41EB8002AE5FFC300B83A7D /* GoogleService-Info.plist in Resources */,
 				F457C1162AC1854600B4D46C /* LaunchScreen.storyboard in Resources */,
 				F457C1132AC1854600B4D46C /* Assets.xcassets in Resources */,
 			);

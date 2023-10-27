@@ -53,10 +53,10 @@ class GrapeRepository {
         }
     }
     
-    func update(id: ObjectId, isCurrent: Bool, fillCount: Int, completeDate: Date?) {
+    func update(id: ObjectId, isCurrent: Bool, fillCount: Int, completeDate: Date?, plusDate: Date?, deleteDate: Date?) {
         do {
             try realm.write {
-                realm.create(GrapeList.self, value: ["_id": id, "isCurrent": isCurrent, "fillCount": fillCount, "completeDate": completeDate], update: .modified)
+                realm.create(GrapeList.self, value: ["_id": id, "isCurrent": isCurrent, "fillCount": fillCount, "completeDate": completeDate, "plusDate": plusDate, "deleteDate": deleteDate], update: .modified)
             }
         } catch {
             print(error) //nslog로 기록 남기기, 집계하기 등 필요
