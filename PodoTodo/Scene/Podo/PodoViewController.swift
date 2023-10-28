@@ -55,7 +55,6 @@ class PodoViewController: BaseViewController {
     
     override func configureView() {
         super.configureView()
-        addSubViews()
         configureColelctionView()
         underlineView.backgroundColor = .firstGrape
         navigationItem.title = "포도알 스티커"
@@ -66,7 +65,7 @@ class PodoViewController: BaseViewController {
         
     }
     
-    func addSubViews() {
+    override func addSubViews() {
         view.addSubview(grape)
         view.addSubview(label)
         view.addSubview(underlineView)

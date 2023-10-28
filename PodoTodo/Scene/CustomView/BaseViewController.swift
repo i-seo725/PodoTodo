@@ -18,8 +18,10 @@ class BaseViewController: UIViewController {
     
     func configureView() {
         view.backgroundColor = .background
+        addSubViews()
     }
     
     func setConstraints() { }
     
+    func addSubViews() { }
 }

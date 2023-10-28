@@ -75,7 +75,6 @@ class MainViewController: BaseViewController {
     
     override func configureView() {
         super.configureView()
-        addSubViews()
         configureCalendar()
         configureTableView()
         navigationItem.title = viewModel.configureNavigationTitle(Date())
@@ -84,7 +83,7 @@ class MainViewController: BaseViewController {
         addButton.addTarget(self, action: #selector(addButtonTapped), for: .touchUpInside)
     }
     
-    func addSubViews() {
+    override func addSubViews() {
         view.addSubview(todoCalendar)
         view.addSubview(todoLabel)
         view.addSubview(todoUnderlineView)
