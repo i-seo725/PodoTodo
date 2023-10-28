@@ -54,23 +54,21 @@ class GroupManagementViewController: BaseViewController {
         presentSheetView(vc, height: 55)
     }
     
-    @objc func enterButtonTapped(_ sender: UITextField) {
-        guard let text = sender.text else { return }
-        if text.isEmpty {
-            let alert = UIAlertController(title: "그룹명은 비워둘 수 없습니다", message: "그룹명을 입력해주세요", preferredStyle: .alert)
-            let ok = UIAlertAction(title: "확인", style: .default) { _ in
-                sender.becomeFirstResponder()
-            }
-            alert.addAction(ok)
-            present(alert, animated: true)
-        } else if let selectedColor {
-            GroupRepository.shared.create(GroupList(groupName: text, color: selectedColor))
-            tableView.reloadData()
-        } else {
-            GroupRepository.shared.create(GroupList(groupName: text, color: "#9D76C1"))
-            tableView.reloadData()
-        }
-    }
+//    @objc func enterButtonTapped(_ sender: UITextField) {
+//        guard let text = sender.text else { return }
+//        if text.isEmpty {
+//            let alert = UIAlertController(title: "그룹명은 비워둘 수 없습니다", message: "그룹명을 입력해주세요", preferredStyle: .alert)
+//            let ok = UIAlertAction(title: "확인", style: .default)
+//            alert.addAction(ok)
+//            present(alert, animated: true)
+//        } else if let selectedColor {
+//            GroupRepository.shared.create(GroupList(groupName: text, color: selectedColor))
+//            tableView.reloadData()
+//        } else {
+//            GroupRepository.shared.create(GroupList(groupName: text, color: "#9D76C1"))
+//            tableView.reloadData()
+//        }
+//    }
 }
 
 extension GroupManagementViewController: UITableViewDelegate, UITableViewDataSource {

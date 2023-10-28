@@ -39,6 +39,7 @@ class PodoViewModel {
                 GrapeRepository.shared.create(GrapeList(isCurrent: true, completeDate: nil, plusDate: nil, deleteDate: nil))
             }
             currentPodo = GrapeRepository.shared.fetchCurrent().first
+            podoList = GrapeRepository.shared.fetch()
         }
     }
     
@@ -47,10 +48,6 @@ class PodoViewModel {
         var changeCount = count
         let today = Date().dateToString().stringToDate()
         let validateIsDone = todayTodo.filter { $0.isDone == false }
-        
-//        if count == 10 {
-//            return
-//        }
         
         guard let currentPodo else {
             return

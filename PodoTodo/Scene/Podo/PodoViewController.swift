@@ -116,9 +116,9 @@ extension PodoViewController: UICollectionViewDelegate, UICollectionViewDataSour
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "podoCell", for: indexPath) as? PodoCollectionViewCell else { return UICollectionViewCell() }
-        
+        print(viewModel.podoList)
         let count = viewModel.podoList.count - 1
-        print(count)
+//        print(count)
         if indexPath.item < count {
             cell.podoImageView.image = UIImage(named: Grape.Purple.complete.rawValue)
         } else {
