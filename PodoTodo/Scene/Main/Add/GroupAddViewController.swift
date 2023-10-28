@@ -70,26 +70,38 @@ class GroupAddViewController: BaseViewController {
             
             if text.isEmpty {
                 let alert = UIAlertController(title: "주의", message: "그룹명은 비워둘 수 없습니다", preferredStyle: .alert)
-                let ok = UIAlertAction(title: "확인", style: .default) { _ in
-                    sender.becomeFirstResponder()
-                }
+                let ok = UIAlertAction(title: "확인", style: .default)
                 alert.addAction(ok)
                 present(alert, animated: true)
-            } else if let selectedColor {
-                GroupRepository.shared.create(GroupList(groupName: text, color: selectedColor))
-            } else {
+//                sender.text = "빈 그룹명"
+//                GroupRepository.shared.create(GroupList(groupName: "빈 그룹명", color: selectedColor))
+            }
+//                else if let selectedColor {
+//                GroupRepository.shared.create(GroupList(groupName: text, color: selectedColor))
+//            }
+            else {
                 GroupRepository.shared.create(GroupList(groupName: text, color: "#9D76C1"))
+                groupDelegate?.groupTableReload()
+                dismiss(animated: true)
             }
  
-            groupDelegate?.groupTableReload()
-            dismiss(animated: true)
+            
         case .edit:
             guard let text = sender.text, let listID else { return }
-            print(selectedColor)
-            GroupRepository.shared.update(id: listID, groupName: text, color: selectedColor)
-
-            groupDelegate?.groupTableReload()
-            dismiss(animated: true)
+            if text.isEmpty {
+                let alert = UIAlertController(title: "주의", message: "그룹명은 비워둘 수 없습니다", preferredStyle: .alert)
+                let ok = UIAlertAction(title: "확인", style: .default)
+                alert.addAction(ok)
+                present(alert, animated: true)
+//                sender.text = "그룹명"
+//                GroupRepository.shared.update(id: listID, groupName: "빈 그룹명", color: selectedColor)
+            } else {
+                GroupRepository.shared.update(id: listID, groupName: text, color: selectedColor)
+                groupDelegate?.groupTableReload()
+                dismiss(animated: true)
+            }
+            
+            
         case .select:
             return
         }
