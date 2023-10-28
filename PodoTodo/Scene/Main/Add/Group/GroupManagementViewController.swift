@@ -96,17 +96,18 @@ extension GroupManagementViewController: UITableViewDelegate, UITableViewDataSou
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let groupID = GroupRepository.shared.fetch()[indexPath.row]._id
+        let group = GroupRepository.shared.fetch()[indexPath.row]//._id
         
         if status == .edit {
             let vc = GroupAddViewController()
             vc.status = .edit
-            vc.listID = groupID
+            vc.listID = group._id
             vc.groupDelegate = self
+            vc.selectedColor = group.color
             presentSheetView(vc, height: 55)
             
         } else if status == .select {
-            NotificationCenter.default.post(name: NSNotification.Name("groupID"), object: nil, userInfo: ["groupID": groupID])
+            NotificationCenter.default.post(name: NSNotification.Name("groupID"), object: nil, userInfo: ["groupID": group._id])
             dismiss(animated: true)
         }
         
