@@ -351,37 +351,37 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
         return swipeConfiguration
     }
     
-//    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-//
-//        guard let todo = TodoRepository.shared.fetchFilterOneDay(date: calendarDate)?[indexPath.row] else { return nil }
-//
-//        guard let updateDate = todo.date.addingTimeInterval(86400).dateToString().stringToDate() else { return nil }
-//        let laterButton = UIContextualAction(style: .normal, title: "미루기") { action, view, handler in
-//
-//            TodoRepository.shared.update(id: todo._id, contents: todo.contents, date: updateDate, group: todo.group)
-//            self.todoCalendar.reloadData()
-//            tableView.reloadSections(IndexSet(indexPath.section...indexPath.section), with: .automatic)
-//            handler(true)
-//        }
-//
-//        laterButton.backgroundColor = .thirdGrape
-//        laterButton.image = UIImage(systemName: "arrowshape.right.fill")!
-//
-//        let deleteButton = UIContextualAction(style: .destructive, title: nil) { action, view, handler in
-//
-//            TodoRepository.shared.delete(todo)
-//            tableView.reloadSections(IndexSet(indexPath.section...indexPath.section), with: .automatic)
-//            self.todoCalendar.reloadData()
-//            handler(true)
-//        }
-//
-//        deleteButton.image = UIImage(systemName: "trash.fill")!
-//        deleteButton.image?.withTintColor(.white)
-//
-//        let swipeConfiguration = UISwipeActionsConfiguration(actions: [deleteButton, laterButton])
-//        return swipeConfiguration
-//
-//    }
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+
+        guard let todo = TodoRepository.shared.fetchFilterOneDay(date: calendarDate)?[indexPath.row] else { return nil }
+
+        guard let updateDate = todo.date.addingTimeInterval(86400).dateToString().stringToDate() else { return nil }
+        let laterButton = UIContextualAction(style: .normal, title: "미루기") { action, view, handler in
+
+            TodoRepository.shared.update(id: todo._id, contents: todo.contents, date: updateDate, group: todo.group)
+            self.todoCalendar.reloadData()
+            tableView.reloadSections(IndexSet(indexPath.section...indexPath.section), with: .automatic)
+            handler(true)
+        }
+
+        laterButton.backgroundColor = .thirdGrape
+        laterButton.image = UIImage(systemName: "arrowshape.right.fill")!
+
+        let deleteButton = UIContextualAction(style: .destructive, title: nil) { action, view, handler in
+
+            TodoRepository.shared.delete(todo)
+            tableView.reloadSections(IndexSet(indexPath.section...indexPath.section), with: .automatic)
+            self.todoCalendar.reloadData()
+            handler(true)
+        }
+
+        deleteButton.image = UIImage(systemName: "trash.fill")!
+        deleteButton.image?.withTintColor(.white)
+
+        let swipeConfiguration = UISwipeActionsConfiguration(actions: [deleteButton, laterButton])
+        return swipeConfiguration
+
+    }
     
     
 }
