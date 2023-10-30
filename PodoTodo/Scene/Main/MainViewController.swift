@@ -28,7 +28,7 @@ class MainViewController: BaseViewController {
         view.tintColor = .white
         view.backgroundColor = .firstGrape
         
-        view.layer.shadowOffset = .init(width: 5, height: 5)
+        view.layer.shadowOffset = .init(width: 2, height: 2)
         view.layer.shadowOpacity = 0.2
         view.layer.shadowRadius = 3
         return view
@@ -65,12 +65,12 @@ class MainViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first)
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         todoTable.reloadData()
+        todoCalendar.reloadData()
     }
     
     override func configureView() {
@@ -120,9 +120,9 @@ class MainViewController: BaseViewController {
     
     override func setConstraints() {
         todoCalendar.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide)//.offset(-30)
+            make.top.equalTo(view.safeAreaLayoutGuide)
             make.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(8)
-            make.height.equalTo(330)//.multipliedBy(0.4)
+            make.height.equalTo(330)
         }
         
         todoLabel.snp.makeConstraints { make in
@@ -221,7 +221,6 @@ extension MainViewController: FSCalendarDelegate, FSCalendarDataSource, FSCalend
     
     func calendar(_ calendar: FSCalendar, numberOfEventsFor date: Date) -> Int {
         let dateArray: [Date] = TodoRepository.shared.fetch().map { $0.date }
-        print(dateArray, "저장된 날짜")
         
         guard let calendarDate = date.dateToString().stringToDate() else { return 0 }
         
@@ -321,15 +320,15 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
         return true
     }
     
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            
-            TodoRepository.shared.delete(viewModel.todoList(date: calendarDate, groupID: GroupRepository.shared.fetch()[indexPath.section]._id)[indexPath.row])
-            tableView.reloadSections(IndexSet(indexPath.section...indexPath.section), with: .automatic)
-            todoCalendar.reloadData()
-        }
-        
-    }
+//    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+//        if editingStyle == .delete {
+//
+//            TodoRepository.shared.delete(viewModel.todoList(date: calendarDate, groupID: GroupRepository.shared.fetch()[indexPath.section]._id)[indexPath.row])
+//            tableView.reloadSections(IndexSet(indexPath.section...indexPath.section), with: .automatic)
+//            todoCalendar.reloadData()
+//        }
+//
+//    }
     
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
@@ -347,6 +346,38 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
         let swipeConfiguration = UISwipeActionsConfiguration(actions: [doneButton])
         
         return swipeConfiguration
+    }
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        
+        let todo = TodoRepository.shared.fetchFilterOneDay(date: calendarDate)[indexPath.row]
+        
+        guard let updateDate = todo.date.addingTimeInterval(86400).dateToString().stringToDate() else { return nil }
+        let laterButton = UIContextualAction(style: .normal, title: "미루기") { action, view, handler in
+            
+            TodoRepository.shared.update(id: todo._id, contents: todo.contents, date: updateDate, group: todo.group)
+            self.todoCalendar.reloadData()
+            self.todoTable.reloadSections(IndexSet(indexPath.section...indexPath.section), with: .automatic)
+            handler(true)
+        }
+        
+        laterButton.backgroundColor = .thirdGrape
+        laterButton.image = UIImage(systemName: "arrowshape.right.fill")!
+        
+        let deleteButton = UIContextualAction(style: .destructive, title: nil) { action, view, handler in
+            
+            TodoRepository.shared.delete(todo)
+            tableView.reloadSections(IndexSet(indexPath.section...indexPath.section), with: .automatic)
+            self.todoCalendar.reloadData()
+            handler(true)
+        }
+        
+        deleteButton.image = UIImage(systemName: "trash.fill")!
+        deleteButton.image?.withTintColor(.white)
+        
+        let swipeConfiguration = UISwipeActionsConfiguration(actions: [deleteButton, laterButton])
+        return swipeConfiguration
+        
     }
     
     

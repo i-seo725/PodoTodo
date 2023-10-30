@@ -23,8 +23,8 @@ class TodoAddViewController: BaseViewController {
     let groupSelectButton = {
         let view = UIButton()
         view.backgroundColor = .thirdGrape
-        view.layer.borderColor = UIColor.lightGray.cgColor
-        view.layer.borderWidth = 2
+        view.layer.borderColor = UIColor.black.cgColor
+        view.layer.borderWidth = 0.5
         return view
     }()
 

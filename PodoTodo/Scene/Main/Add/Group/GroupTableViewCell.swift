@@ -45,9 +45,7 @@ class GroupTableViewCell: UITableViewCell {
     }
     
     @objc func colorPicked(_ sender: UIColorWell) {
-        //        print(sender.selectedColor?.cgColor.components)
         let a = sender.selectedColor?.hexString
-        print(a)
     }
 
     

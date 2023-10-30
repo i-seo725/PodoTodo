@@ -45,4 +45,8 @@ class ViewModel {
             TodoRepository.shared.toggleDone(id: todoList._id, isDone: true)
         }
     }
+    
+    func laterTodo(date: Date, indexPath: IndexPath) {
+        
+    }
 }

@@ -80,7 +80,7 @@ class GroupAddViewController: BaseViewController {
 //                GroupRepository.shared.create(GroupList(groupName: text, color: selectedColor))
 //            }
             else {
-                GroupRepository.shared.create(GroupList(groupName: text, color: "#9D76C1"))
+                GroupRepository.shared.create(GroupList(groupName: text, color: selectedColor))
                 groupDelegate?.groupTableReload()
                 dismiss(animated: true)
             }
