@@ -14,7 +14,6 @@ class GroupTableViewCell: UITableViewCell {
     let groupNameLabel = {
         let view = UILabel()
         view.font = UIFont.jamsilContent
-        view.text = "20자 제한 주기"
         return view
     }()
     
