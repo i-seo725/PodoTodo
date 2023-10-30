@@ -69,7 +69,7 @@ class GroupAddViewController: BaseViewController {
             guard let text = sender.text else { return }
             
             if text.isEmpty {
-                let alert = UIAlertController(title: "주의", message: "그룹명은 비워둘 수 없습니다", preferredStyle: .alert)
+                let alert = UIAlertController(title: "그룹을 추가하시겠습니까?", message: "그룹명은 비워둘 수 없습니다", preferredStyle: .alert)
                 let ok = UIAlertAction(title: "확인", style: .default)
                 alert.addAction(ok)
                 present(alert, animated: true)
@@ -89,7 +89,7 @@ class GroupAddViewController: BaseViewController {
         case .edit:
             guard let text = sender.text, let listID else { return }
             if text.isEmpty {
-                let alert = UIAlertController(title: "주의", message: "그룹명은 비워둘 수 없습니다", preferredStyle: .alert)
+                let alert = UIAlertController(title: "그룹명을 변경하시겠습니까?", message: "그룹명은 비워둘 수 없습니다", preferredStyle: .alert)
                 let ok = UIAlertAction(title: "확인", style: .default)
                 alert.addAction(ok)
                 present(alert, animated: true)

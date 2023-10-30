@@ -140,7 +140,6 @@ class TodoAddViewController: BaseViewController {
 
     func setDatePicker(){
         datePicker.datePickerMode = .date
-        datePicker.minimumDate = .now
         datePicker.preferredDatePickerStyle = .wheels
         datePicker.locale = Locale(identifier: "ko-KR")
         datePicker.addTarget(self, action: #selector(dateChange), for: .valueChanged)
