@@ -36,26 +36,32 @@ class TodoRepository: RepositoryType {
         return data
     }
     
-    func fetchFilter(isTodo: Bool, date: Date, group: ObjectId) -> Results<MainList> {
-        let startDay = date.dateToString().stringToDate()!
-        let endDay = startDay.addingTimeInterval(86400)
-        
-        let data = realm.objects(MainList.self).where {
-            $0.date >= startDay && $0.date < endDay && $0.group == group
+    func fetchFilter(isTodo: Bool, date: Date, group: ObjectId) -> Results<MainList>? {
+        if let startDay = date.dateToString().stringToDate() {
+            let endDay = startDay.addingTimeInterval(86400)
+            
+            let data = realm.objects(MainList.self).where {
+                $0.date >= startDay && $0.date < endDay && $0.group == group
+            }
+            
+            return data.sorted(byKeyPath: "isDone")
+        } else {
+            return nil
         }
-        
-        return data.sorted(byKeyPath: "isDone")
     }
     
-    func fetchFilterOneDay(date: Date) -> Results<MainList> {
-        let startDay = date.dateToString().stringToDate()!
-        let endDay = startDay.addingTimeInterval(86400)
-        
-        let data = realm.objects(MainList.self).where {
-            $0.date >= startDay && $0.date < endDay
+    func fetchFilterOneDay(date: Date) -> Results<MainList>? {
+        if let startDay = date.dateToString().stringToDate() {
+            let endDay = startDay.addingTimeInterval(86400)
+            
+            let data = realm.objects(MainList.self).where {
+                $0.date >= startDay && $0.date < endDay
+            }
+            
+            return data.sorted(byKeyPath: "isDone")
+        } else {
+            return nil
         }
-        
-        return data.sorted(byKeyPath: "isDone")
     }
     
     func fetchFilterWithID(isTodo: Bool = true, id: ObjectId) -> Results<MainList> {

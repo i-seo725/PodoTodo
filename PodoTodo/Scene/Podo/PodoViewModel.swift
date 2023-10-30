@@ -30,7 +30,7 @@ class PodoViewModel {
     }
     
     func setNewPodo() {
-        let todayTodo = TodoRepository.shared.fetchFilterOneDay(date: Date())
+        guard let todayTodo = TodoRepository.shared.fetchFilterOneDay(date: Date()) else { return }
         let validateIsDone = todayTodo.filter { $0.isDone == false }
         let date = Date().addingTimeInterval(-86400).dateToString().stringToDate()
         if currentPodoCount() == 10 && (todayTodo.count == 0 || validateIsDone.isEmpty) {
@@ -44,6 +44,7 @@ class PodoViewModel {
     }
     
     func updatePodo() {
+        guard let todayTodo else { return }
         let count = currentPodoCount()
         var changeCount = count
         let today = Date().dateToString().stringToDate()
