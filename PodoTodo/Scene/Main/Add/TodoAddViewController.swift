@@ -105,6 +105,7 @@ class TodoAddViewController: BaseViewController {
             if let list = TodoRepository.shared.fetchFilterWithID(id: id).first {
                 textField.text = list.contents
                 dateTextField.text = list.date.dateToString()
+                datePicker.date = list.date
             }
         }
     }
