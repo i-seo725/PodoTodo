@@ -42,6 +42,8 @@ class TodoAddViewController: BaseViewController {
     var status = Present.add
     var handler: (() -> Void)?
     
+    let viewModel = 
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setDatePicker()

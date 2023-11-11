@@ -26,10 +26,12 @@ class GroupAddViewController: BaseViewController {
     }()
 
     let colorSelectButton = UIColorWell()
-    let viewModel = ViewModel()
+    
     var status = Present.add
     var listID: ObjectId?
     var selectedColor = UIColor.thirdGrape.hexString
+    
+    let viewModel = GroupViewModel()
     weak var groupDelegate: GroupAddProtocol?
     
     override func viewDidLoad() {
@@ -56,7 +58,7 @@ class GroupAddViewController: BaseViewController {
                 print("아이디 못받아옴")
                 return
             }
-            if let list = GroupRepository.shared.fetchFilter(id: id).first, let color = list.color {
+            if let list = viewModel.filterGroup(id: id).first, let color = list.color {
                 textField.text = list.groupName
                 colorSelectButton.selectedColor = color.hexStringToUIColor()
             }
@@ -73,14 +75,10 @@ class GroupAddViewController: BaseViewController {
                 let ok = UIAlertAction(title: "확인", style: .default)
                 alert.addAction(ok)
                 present(alert, animated: true)
-//                sender.text = "빈 그룹명"
-//                GroupRepository.shared.create(GroupList(groupName: "빈 그룹명", color: selectedColor))
             }
-//                else if let selectedColor {
-//                GroupRepository.shared.create(GroupList(groupName: text, color: selectedColor))
-//            }
+
             else {
-                GroupRepository.shared.create(GroupList(groupName: text, color: selectedColor))
+                viewModel.createGroup(item: GroupList(groupName: text, color: selectedColor))
                 groupDelegate?.groupTableReload()
                 dismiss(animated: true)
             }
@@ -96,7 +94,7 @@ class GroupAddViewController: BaseViewController {
 //                sender.text = "그룹명"
 //                GroupRepository.shared.update(id: listID, groupName: "빈 그룹명", color: selectedColor)
             } else {
-                GroupRepository.shared.update(id: listID, groupName: text, color: selectedColor)
+                viewModel.updateGroup(id: listID, name: text, color: selectedColor)
                 groupDelegate?.groupTableReload()
                 dismiss(animated: true)
             }
