@@ -8,10 +8,10 @@
 import Foundation
 import RealmSwift
 
-class ViewModel {
+final class MainViewModel {
 
-//    let todoList = Repository.shared.fetchFilter1(isTodo: true)
-//    let goalList = Repository.shared.fetchFilter1(isTodo: false)
+    private let todoRepo = TodoRepository()
+    private let groupRepo = GroupRepository()
     
     func configureNavigationTitle(_ date: Date) -> String {
 
@@ -24,29 +24,48 @@ class ViewModel {
         return result
     }
     
-    
     func allTodoList(date: Date) -> Results<MainList>? {
-        return TodoRepository.shared.fetchFilterOneDay(date: date)
+        return todoRepo.fetchFilterOneDay(date: date)
     }
     
     func todoList(date: Date, groupID: ObjectId) -> Results<MainList>? {
-        return TodoRepository.shared.fetchFilter(isTodo: true, date: date, group: groupID)
-    }
-    
-    func goalList(date: Date, groupID: ObjectId) -> Results<MainList>? {
-        return TodoRepository.shared.fetchFilter(isTodo: false, date: date, group: groupID)
+        return todoRepo.fetchFilter(isTodo: true, date: date, group: groupID)
     }
     
     func toggleTodo(date: Date, indexPath: IndexPath, groupID: ObjectId) {
+        
         guard let todoList = todoList(date: date, groupID: groupID)?[indexPath.row] else { return }
-        if todoList.isDone {
-            TodoRepository.shared.toggleDone(id: todoList._id, isDone: false)
+        todoRepo.toggleDone(id: todoList._id, isDone: !todoList.isDone)
+//        if todoList.isDone {
+//            todoRepo.toggleDone(id: todoList._id, isDone: false)
+//        } else {
+//            todoRepo.toggleDone(id: todoList._id, isDone: true)
+//        }
+    }
+    
+    func deleteTodo(item: MainList) {
+        todoRepo.delete(item)
+    }
+    
+    func countOfCalendarEvent(date: Date) -> Int {
+        let dateArray = todoRepo.fetch().map { $0.date }
+        
+        if dateArray.contains(date){
+            return 1
         } else {
-            TodoRepository.shared.toggleDone(id: todoList._id, isDone: true)
+            return 0
         }
     }
     
-    func laterTodo(date: Date, indexPath: IndexPath) {
-        
+    
+    func numberOfSections(color: String?) -> Int {
+        if groupRepo.fetch().count == 0 {
+            groupRepo.create(GroupList(groupName: "기본 그룹", color: color, isDefault: true))
+        }
+        return groupRepo.fetch().count
+    }
+    
+    func fetchGroup() -> Results<GroupList>? {
+        return groupRepo.fetch()
     }
 }

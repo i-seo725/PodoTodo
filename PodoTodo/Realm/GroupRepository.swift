@@ -8,11 +8,9 @@
 import Foundation
 import RealmSwift
 
-class GroupRepository {
+final class GroupRepository {
     
-    static let shared = GroupRepository()
-    private init() { }
-    private let realm = try! Realm()
+    let realm = try! Realm()
     
     func checkSchemaVersion() {
         do {

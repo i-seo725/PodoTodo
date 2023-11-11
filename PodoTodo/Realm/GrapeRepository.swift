@@ -8,10 +8,8 @@
 import Foundation
 import RealmSwift
 
-class GrapeRepository {
+final class GrapeRepository {
     
-    static let shared = GrapeRepository()
-    private init() { }
     private let realm = try! Realm()
     
     func checkSchemaVersion() {

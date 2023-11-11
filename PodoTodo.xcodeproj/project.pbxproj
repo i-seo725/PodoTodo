@@ -55,6 +55,9 @@
 		F466DBB42AE021A500E2B306 /* PodoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F466DBB32AE021A500E2B306 /* PodoCollectionViewCell.swift */; };
 		F466DBB62AE0274F00E2B306 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F466DBB52AE0274F00E2B306 /* UIViewController+Extension.swift */; };
 		F466DBB82AE02A6000E2B306 /* UIFont+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F466DBB72AE02A6000E2B306 /* UIFont+Extension.swift */; };
+		F47DD5B52AFE1EB300997462 /* GroupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F47DD5B42AFE1EB300997462 /* GroupViewModel.swift */; };
+		F47DD5B82AFF301800997462 /* TodoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F47DD5B72AFF301800997462 /* TodoViewModel.swift */; };
+		F47DD5BB2B005E3C00997462 /* GroupManageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F47DD5BA2B005E3C00997462 /* GroupManageViewModel.swift */; };
 		F49DDCE32ACD88210067EFE6 /* ListCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49DDCE22ACD88210067EFE6 /* ListCollectionView.swift */; };
 		F49DDCE72ACDB0A60067EFE6 /* Grape.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49DDCE62ACDB0A60067EFE6 /* Grape.swift */; };
 		F49DDCE92ACDB7220067EFE6 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = F49DDCE82ACDB7220067EFE6 /* .gitignore */; };
@@ -111,6 +114,9 @@
 		F466DBB32AE021A500E2B306 /* PodoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodoCollectionViewCell.swift; sourceTree = "<group>"; };
 		F466DBB52AE0274F00E2B306 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		F466DBB72AE02A6000E2B306 /* UIFont+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extension.swift"; sourceTree = "<group>"; };
+		F47DD5B42AFE1EB300997462 /* GroupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupViewModel.swift; sourceTree = "<group>"; };
+		F47DD5B72AFF301800997462 /* TodoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoViewModel.swift; sourceTree = "<group>"; };
+		F47DD5BA2B005E3C00997462 /* GroupManageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupManageViewModel.swift; sourceTree = "<group>"; };
 		F49DDCE22ACD88210067EFE6 /* ListCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCollectionView.swift; sourceTree = "<group>"; };
 		F49DDCE62ACDB0A60067EFE6 /* Grape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grape.swift; sourceTree = "<group>"; };
 		F49DDCE82ACDB7220067EFE6 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
@@ -239,11 +245,11 @@
 		F45DF3212AC81A53004D4667 /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				F457C10D2AC1854500B4D46C /* MainViewController.swift */,
+				F466D6122AD266C900819ED9 /* ViewModel.swift */,
 				F466D6112AD266C000819ED9 /* TableView */,
 				F466D5FE2AD10F4300819ED9 /* Add */,
 				F45DF3302ACBFF60004D4667 /* Tab */,
-				F457C10D2AC1854500B4D46C /* MainViewController.swift */,
-				F466D6122AD266C900819ED9 /* ViewModel.swift */,
 				F45DF32B2AC87ED5004D4667 /* WeatherView.swift */,
 				F46210FC2AD07BA0001A5EA2 /* KindOfTabEnum.swift */,
 			);
@@ -272,10 +278,9 @@
 		F466D5FE2AD10F4300819ED9 /* Add */ = {
 			isa = PBXGroup;
 			children = (
-				F466DBAC2AD9ACB500E2B306 /* Group */,
-				F46210F32ACFC16D001A5EA2 /* GroupAddViewController.swift */,
-				F466D5FF2AD10F7F00819ED9 /* TodoAddViewController.swift */,
 				F466DB8E2AD47F8B00E2B306 /* StatusEnum.swift */,
+				F47DD5B62AFF300A00997462 /* Todo */,
+				F466DBAC2AD9ACB500E2B306 /* Group */,
 			);
 			path = Add;
 			sourceTree = "<group>";
@@ -322,10 +327,38 @@
 		F466DBAC2AD9ACB500E2B306 /* Group */ = {
 			isa = PBXGroup;
 			children = (
-				F466DBA52AD8294400E2B306 /* GroupManagementViewController.swift */,
-				F466DBAD2AD9ACD600E2B306 /* GroupTableViewCell.swift */,
+				F47DD5BC2B005E6500997462 /* GroupAdd */,
+				F47DD5B92B005E2E00997462 /* Manage */,
 			);
 			path = Group;
+			sourceTree = "<group>";
+		};
+		F47DD5B62AFF300A00997462 /* Todo */ = {
+			isa = PBXGroup;
+			children = (
+				F466D5FF2AD10F7F00819ED9 /* TodoAddViewController.swift */,
+				F47DD5B72AFF301800997462 /* TodoViewModel.swift */,
+			);
+			path = Todo;
+			sourceTree = "<group>";
+		};
+		F47DD5B92B005E2E00997462 /* Manage */ = {
+			isa = PBXGroup;
+			children = (
+				F466DBA52AD8294400E2B306 /* GroupManagementViewController.swift */,
+				F47DD5BA2B005E3C00997462 /* GroupManageViewModel.swift */,
+			);
+			path = Manage;
+			sourceTree = "<group>";
+		};
+		F47DD5BC2B005E6500997462 /* GroupAdd */ = {
+			isa = PBXGroup;
+			children = (
+				F47DD5B42AFE1EB300997462 /* GroupViewModel.swift */,
+				F46210F32ACFC16D001A5EA2 /* GroupAddViewController.swift */,
+				F466DBAD2AD9ACD600E2B306 /* GroupTableViewCell.swift */,
+			);
+			path = GroupAdd;
 			sourceTree = "<group>";
 		};
 		F49DDCEA2ACDB72B0067EFE6 /* Network */ = {
@@ -464,10 +497,12 @@
 				F466DB872AD2FFD200E2B306 /* GroupList.swift in Sources */,
 				F466D6042AD12A1D00819ED9 /* MainListTable.swift in Sources */,
 				F45DF3342ACC00AC004D4667 /* GoalTab.swift in Sources */,
+				F47DD5B82AFF301800997462 /* TodoViewModel.swift in Sources */,
 				F466DBB82AE02A6000E2B306 /* UIFont+Extension.swift in Sources */,
 				F466D6102AD131F800819ED9 /* TodoRepository.swift in Sources */,
 				F45DF31F2AC6CDBC004D4667 /* String+Extension.swift in Sources */,
 				F45DF30F2AC6C431004D4667 /* BaseViewController.swift in Sources */,
+				F47DD5B52AFE1EB300997462 /* GroupViewModel.swift in Sources */,
 				F41EB7FE2AE18E9D00B83A7D /* GrapeRepository.swift in Sources */,
 				F457C10E2AC1854500B4D46C /* MainViewController.swift in Sources */,
 				F49DDCEC2ACDB7330067EFE6 /* APIKey.swift in Sources */,
@@ -487,6 +522,7 @@
 				F466DBAB2AD9739C00E2B306 /* TableHeaderView.swift in Sources */,
 				F466DB892AD30E9300E2B306 /* Results+Extension.swift in Sources */,
 				F466DB8F2AD47F8B00E2B306 /* StatusEnum.swift in Sources */,
+				F47DD5BB2B005E3C00997462 /* GroupManageViewModel.swift in Sources */,
 				F49DDCE72ACDB0A60067EFE6 /* Grape.swift in Sources */,
 				F46210FD2AD07BA0001A5EA2 /* KindOfTabEnum.swift in Sources */,
 				F45DF3252AC81A76004D4667 /* Observable.swift in Sources */,

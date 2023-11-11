@@ -8,16 +8,41 @@
 import Foundation
 import RealmSwift
 
-class PodoViewModel {
+final class PodoViewModel {
     
-    var podoList = GrapeRepository.shared.fetch()
-    var currentPodo = GrapeRepository.shared.fetchCurrent().first
-    var todayTodo = TodoRepository.shared.fetchFilterOneDay(date: Date())
+    private let podoRepo = GrapeRepository()
+    private let todoRepo = TodoRepository()
+    
+    lazy var podoList = podoRepo.fetch()
+    lazy var currentPodo = podoRepo.fetchCurrent().first
+    
+    /*
+    var podoList: Results<GrapeList> {
+        get {
+            return podoRepo.fetch()
+        }
+        set {
+            self.podoList = newValue
+        }
+    }
+    
+    var currentPodo: GrapeList? {
+        get {
+            return podoRepo.fetchCurrent().first
+        }
+        set {
+            self.currentPodo = newValue
+        }
+    }
+    */
+    var todayTodo: Results<MainList>? {
+        return todoRepo.fetchFilterOneDay(date: Date())
+    }
     
     func firstPodo() {
         if podoList.isEmpty {
-            GrapeRepository.shared.create(GrapeList(isCurrent: true, completeDate: nil, plusDate: nil, deleteDate: nil))
-            currentPodo = GrapeRepository.shared.fetchCurrent().first
+            podoRepo.create(GrapeList(isCurrent: true, completeDate: nil, plusDate: nil, deleteDate: nil))
+            currentPodo = podoRepo.fetchCurrent().first
         }
     }
     
@@ -30,16 +55,16 @@ class PodoViewModel {
     }
     
     func setNewPodo() {
-        guard let todayTodo = TodoRepository.shared.fetchFilterOneDay(date: Date()) else { return }
+        guard let todayTodo else { return }
         let validateIsDone = todayTodo.filter { $0.isDone == false }
         let date = Date().addingTimeInterval(-86400).dateToString().stringToDate()
         if currentPodoCount() == 10 && (todayTodo.count == 0 || validateIsDone.isEmpty) {
             if let currentPodo {
-                GrapeRepository.shared.update(id: currentPodo._id, isCurrent: false, fillCount: 10, completeDate: date, plusDate: date, deleteDate: nil)
-                GrapeRepository.shared.create(GrapeList(isCurrent: true, completeDate: nil, plusDate: nil, deleteDate: nil))
+                podoRepo.update(id: currentPodo._id, isCurrent: false, fillCount: 10, completeDate: date, plusDate: date, deleteDate: nil)
+                podoRepo.create(GrapeList(isCurrent: true, completeDate: nil, plusDate: nil, deleteDate: nil))
             }
-            currentPodo = GrapeRepository.shared.fetchCurrent().first
-            podoList = GrapeRepository.shared.fetch()
+            currentPodo = podoRepo.fetchCurrent().first
+            podoList = podoRepo.fetch()
         }
     }
     
@@ -61,7 +86,7 @@ class PodoViewModel {
                 if changeCount > 10 || changeCount > count + 1 {
                     return
                 }
-                GrapeRepository.shared.update(id: currentPodo._id, isCurrent: true, fillCount: changeCount, completeDate: nil, plusDate: today, deleteDate: nil)
+                podoRepo.update(id: currentPodo._id, isCurrent: true, fillCount: changeCount, completeDate: nil, plusDate: today, deleteDate: nil)
             }
         } else {
             if currentPodo.deleteDate != today && currentPodo.plusDate == today {
@@ -69,7 +94,7 @@ class PodoViewModel {
                 if changeCount < 0 || changeCount < count - 1 {
                     return
                 }
-                GrapeRepository.shared.update(id: currentPodo._id, isCurrent: true, fillCount: changeCount, completeDate: nil, plusDate: nil, deleteDate: today)
+                podoRepo.update(id: currentPodo._id, isCurrent: true, fillCount: changeCount, completeDate: nil, plusDate: nil, deleteDate: today)
             }
         }
         

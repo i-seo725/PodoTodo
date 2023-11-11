@@ -42,13 +42,12 @@ class TodoAddViewController: BaseViewController {
     var status = Present.add
     var handler: (() -> Void)?
     
-    let viewModel = 
+    let viewModel = TodoViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setDatePicker()
         setupToolbar()
-        print(status)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -76,12 +75,12 @@ class TodoAddViewController: BaseViewController {
         groupSelectButton.layer.cornerRadius = 14
         
         guard let groupID else {
-            if let id = GroupRepository.shared.fetchDefault().first?._id, let color = GroupRepository.shared.fetchFilter(id: id).first?.color?.hexStringToUIColor() {
+            if let id = viewModel.defaultGroup.first?._id, let color = viewModel.fetchGroup(id: id).first?.color?.hexStringToUIColor() {
                 groupSelectButton.backgroundColor = color
             }
             return
         }
-            if let color = GroupRepository.shared.fetchFilter(id: groupID).first?.color?.hexStringToUIColor() {
+        if let color = viewModel.fetchGroup(id: groupID).first?.color?.hexStringToUIColor() {
                 groupSelectButton.backgroundColor = color
             }
         
@@ -91,7 +90,7 @@ class TodoAddViewController: BaseViewController {
         guard let id = notification.userInfo?["groupID"] as? ObjectId else { return }
         groupID = id
         
-        guard let selected = GroupRepository.shared.fetchFilter(id: id).first else { return }
+        guard let selected = viewModel.fetchGroup(id: id).first else { return }
         groupSelectButton.backgroundColor = selected.color?.hexStringToUIColor()
     }
     
@@ -104,7 +103,7 @@ class TodoAddViewController: BaseViewController {
                 print("아이디 못받아옴")
                 return
             }
-            if let list = TodoRepository.shared.fetchFilterWithID(id: id).first {
+            if let list = viewModel.fetchSpecificTodo(id: id).first {
                 textField.text = list.contents
                 dateTextField.text = list.date.dateToString()
                 datePicker.date = list.date
@@ -185,12 +184,12 @@ class TodoAddViewController: BaseViewController {
             selectedDate = datePicker.date
         } else {
             guard let groupID else {
-                if let id = GroupRepository.shared.fetchDefault().first?._id {
+                if let id = viewModel.defaultGroup.first?._id {
                     switch status {
                     case .add:
-                        TodoRepository.shared.create(MainList(isTodo: true, contents: text, date: datePicker.date, group: id))
+                        viewModel.createTodo(MainList(isTodo: true, contents: text, date: datePicker.date, group: id))
                     case .edit:
-                        TodoRepository.shared.update(id: listID, contents: text, date: datePicker.date, group: id)
+                        viewModel.updateTodo(id: listID, contents: text, date: datePicker.date, group: id)
                     case .select:
                         return
                     }
@@ -202,9 +201,9 @@ class TodoAddViewController: BaseViewController {
             guard let date = datePicker.date.dateToString().stringToDate() else { return }
             switch status {
             case .add:
-                TodoRepository.shared.create(MainList(isTodo: true, contents: text, date: date, group: groupID))
+                viewModel.createTodo(MainList(isTodo: true, contents: text, date: date, group: groupID))
             case .edit:
-                TodoRepository.shared.update(id: listID, contents: text, date: date, group: groupID)
+                viewModel.updateTodo(id: listID, contents: text, date: date, group: groupID)
             case .select:
                 return
             }
@@ -224,11 +223,11 @@ class TodoAddViewController: BaseViewController {
             return
         }
         guard let groupID else {
-            if let id = GroupRepository.shared.fetchDefault().first?._id {
+            if let id = viewModel.defaultGroup.first?._id {
                 if status == .add {
-                    TodoRepository.shared.create(MainList(isTodo: true, contents: text, date: selectedDate, group: id))
+                    viewModel.createTodo(MainList(isTodo: true, contents: text, date: selectedDate, group: id))
                 } else if status == .edit {
-                    TodoRepository.shared.update(id: listID, contents: text, date: selectedDate, group: id)
+                    viewModel.updateTodo(id: listID, contents: text, date: selectedDate, group: id)
                 }
                 handler?()
                 dismiss(animated: true)
@@ -238,9 +237,9 @@ class TodoAddViewController: BaseViewController {
         }
         
         if status == .add {
-            TodoRepository.shared.create(MainList(isTodo: true, contents: text, date: selectedDate, group: groupID))
+            viewModel.createTodo(MainList(isTodo: true, contents: text, date: selectedDate, group: groupID))
         } else if status == .edit {
-            TodoRepository.shared.update(id: listID, contents: text, date: selectedDate, group: groupID)
+            viewModel.updateTodo(id: listID, contents: text, date: selectedDate, group: groupID)
         }
         
         handler?()

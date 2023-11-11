@@ -15,10 +15,7 @@ protocol RepositoryType: AnyObject {
 //    func delete(_ item: MainList)
 }
 
-class TodoRepository: RepositoryType {
-    
-    static let shared = TodoRepository()
-    private init() { }
+final class TodoRepository: RepositoryType {
     
     private let realm = try! Realm()
     

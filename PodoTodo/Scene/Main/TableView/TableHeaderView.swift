@@ -25,10 +25,9 @@ class TableHeaderView: UITableViewHeaderFooterView {
     let underlineView = UIView()
     
     weak var delegate: SectionViewDelegate?
-    var colorView = UIView()
     var expandImage = {
         let view = UIImageView()
-        view.image = UIImage(systemName: "chevron.up")!
+        view.image = UIImage(systemName: "plus.circle")!
         view.tintColor = .firstGrape
         return view
     }()
@@ -57,10 +56,7 @@ class TableHeaderView: UITableViewHeaderFooterView {
     
     func configureView() {
         contentView.backgroundColor = .white
-//        contentView.layer.borderColor = UIColor.lightGray.cgColor
-//        contentView.layer.borderWidth = 1
-//        contentView.addSubview(colorView)
-        colorView.backgroundColor = .thirdGrape
+//        colorView.backgroundColor = .thirdGrape
         contentView.addSubview(contentsLabel)
         contentView.addSubview(expandImage)
         contentView.addSubview(underlineView)
@@ -68,12 +64,6 @@ class TableHeaderView: UITableViewHeaderFooterView {
     }
     
     func setConstraints() {
-        
-//        colorView.snp.makeConstraints { make in
-//            make.height.equalToSuperview()
-//            make.width.equalTo(10)
-//            make.leading.equalToSuperview()//.inset(20)
-//        }
         
         expandImage.snp.makeConstraints { make in
             make.trailing.equalToSuperview().inset(16)
@@ -90,8 +80,6 @@ class TableHeaderView: UITableViewHeaderFooterView {
         underlineView.snp.makeConstraints { make in
             make.bottom.equalToSuperview()
             make.height.equalTo(2)
-//            make.leading.equalTo(contentsLabel.snp.leading)
-//            make.trailing.equalTo(expandImage.snp.trailing)
             make.horizontalEdges.equalToSuperview()
         }
     }

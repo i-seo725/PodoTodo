@@ -15,6 +15,8 @@ class GroupManagementViewController: BaseViewController {
     var selectedColor: String? = nil
     var handler: (() -> Void)?
     
+    let viewModel = GroupManageViewModel()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureNavigationBar()
@@ -74,10 +76,10 @@ class GroupManagementViewController: BaseViewController {
 extension GroupManagementViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if GroupRepository.shared.fetch().count == 0 {
+        if viewModel.fetchGroup.count == 0 {
             return 1
         } else {
-            return GroupRepository.shared.fetch().count
+            return viewModel.fetchGroup.count
         }
     }
     
@@ -85,7 +87,7 @@ extension GroupManagementViewController: UITableViewDelegate, UITableViewDataSou
         let cell = GroupTableViewCell()
         cell.selectionStyle = .none
         
-        let groupList = GroupRepository.shared.fetch()[indexPath.row]
+        let groupList = viewModel.fetchGroup[indexPath.row]
         guard let color = groupList.color else { return cell }
         cell.colorView.backgroundColor = color.hexStringToUIColor()
         cell.groupNameLabel.text = groupList.groupName
@@ -94,7 +96,7 @@ extension GroupManagementViewController: UITableViewDelegate, UITableViewDataSou
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let group = GroupRepository.shared.fetch()[indexPath.row]//._id
+        let group = viewModel.fetchGroup[indexPath.row]//._id
         
         if status == .edit {
             let vc = GroupAddViewController()
@@ -116,33 +118,33 @@ extension GroupManagementViewController: UITableViewDelegate, UITableViewDataSou
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        let groupID = GroupRepository.shared.fetch()[indexPath.row]._id
+        let groupID = viewModel.fetchGroup[indexPath.row]._id
         
         if editingStyle == .delete {
             
-            if groupID == GroupRepository.shared.fetchDefault().first!._id {
+            if groupID == viewModel.fetchDefault.first!._id {
                 let alert = UIAlertController(title: "기본 그룹은 삭제할 수 없습니다", message: nil, preferredStyle: .alert)
                 let ok = UIAlertAction(title: "확인", style: .default)
                 alert.addAction(ok)
                 present(alert, animated: true)
                 return
             }
-            if TodoRepository.shared.fetchGroup(group: groupID).count != 0 {
+            if viewModel.fetchTodo(groupID: groupID).count != 0 {
                 let alert = UIAlertController(title: "그룹을 삭제하시겠습니까?", message: "해당 그룹에 속한 모든 Todo가 함께 삭제됩니다", preferredStyle: .alert)
                 let cancel = UIAlertAction(title: "취소", style: .cancel)
                 let ok = UIAlertAction(title: "확인", style: .destructive) { _ in
-                    let deleteList = TodoRepository.shared.fetchGroup(group: groupID)
+                    let deleteList = self.viewModel.fetchTodo(groupID: groupID)
                     for item in deleteList {
-                        TodoRepository.shared.delete(item)
+                        self.viewModel.deleteTodo(item)
                     }
-                    GroupRepository.shared.delete(GroupRepository.shared.fetch()[indexPath.row])
+                    self.viewModel.deleteGroup(self.viewModel.fetchGroup[indexPath.row])
                     tableView.reloadData()
                 }
                 alert.addAction(ok)
                 alert.addAction(cancel)
                 present(alert, animated: true)
             } else {
-                GroupRepository.shared.delete(GroupRepository.shared.fetch()[indexPath.row])
+                viewModel.deleteGroup(viewModel.fetchGroup[indexPath.row])
                 tableView.reloadData()
             }
         }

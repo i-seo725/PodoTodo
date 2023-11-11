@@ -9,16 +9,16 @@ import UIKit
 import FSCalendar
 import SnapKit
 
-class MainViewController: BaseViewController {
+final class MainViewController: BaseViewController {
     
-    let todoLabel = {
+    private let todoLabel = {
         let view = UILabel()
         view.text = "오늘의 할 일"
         view.font = UIFont.jamsilTitle
         return view
     }()
-    let todoUnderlineView = UIView()
-    let addButton = {
+    private let todoUnderlineView = UIView()
+    private let addButton = {
         let view = UIButton()
         view.layer.cornerRadius = 24
         
@@ -33,7 +33,7 @@ class MainViewController: BaseViewController {
         view.layer.shadowRadius = 3
         return view
     }()
-    var todoCalendar = {
+    private var todoCalendar = {
         let view = FSCalendar()
         view.scope = .week
         view.locale = Locale(identifier: "us_US")
@@ -59,9 +59,22 @@ class MainViewController: BaseViewController {
        
         return view
     }()
-    let todoTable = UITableView(frame: .zero, style: .grouped)
+    private let todoTable = UITableView(frame: .zero, style: .grouped)
     var calendarDate = Date()
-    let viewModel = ViewModel()
+    
+    
+    private let swipeUp = {
+        let view = UISwipeGestureRecognizer(target: MainViewController.self, action: #selector(swipedUpAndDown))
+        view.direction = .up
+        return view
+    }()
+    private let swipeDown = {
+        let view = UISwipeGestureRecognizer(target: MainViewController.self, action: #selector(swipedUpAndDown))
+        view.direction = .down
+        return view
+    }()
+    
+    let viewModel = MainViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -70,7 +83,6 @@ class MainViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         todoTable.reloadData()
-        todoCalendar.reloadData()
     }
     
     override func configureView() {
@@ -96,7 +108,6 @@ class MainViewController: BaseViewController {
         todoTable.rowHeight = UITableView.automaticDimension
         todoTable.backgroundColor = .white
         todoTable.layer.cornerRadius = 20
-
     }
     func configureCalendar() {
         todoCalendar.delegate = self
@@ -177,17 +188,7 @@ class MainViewController: BaseViewController {
         }
         self.navigationController?.pushViewController(vc, animated: true)
     }
-    
-    private lazy var swipeUp = {
-        let view = UISwipeGestureRecognizer(target: self, action: #selector(swipedUpAndDown))
-        view.direction = .up
-        return view
-    }()
-    private lazy var swipeDown = {
-        let view = UISwipeGestureRecognizer(target: self, action: #selector(swipedUpAndDown))
-        view.direction = .down
-        return view
-    }()
+
     
     @objc private func swipedUpAndDown(_ sender: UISwipeGestureRecognizer) {
         if sender.direction == .up {
@@ -219,15 +220,7 @@ extension MainViewController: FSCalendarDelegate, FSCalendarDataSource, FSCalend
     }
     
     func calendar(_ calendar: FSCalendar, numberOfEventsFor date: Date) -> Int {
-        let dateArray: [Date] = TodoRepository.shared.fetch().map { $0.date }
-        
-        guard let calendarDate = date.dateToString().stringToDate() else { return 0 }
-        
-        if dateArray.contains(calendarDate){
-            return 1
-        } else {
-            return 0
-        }
+        viewModel.countOfCalendarEvent(date: date)
     }
     
     func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, eventDefaultColorsFor date: Date) -> [UIColor]? {
@@ -243,24 +236,20 @@ extension MainViewController: FSCalendarDelegate, FSCalendarDataSource, FSCalend
 extension MainViewController: UITableViewDataSource, UITableViewDelegate {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        if GroupRepository.shared.fetch().count == 0 {
-            GroupRepository.shared.create(GroupList(groupName: "기본 그룹", color: UIColor.thirdGrape.hexString, isDefault: true))
-        }
-        return GroupRepository.shared.fetch().count
+        viewModel.numberOfSections(color: UIColor.thirdGrape.hexString)
     }
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let view = TableHeaderView()
-        let isOpen = GroupRepository.shared.fetch()[section].isOpen
+        
         view.delegate = self
-        view.expandImage.image = isOpen ? UIImage(systemName: "chevron.up") : UIImage(systemName: "chevron.down")
-        view.contentsLabel.text = GroupRepository.shared.fetch()[section].groupName
-         
         view.sectionIndex = section
         
-        if let color = GroupRepository.shared.fetch()[section].color?.hexStringToUIColor() {
+        if let group = viewModel.fetchGroup(), let color = group[section].color?.hexStringToUIColor() {
             view.underlineView.backgroundColor = color
+            view.contentsLabel.text = group[section].groupName
         }
+        
         return view
     }
     
@@ -270,9 +259,8 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let group = GroupRepository.shared.fetch()[section]
-        guard let todoList = TodoRepository.shared.fetchFilter(isTodo: true, date: calendarDate, group: group._id) else { return 0 }
-        if group.isOpen {
+        if let group = viewModel.fetchGroup()?[section] {
+            guard let todoList = viewModel.todoList(date: calendarDate, groupID: group._id) else { return 0 }
             return todoList.count
         } else {
             return 0
@@ -284,9 +272,7 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
         var contents = cell.defaultContentConfiguration()
         contents.textProperties.font = UIFont.jamsilContent
         
-        let groupID = GroupRepository.shared.fetch()[indexPath.section]._id
-        
-        guard let todoList = TodoRepository.shared.fetchFilter(isTodo: true, date: calendarDate, group: groupID)?[indexPath.row] else { return cell }
+        guard let groupID = viewModel.fetchGroup()?[indexPath.section]._id, let todoList = viewModel.todoList(date: calendarDate, groupID: groupID)?[indexPath.row] else { return cell }
         
         if todoList.isDone == true {
             contents.attributedText = todoList.contents.strikeThrough()
@@ -300,7 +286,7 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let todoList = viewModel.todoList(date: calendarDate, groupID: GroupRepository.shared.fetch()[indexPath.section]._id)?[indexPath.row] else { return }
+        guard let groupID = viewModel.fetchGroup()?[indexPath.section]._id, let todoList = viewModel.todoList(date: calendarDate, groupID: groupID)?[indexPath.row] else { return }
         
         let vc = TodoAddViewController()
         vc.status = .edit
@@ -321,11 +307,11 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        let groupID = GroupRepository.shared.fetch()[indexPath.section]._id
-        guard let todoList = viewModel.todoList(date: calendarDate, groupID: groupID) else { return }
-        if editingStyle == .delete {
 
-            TodoRepository.shared.delete(todoList[indexPath.row])
+        guard let groupID = viewModel.fetchGroup()?[indexPath.section]._id, let todoList = viewModel.todoList(date: calendarDate, groupID: groupID)?[indexPath.row] else { return }
+        
+        if editingStyle == .delete {
+            viewModel.deleteTodo(item: todoList)
             tableView.reloadSections(IndexSet(indexPath.section...indexPath.section), with: .automatic)
             todoCalendar.reloadData()
         }
@@ -334,8 +320,7 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
-        let groupID = GroupRepository.shared.fetch()[indexPath.section]._id
-        guard let todoList = viewModel.todoList(date: calendarDate, groupID: groupID)?[indexPath.row] else { return nil }
+        guard let groupID = viewModel.fetchGroup()?[indexPath.section]._id, let todoList = viewModel.todoList(date: calendarDate, groupID: groupID)?[indexPath.row] else { return nil }
         let doneButton = UIContextualAction(style: .normal, title: nil) { action, view, handler in
             
             self.viewModel.toggleTodo(date: self.calendarDate, indexPath: indexPath, groupID: groupID)
@@ -350,7 +335,7 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
         
         return swipeConfiguration
     }
-    
+    /*
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
 
         guard let todo = TodoRepository.shared.fetchFilterOneDay(date: calendarDate)?[indexPath.row] else { return nil }
@@ -382,16 +367,23 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
         return swipeConfiguration
 
     }
-    
+    */
     
 }
 
 extension MainViewController: SectionViewDelegate {
     
     func sectionViewTapped(_ section: Int) {
-        let group = GroupRepository.shared.fetch()[section]
-        GroupRepository.shared.isOpenUpdate(id: group._id, isOpen: !group.isOpen)
-        todoTable.reloadSections(IndexSet(section...section), with: .fade)
+        let vc = TodoAddViewController()
+        vc.status = .add
+        vc.selectedDate = calendarDate
+//        vc.listID = todoList._id
+//        vc.groupID = todoList.group
+//        vc.handler = {
+//            tableView.reloadData()
+//            self.todoCalendar.reloadData()
+//        }
+        presentSheetView(vc, height: 120)
     }
     
 }

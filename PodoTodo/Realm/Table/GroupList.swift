@@ -13,7 +13,7 @@ class GroupList: Object {
     @Persisted(primaryKey: true) var _id: ObjectId
     @Persisted var groupName: String
     @Persisted var color: String?
-    @Persisted var isOpen: Bool = true
+//    @Persisted var isOpen: Bool = true
     @Persisted var isDefault: Bool = false
 
     convenience init(groupName: String, color: String?, isDefault: Bool = false) {

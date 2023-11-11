@@ -21,7 +21,6 @@ extension UIViewController {
             sheet.detents = [.medium()]
         }
         
-        
         present(vc, animated: true)
     }
 }
