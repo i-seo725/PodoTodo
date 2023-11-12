@@ -19,21 +19,21 @@ final class MainViewController: BaseViewController {
         return view
     }()
     private let todoUnderlineView = UIView()
-    private let addButton = {
-        let view = UIButton()
-        view.layer.cornerRadius = 24
-        
-        let imageConfig = UIImage.SymbolConfiguration(pointSize: 30, weight: .light)
-        let image = UIImage(systemName: "plus", withConfiguration: imageConfig)
-        view.setImage(image, for: .normal)
-        view.tintColor = .white
-        view.backgroundColor = .firstGrape
-        
-        view.layer.shadowOffset = .init(width: 2, height: 2)
-        view.layer.shadowOpacity = 0.2
-        view.layer.shadowRadius = 3
-        return view
-    }()
+//    private let addButton = {
+//        let view = UIButton()
+//        view.layer.cornerRadius = 24
+//        
+//        let imageConfig = UIImage.SymbolConfiguration(pointSize: 30, weight: .light)
+//        let image = UIImage(systemName: "plus", withConfiguration: imageConfig)
+//        view.setImage(image, for: .normal)
+//        view.tintColor = .white
+//        view.backgroundColor = .firstGrape
+//        
+//        view.layer.shadowOffset = .init(width: 2, height: 2)
+//        view.layer.shadowOpacity = 0.2
+//        view.layer.shadowRadius = 3
+//        return view
+//    }()
     private var todoCalendar = {
         let view = FSCalendar()
         view.scope = .week
@@ -79,11 +79,6 @@ final class MainViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        Analytics.logEvent(AnalyticsEventSelectContent, parameters: [
-          AnalyticsParameterItemID: "id-\(addButton)",
-          AnalyticsParameterItemName: addButton,
-          AnalyticsParameterContentType: "cont",
-        ])
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -98,7 +93,6 @@ final class MainViewController: BaseViewController {
         navigationItem.title = viewModel.configureNavigationTitle(Date())
         configureNavigationBar()
         todoUnderlineView.backgroundColor = .firstGrape
-        addButton.addTarget(self, action: #selector(addButtonTapped), for: .touchUpInside)
     }
     
     override func addSubViews() {
@@ -106,7 +100,6 @@ final class MainViewController: BaseViewController {
         view.addSubview(todoLabel)
         view.addSubview(todoUnderlineView)
         view.addSubview(todoTable)
-        view.addSubview(addButton)
     }
     func configureTableView() {
         todoTable.dataSource = self
@@ -121,17 +114,6 @@ final class MainViewController: BaseViewController {
         todoCalendar.addGestureRecognizer(swipeUp)
         todoCalendar.addGestureRecognizer(swipeDown)
         todoCalendar.allowsSelection = true
-    }
-    @objc func addButtonTapped() {
-        let vc = TodoAddViewController()
-        vc.status = .add
-        vc.selectedDate = calendarDate
-      
-        vc.handler = {
-            self.todoTable.reloadData()
-            self.todoCalendar.reloadData()
-        }
-        presentSheetView(vc, height: 120)
     }
     
     override func setConstraints() {
@@ -150,12 +132,6 @@ final class MainViewController: BaseViewController {
             make.top.equalTo(todoLabel.snp.bottom).offset(12)
             make.horizontalEdges.equalTo(todoLabel)
             make.height.equalTo(4)
-        }
-        
-        addButton.snp.makeConstraints { make in
-            make.size.equalTo(48)
-            make.trailing.equalTo(view.safeAreaLayoutGuide).multipliedBy(0.92)
-            make.bottom.equalTo(view.safeAreaLayoutGuide).multipliedBy(0.92)
         }
         
         todoTable.snp.makeConstraints { make in
