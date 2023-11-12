@@ -8,6 +8,7 @@
 import UIKit
 import FSCalendar
 import SnapKit
+import Firebase
 
 final class MainViewController: BaseViewController {
     
@@ -78,6 +79,11 @@ final class MainViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        Analytics.logEvent(AnalyticsEventSelectContent, parameters: [
+          AnalyticsParameterItemID: "id-\(addButton)",
+          AnalyticsParameterItemName: addButton,
+          AnalyticsParameterContentType: "cont",
+        ])
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -377,12 +383,11 @@ extension MainViewController: SectionViewDelegate {
         let vc = TodoAddViewController()
         vc.status = .add
         vc.selectedDate = calendarDate
-//        vc.listID = todoList._id
-//        vc.groupID = todoList.group
-//        vc.handler = {
-//            tableView.reloadData()
-//            self.todoCalendar.reloadData()
-//        }
+        vc.groupID = viewModel.fetchGroup()?[section]._id
+        vc.handler = {
+            self.todoTable.reloadData()
+            self.todoCalendar.reloadData()
+        }
         presentSheetView(vc, height: 120)
     }
     
