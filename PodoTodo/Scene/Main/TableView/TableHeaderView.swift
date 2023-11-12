@@ -27,7 +27,7 @@ class TableHeaderView: UITableViewHeaderFooterView {
     weak var delegate: SectionViewDelegate?
     var expandImage = {
         let view = UIImageView()
-        view.image = UIImage(systemName: "plus.circle")!
+        view.image = UIImage(systemName: "plus")!
         view.tintColor = .firstGrape
         return view
     }()
