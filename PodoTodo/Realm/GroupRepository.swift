@@ -9,7 +9,7 @@ import Foundation
 import RealmSwift
 
 final class GroupRepository {
-    
+    //
     let realm = try! Realm()
     
     func checkSchemaVersion() {
