@@ -33,14 +33,14 @@
    * DatePicker를 통해 Todo 날짜 선택 시 초 단위로 날짜가 저장되는데, FSCalendar에서 선택한 날짜는 15:00로 고정됨
    * 이로 인해 Realm에서 filter를 통해 데이터를 불려올 때 시간이 정확히 일치하지 않아 불러오기에 실패
    * 따라서 다음과 같은 코드를 통해 테이블에 날짜 저장 시 Date -> String -> Date 타입 변환을 통해 동일하게 15:00로 고정되도록 함
-
-   ```swift
-   class MainList: Object {
+     ```swift
+      class MainList: Object {
        convenience init(date: Date = Date()) {
         self.date = date.dateToString().stringToDate() ?? Date()
-    }
-   }
-   ```
+       }
+      }
+     ```
+   
    
  * 포도알 채우는 로직 구현 시 예상보다 많은 고려 사항
    * 화면이 나타날 때 로직 계산을 위해 `viewWillAppear`에 메서드를 작성하였는데, Todo를 모두 완료한 경우 화면을 볼 때마다 포도알이 늘어나는 버그 발생
