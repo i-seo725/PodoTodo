@@ -32,7 +32,7 @@
  * MVVM, Repository, Localization
  * Firebase Analytics, Firebase Crashlytics, Firebase Cloud messaging
 
- 
+ <br/><br/><br/><br/><br/>
  
 # 트러블 슈팅
  * Todo가 등록된 날짜와 캘린더 날짜 비교의 어려움
@@ -46,7 +46,6 @@
         self.date = date.dateToString().stringToDate() ?? Date()
     }
    }
-   <br/>
    ```
  * 포도알 채우는 로직 구현 시 생각보다 많은 고려 사항
    * 
