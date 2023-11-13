@@ -32,7 +32,7 @@
  * MVVM, Repository, Localization
  * Firebase Analytics, Firebase Crashlytics, Firebase Cloud messaging
 
- <br/><br/><br/><br/><br/>
+ 
  
 # 트러블 슈팅
  * Todo가 등록된 날짜와 캘린더 날짜 비교의 어려움
