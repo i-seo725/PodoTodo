@@ -2,19 +2,15 @@
 <img width="1018" alt="스크린샷 2023-11-12 오전 10 55 52" src="https://github.com/i-seo725/PodoTodo/assets/140357379/901e9bd8-1d6f-4dd6-bd61-eb324756a777">
 
 
-
 # 앱 소개
  * 매일 그날의 할 일을 모두 완료하면 포도알 스티커를 하나씩 채워 성취감을 느낄 수 있도록 도와주는 앱
  * 테이블뷰 셀을 좌우로 스와이프하여 완료/취소, 삭제, 미루기 기능 동작
  * 그룹 기능을 통한 체계적인 일정 관리 지원
  * 매일 채우는 포도알 스티커와 포도를 통해 추가 컨텐츠 즐기기(업데이트 예정)
 <br/>
-<br/>
-
 
 # 개발 기간
  * 2023.09.25. ~ 2023.10.24.(약 1달)
-<br/>
 <br/>
 
 
@@ -24,14 +20,12 @@
   * Minimum Deployments : 15.0
   * Orientation : Portrait
 <br/>
-<br/>
 
 
 # 사용기술 및 라이브러리
  * UIKit, Codable, Realm, FSCalendar
  * MVVM, Repository, Localization
  * Firebase Analytics, Firebase Crashlytics, Firebase Cloud messaging
-<br/>
  <br/>
  
 # 트러블 슈팅
@@ -47,6 +41,7 @@
     }
    }
    ```
+   
  * 포도알 채우는 로직 구현 시 예상보다 많은 고려 사항
    * 화면이 나타날 때 로직 계산을 위해 `viewWillAppear`에 메서드를 작성하였는데, Todo를 모두 완료한 경우 화면을 볼 때마다 포도알이 늘어나는 버그 발생
    * 오늘의 Todo를 모두 완료처리 했다가 사용자가 새로운 할 일을 추가하거나 완료 처리를 취소할 때 채웠던 포도알 스티커를 하나 회수해야 하는 상황 발생
@@ -66,7 +61,8 @@
             podoList = podoRepo.fetch()
         }
     }
-    
+    ```
+    ```swift
     func updatePodo() {
         guard let todayTodo else { return }
         let count = currentPodoCount()
