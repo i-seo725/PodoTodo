@@ -59,11 +59,10 @@
             }
             currentPodo = podoRepo.fetchCurrent().first
             podoList = podoRepo.fetch()
-        }
-    }
-    ```
-    ```swift
-    func updatePodo() {
+         }
+       }
+
+     func updatePodo() {
         guard let todayTodo else { return }
         let count = currentPodoCount()
         var changeCount = count
@@ -73,7 +72,6 @@
         guard let currentPodo else {
             return
         }
-        
         
         if validateIsDone.isEmpty && todayTodo.count != 0 {
             if currentPodo.plusDate != today {
@@ -92,8 +90,9 @@
                 podoRepo.update(id: currentPodo._id, isCurrent: true, fillCount: changeCount, completeDate: nil, plusDate: nil, deleteDate: today)
             }
         }
+    
      ```
 
 <br/>
-<br/>
+
 # 회고
