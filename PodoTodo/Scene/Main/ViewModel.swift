@@ -17,8 +17,8 @@ final class MainViewModel {
 
         let formatter = DateFormatter()
         formatter.locale = .autoupdatingCurrent
-        formatter.timeZone = TimeZone(abbreviation: "KST")
-        formatter.dateFormat = "yyyy년 MM월"
+//        formatter.timeZone = TimeZone(abbreviation: "KST")
+        formatter.dateFormat = "main_date".localized
         
         let result = formatter.string(from: date)
         return result
@@ -60,7 +60,7 @@ final class MainViewModel {
     
     func numberOfSections(color: String?) -> Int {
         if groupRepo.fetch().count == 0 {
-            groupRepo.create(GroupList(groupName: "기본 그룹", color: color, isDefault: true))
+            groupRepo.create(GroupList(groupName: "default_group".localized, color: color, isDefault: true))
         }
         return groupRepo.fetch().count
     }

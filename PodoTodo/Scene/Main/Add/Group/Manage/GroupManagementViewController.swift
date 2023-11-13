@@ -42,7 +42,7 @@ class GroupManagementViewController: BaseViewController {
             navBar.titleTextAttributes = [.font: UIFont.jamsilNav]
         }
         
-        title = "그룹 관리"
+        title = "manage_group".localized
         
         let plusButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(plusButtonTapped))
         navigationItem.rightBarButtonItem = plusButton

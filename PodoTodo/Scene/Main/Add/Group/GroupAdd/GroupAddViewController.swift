@@ -51,7 +51,7 @@ class GroupAddViewController: BaseViewController {
     
     func updateViewByStatus() {
         if status == .add {
-            textField.placeholder = "그룹명을 입력해주세요"
+            textField.placeholder = "add_group_placeholder".localized
             colorSelectButton.selectedColor = nil
         } else if status == .edit {
             guard let id = listID else {
@@ -71,8 +71,8 @@ class GroupAddViewController: BaseViewController {
             guard let text = sender.text else { return }
             
             if text.isEmpty {
-                let alert = UIAlertController(title: "그룹을 추가하시겠습니까?", message: "그룹명은 비워둘 수 없습니다", preferredStyle: .alert)
-                let ok = UIAlertAction(title: "확인", style: .default)
+                let alert = UIAlertController(title: "empty_group_alert_title".localized, message: "empty_group_alert_message".localized, preferredStyle: .alert)
+                let ok = UIAlertAction(title: "alert_ok".localized, style: .default)
                 alert.addAction(ok)
                 present(alert, animated: true)
             }
@@ -87,8 +87,8 @@ class GroupAddViewController: BaseViewController {
         case .edit:
             guard let text = sender.text, let listID else { return }
             if text.isEmpty {
-                let alert = UIAlertController(title: "그룹명을 변경하시겠습니까?", message: "그룹명은 비워둘 수 없습니다", preferredStyle: .alert)
-                let ok = UIAlertAction(title: "확인", style: .default)
+                let alert = UIAlertController(title: "change_group_alert_title".localized, message: "empty_group_alert_message".localized, preferredStyle: .alert)
+                let ok = UIAlertAction(title: "alert_ok".localized, style: .default)
                 alert.addAction(ok)
                 present(alert, animated: true)
 //                sender.text = "그룹명"

@@ -14,7 +14,7 @@ final class MainViewController: BaseViewController {
     
     private let todoLabel = {
         let view = UILabel()
-        view.text = "오늘의 할 일"
+        view.text = "today_todo".localized
         view.font = UIFont.jamsilTitle
         return view
     }()
@@ -42,7 +42,7 @@ final class MainViewController: BaseViewController {
         //헤더 영역
         view.headerHeight = 0
         view.appearance.headerMinimumDissolvedAlpha = 0
-        view.appearance.headerDateFormat = "YYYY년 MM월"
+        view.appearance.headerDateFormat = "main_date".localized
         view.appearance.headerTitleAlignment = .natural
         view.appearance.headerTitleColor = UIColor.black
         view.appearance.headerTitleFont = UIFont.jamsilTitle
@@ -64,14 +64,16 @@ final class MainViewController: BaseViewController {
     var calendarDate = Date()
     
     
-    private let swipeUp = {
-        let view = UISwipeGestureRecognizer(target: MainViewController.self, action: #selector(swipedUpAndDown))
+    private lazy var swipeUp = {
+        let view = UISwipeGestureRecognizer(target: self, action: #selector(swipedUpAndDown))
         view.direction = .up
+        todoCalendar.addGestureRecognizer(view)
         return view
     }()
-    private let swipeDown = {
-        let view = UISwipeGestureRecognizer(target: MainViewController.self, action: #selector(swipedUpAndDown))
+    private lazy var swipeDown = {
+        let view = UISwipeGestureRecognizer(target: self, action: #selector(swipedUpAndDown))
         view.direction = .down
+        todoCalendar.addGestureRecognizer(view)
         return view
     }()
     
@@ -79,6 +81,15 @@ final class MainViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    
+    @objc private func swipedUpAndDown(_ sender: UISwipeGestureRecognizer) {
+        if sender.direction == .up {
+            todoCalendar.setScope(.week, animated: true)
+        } else if sender.direction == .down {
+            todoCalendar.setScope(.month, animated: true)
+        }
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -171,14 +182,7 @@ final class MainViewController: BaseViewController {
         self.navigationController?.pushViewController(vc, animated: true)
     }
 
-    
-    @objc private func swipedUpAndDown(_ sender: UISwipeGestureRecognizer) {
-        if sender.direction == .up {
-            todoCalendar.setScope(.week, animated: true)
-        } else if sender.direction == .down {
-            todoCalendar.setScope(.month, animated: true)
-        }
-    }
+
 }
 
 extension MainViewController: FSCalendarDelegate, FSCalendarDataSource, FSCalendarDelegateAppearance {

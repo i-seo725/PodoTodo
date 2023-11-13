@@ -12,8 +12,8 @@ extension Date {
     func dateToString() -> String {
         let formatter = DateFormatter()
         formatter.locale = .autoupdatingCurrent // Locale(identifier: "ko_KR")
-        formatter.timeZone = TimeZone(abbreviation: "KST")
-        formatter.dateFormat = "yyyy년 MM월 dd일"
+//        formatter.timeZone = TimeZone(abbreviation: "KST")
+        formatter.dateFormat = "date_format".localized
         
         let result = formatter.string(from: self)
         return result

@@ -96,7 +96,7 @@ class TodoAddViewController: BaseViewController {
     
     func updateViewByStatus() {
         if status == .add {
-            textField.placeholder = "할 일을 입력해주세요"
+            textField.placeholder = "add_todo_placeholder".localized
             dateTextField.text = selectedDate.dateToString()
         } else if status == .edit {
             guard let id = listID else {
@@ -143,14 +143,13 @@ class TodoAddViewController: BaseViewController {
     func setDatePicker(){
         datePicker.datePickerMode = .date
         datePicker.preferredDatePickerStyle = .wheels
-        datePicker.locale = Locale(identifier: "ko-KR")
         datePicker.addTarget(self, action: #selector(dateChange), for: .valueChanged)
         dateTextField.inputView = datePicker
     }
     
     func emptyTodo() {
-        let alert = UIAlertController(title: "Todo를 추가하시겠습니까?", message: "Todo는 비워둘 수 없습니다 내용을 입력해주세요", preferredStyle: .alert)
-        let ok = UIAlertAction(title: "확인", style: .default)
+        let alert = UIAlertController(title: "empty_todo_alert_title".localized, message: "empty_todo_alert_message".localized, preferredStyle: .alert)
+        let ok = UIAlertAction(title: "alert_ok".localized, style: .default)
         alert.addAction(ok)
         present(alert, animated: true)
     }

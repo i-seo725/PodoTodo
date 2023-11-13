@@ -5,3 +5,20 @@
   Created by 이은서 on 2023/09/29.
   
 */
+
+"main_date" = "YYYY년 MM월";
+"today_todo" = "오늘의 할 일";
+"add_todo_placeholder" = "할 일을 입력해주세요";
+"empty_todo_alert_title" = "Todo를 추가하시겠습니까?";
+"empty_todo_alert_message" = "Todo는 비워둘 수 없습니다 내용을 입력해주세요";
+"alert_ok" = "확인";
+"add_group_placeholder" = "그룹명을 입력해주세요";
+"empty_group_alert_title" = "그룹을 추가하시겠습니까?";
+"empty_group_alert_message" = "그룹명은 비워둘 수 없습니다 내용을 입력해주세요";
+"change_group_alert_title" = "그룹명을 변경하시겠습니까?";
+"collected_grape" = "수집한 포도송이";
+"grape stickers" = "포도알 스티커";
+"manage_group" = "그룹 관리";
+
+"default_group" = "기본 그룹";
+"date_format" = "yyyy년 MM월 dd일";
