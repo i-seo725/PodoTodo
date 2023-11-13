@@ -32,13 +32,12 @@
  * MVVM, Repository, Localization
  * Firebase Analytics, Firebase Crashlytics, Firebase Cloud messaging
 
-
  
  
 # 트러블 슈팅
  * Todo가 등록된 날짜와 캘린더 날짜 비교의 어려움
-   ** DatePicker를 통해 Todo 날짜 선택 시 초 단위로 날짜가 저장되는데, FSCalendar에서 선택한 날짜는 15:00로 고정됨
-   ** 따라서 다음과 같은 코드를 통해 테이블에 날짜 저장 시 Date -> String -> Date 타입 변환을 통해 동일하게 15:00로 고정되도록 함
+   * * DatePicker를 통해 Todo 날짜 선택 시 초 단위로 날짜가 저장되는데, FSCalendar에서 선택한 날짜는 15:00로 고정됨
+   * * 따라서 다음과 같은 코드를 통해 테이블에 날짜 저장 시 Date -> String -> Date 타입 변환을 통해 동일하게 15:00로 고정되도록 함
 
    ```swift
    class MainList: Object {
