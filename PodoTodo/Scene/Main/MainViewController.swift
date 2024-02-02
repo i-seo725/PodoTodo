@@ -20,21 +20,6 @@ final class MainViewController: BaseViewController {
         return view
     }()
     private let todoUnderlineView = UIView()
-//    private let addButton = {
-//        let view = UIButton()
-//        view.layer.cornerRadius = 24
-//        
-//        let imageConfig = UIImage.SymbolConfiguration(pointSize: 30, weight: .light)
-//        let image = UIImage(systemName: "plus", withConfiguration: imageConfig)
-//        view.setImage(image, for: .normal)
-//        view.tintColor = .white
-//        view.backgroundColor = .firstGrape
-//        
-//        view.layer.shadowOffset = .init(width: 2, height: 2)
-//        view.layer.shadowOpacity = 0.2
-//        view.layer.shadowRadius = 3
-//        return view
-//    }()
     private var todoCalendar = {
         let view = FSCalendar()
         view.scope = .week
@@ -96,6 +81,18 @@ final class MainViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         todoTable.reloadData()
+    }
+    
+    @objc func updateToday() {
+        DispatchQueue.main.async {
+            self.todoCalendar.today = Date()
+            self.todoCalendar.reloadData()
+        }
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        NotificationCenter.default.removeObserver(self)
     }
     
     override func configureView() {

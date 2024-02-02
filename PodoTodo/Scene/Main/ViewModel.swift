@@ -48,8 +48,8 @@ final class MainViewModel {
     }
     
     func countOfCalendarEvent(date: Date) -> Int {
-        let dateArray = todoRepo.fetch().map { $0.date }
-        
+        let dateArray: [Date] = todoRepo.fetch().map { $0.date }
+        print(dateArray)
         if dateArray.contains(date){
             return 1
         } else {
