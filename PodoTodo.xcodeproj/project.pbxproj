@@ -25,7 +25,6 @@
 		F45DF30C2AC6C351004D4667 /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45DF30B2AC6C351004D4667 /* Font.swift */; };
 		F45DF30F2AC6C431004D4667 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45DF30E2AC6C431004D4667 /* BaseViewController.swift */; };
 		F45DF3122AC6C6D9004D4667 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45DF3112AC6C6D9004D4667 /* UIColor+Extension.swift */; };
-		F45DF31A2AC6CC54004D4667 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F45DF31C2AC6CC54004D4667 /* Localizable.strings */; };
 		F45DF31F2AC6CDBC004D4667 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45DF31E2AC6CDBC004D4667 /* String+Extension.swift */; };
 		F45DF3252AC81A76004D4667 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45DF3242AC81A76004D4667 /* Observable.swift */; };
 		F45DF3272AC81A93004D4667 /* Tabbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45DF3262AC81A93004D4667 /* Tabbar.swift */; };
@@ -68,6 +67,7 @@
 		F49DDCE92ACDB7220067EFE6 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = F49DDCE82ACDB7220067EFE6 /* .gitignore */; };
 		F49DDCEC2ACDB7330067EFE6 /* APIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49DDCEB2ACDB7330067EFE6 /* APIKey.swift */; };
 		F4E6DA342AEC1F4A00C55559 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F4E6DA332AEC1F4A00C55559 /* GoogleService-Info.plist */; };
+		F4F8AD5B2B4792A400317F08 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = F4F8AD5A2B4792A400317F08 /* Localizable.xcstrings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -120,13 +120,12 @@
 		F47DD5B72AFF301800997462 /* TodoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoViewModel.swift; sourceTree = "<group>"; };
 		F47DD5BA2B005E3C00997462 /* GroupManageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupManageViewModel.swift; sourceTree = "<group>"; };
 		F47DD5C82B01235000997462 /* PodoTodo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PodoTodo.entitlements; sourceTree = "<group>"; };
-		F47DD5E72B0248FE00997462 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
-		F47DD5E92B024B0300997462 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
 		F49DDCE22ACD88210067EFE6 /* ListCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCollectionView.swift; sourceTree = "<group>"; };
 		F49DDCE62ACDB0A60067EFE6 /* Grape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grape.swift; sourceTree = "<group>"; };
 		F49DDCE82ACDB7220067EFE6 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		F49DDCEB2ACDB7330067EFE6 /* APIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
 		F4E6DA332AEC1F4A00C55559 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		F4F8AD5A2B4792A400317F08 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -235,7 +234,7 @@
 		F45DF3172AC6CC33004D4667 /* Localization */ = {
 			isa = PBXGroup;
 			children = (
-				F45DF31C2AC6CC54004D4667 /* Localizable.strings */,
+				F4F8AD5A2B4792A400317F08 /* Localizable.xcstrings */,
 			);
 			path = Localization;
 			sourceTree = "<group>";
@@ -459,10 +458,10 @@
 			files = (
 				F49DDCE92ACDB7220067EFE6 /* .gitignore in Resources */,
 				F45DF3092AC6C113004D4667 /* The Jamsil OTF 1 Thin.otf in Resources */,
+				F4F8AD5B2B4792A400317F08 /* Localizable.xcstrings in Resources */,
 				F45DF3052AC6C113004D4667 /* The Jamsil OTF 3 Regular.otf in Resources */,
 				F45DF30A2AC6C113004D4667 /* The Jamsil OTF 6 ExtraBold.otf in Resources */,
 				F45DF3062AC6C113004D4667 /* The Jamsil OTF 4 Medium.otf in Resources */,
-				F45DF31A2AC6CC54004D4667 /* Localizable.strings in Resources */,
 				F45DF3082AC6C113004D4667 /* The Jamsil OTF 5 Bold.otf in Resources */,
 				F45DF3072AC6C113004D4667 /* The Jamsil OTF 2 Light.otf in Resources */,
 				F4E6DA342AEC1F4A00C55559 /* GoogleService-Info.plist in Resources */,
@@ -556,15 +555,6 @@
 				F45DF3162AC6CC04004D4667 /* ko */,
 			);
 			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-		F45DF31C2AC6CC54004D4667 /* Localizable.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				F47DD5E72B0248FE00997462 /* en */,
-				F47DD5E92B024B0300997462 /* ko */,
-			);
-			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -694,7 +684,7 @@
 				CODE_SIGN_ENTITLEMENTS = PodoTodo/PodoTodo.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = N54L2GS5Z3;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -710,7 +700,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 1.1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.eunseo.PodoTodo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -731,7 +721,7 @@
 				CODE_SIGN_ENTITLEMENTS = PodoTodo/PodoTodo.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = N54L2GS5Z3;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PodoTodo/Info.plist;
@@ -746,7 +736,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 1.1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.eunseo.PodoTodo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
