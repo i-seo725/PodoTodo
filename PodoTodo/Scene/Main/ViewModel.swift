@@ -17,7 +17,6 @@ final class MainViewModel {
 
         let formatter = DateFormatter()
         formatter.locale = .autoupdatingCurrent
-//        formatter.timeZone = TimeZone(abbreviation: "KST")
         formatter.dateFormat = "main_date".localized
         
         let result = formatter.string(from: date)
@@ -36,11 +35,6 @@ final class MainViewModel {
         
         guard let todoList = todoList(date: date, groupID: groupID)?[indexPath.row] else { return }
         todoRepo.toggleDone(id: todoList._id, isDone: !todoList.isDone)
-//        if todoList.isDone {
-//            todoRepo.toggleDone(id: todoList._id, isDone: false)
-//        } else {
-//            todoRepo.toggleDone(id: todoList._id, isDone: true)
-//        }
     }
     
     func deleteTodo(item: MainList) {
@@ -55,6 +49,10 @@ final class MainViewModel {
         } else {
             return 0
         }
+    }
+    
+    func updateTodo(id: ObjectId, contents: String, date: Date, group: ObjectId) {
+        todoRepo.update(id: id, contents: contents, date: date, group: group)
     }
     
     

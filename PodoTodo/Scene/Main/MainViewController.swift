@@ -319,15 +319,15 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
         
         return swipeConfiguration
     }
-    /*
+    
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
 
-        guard let todo = TodoRepository.shared.fetchFilterOneDay(date: calendarDate)?[indexPath.row] else { return nil }
-
+        guard let groupID = viewModel.fetchGroup()?[indexPath.section]._id, let todo = viewModel.todoList(date: calendarDate, groupID: groupID)?[indexPath.row] else { return nil }
+        print(indexPath)
         guard let updateDate = todo.date.addingTimeInterval(86400).dateToString().stringToDate() else { return nil }
         let laterButton = UIContextualAction(style: .normal, title: "미루기") { action, view, handler in
 
-            TodoRepository.shared.update(id: todo._id, contents: todo.contents, date: updateDate, group: todo.group)
+            self.viewModel.updateTodo(id: todo._id, contents: todo.contents, date: updateDate, group: todo.group)
             self.todoCalendar.reloadData()
             tableView.reloadSections(IndexSet(indexPath.section...indexPath.section), with: .automatic)
             handler(true)
@@ -338,7 +338,7 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
 
         let deleteButton = UIContextualAction(style: .destructive, title: nil) { action, view, handler in
 
-            TodoRepository.shared.delete(todo)
+            self.viewModel.deleteTodo(item: todo)
             tableView.reloadSections(IndexSet(indexPath.section...indexPath.section), with: .automatic)
             self.todoCalendar.reloadData()
             handler(true)
@@ -351,7 +351,6 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
         return swipeConfiguration
 
     }
-    */
     
 }
 
