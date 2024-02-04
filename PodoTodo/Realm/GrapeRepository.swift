@@ -8,7 +8,7 @@
 import Foundation
 import RealmSwift
 
-final class GrapeRepository {
+final class GrapeRepository: RepositoryType {
     
     private let realm = try! Realm()
     

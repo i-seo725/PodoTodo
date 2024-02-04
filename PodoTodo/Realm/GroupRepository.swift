@@ -8,8 +8,8 @@
 import Foundation
 import RealmSwift
 
-final class GroupRepository {
-    //
+final class GroupRepository: RepositoryType {
+
     let realm = try! Realm()
     
     func checkSchemaVersion() {

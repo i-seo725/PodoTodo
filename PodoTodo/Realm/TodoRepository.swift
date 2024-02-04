@@ -9,10 +9,12 @@ import Foundation
 import RealmSwift
 
 protocol RepositoryType: AnyObject {
-//    func fetchFilter(isTodo: Bool, date: Date) -> Results<MainList>
-//    func create(_ item: MainList)
-//    func update(id: ObjectId, contents: String, date: Date, group: ObjectId)
-//    func delete(_ item: MainList)
+    
+    associatedtype RepoType: RealmCollectionValue
+    
+    func fetch() -> Results<RepoType>
+    func create(_ item: RepoType)
+    func delete(_ item: RepoType)
 }
 
 final class TodoRepository: RepositoryType {
