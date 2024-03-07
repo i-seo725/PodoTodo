@@ -40,9 +40,32 @@
        }
       }
      ```
+     
+ ### 2. FSCalendar 날짜 변경 시 UI 업데이트 버그 발생
+   * 오후 11시 59분에서 자정으로 넘어갈 때 오늘 날짜로 표시되는 UI가 변경되지 않는 버그 발생
+   * `viewWillAppear` 메서드에 캘린더 업데이트 구문을 작성하였으나 탭을 다시 열어도 변경되지 않음
+   * 다음과 같은 코드를 통해 자정이 될 때 UI 업데이트가 되도록 반영
+
+     ```swift
+     override func viewDidLoad() {
+          super.viewDidLoad()
+          NotificationCenter.default.addObserver(self, selector: #selector(updateToday), name: NSNotification.Name.NSCalendarDayChanged, object: nil)
+      }
+  
+       @objc func updateToday() {
+          DispatchQueue.main.async {
+              self.todoCalendar.today = Date()
+              self.todoCalendar.reloadData()
+          }
+      }
+      
+       override func viewDidDisappear(_ animated: Bool) {
+          super.viewDidDisappear(animated)
+          NotificationCenter.default.removeObserver(self)
+      }
+     ```
    
-   
- ### 2. 포도알 채우는 로직 구현 시 예상보다 많은 고려 사항
+ ### 3. 포도알 채우는 로직 구현 시 예상보다 많은 고려 사항
    * 화면이 나타날 때 로직 계산을 위해 `viewWillAppear`에 메서드를 작성하였는데, Todo를 모두 완료한 경우 화면을 볼 때마다 포도알이 늘어나는 버그 발생
    * 오늘의 Todo를 모두 완료처리 했다가 사용자가 새로운 할 일을 추가하거나 완료 처리를 취소할 때 채웠던 포도알 스티커를 하나 회수해야 하는 상황 발생
    * 다음과 같은 코드를 통한 예외 처리 구현
