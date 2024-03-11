@@ -11,9 +11,8 @@
 
 
 ## 주요 기능
- * FSCalendar 라이브러리를 활용하여 컨셉에 맞는 캘린더 표현
- * Realm DB를 사용한 효율적인 할 일 및 그룹 관리
- * Repository Pattern을 통한 데이터베이스 추상화
+ * FSCalendar 라이브러리를 활용하여 컨셉에 맞는 커스텀 캘린더 표현
+ * Realm DB를 Repository Pattern을 통해 추상화하여 사용자가 등록한 할 일, 그룹 및 포도알 관리
  * string catalog 기반의 localization 기능으로 한국어 및 영어 언어 지원
  * Firebase 라이브러리를 활용한 사용자 패턴 분석
  <br/>
