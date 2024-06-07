@@ -332,10 +332,19 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
             tableView.reloadSections(IndexSet(indexPath.section...indexPath.section), with: .automatic)
             handler(true)
         }
+        
+        let alertButton = UIContextualAction(style: .normal, title: "알림 설정") { action, view, handler in
+            
+            print("알림 설정")
+            handler(true)
+        }
 
         laterButton.backgroundColor = .thirdGrape
         laterButton.image = UIImage(systemName: "arrowshape.right.fill")!
 
+        alertButton.backgroundColor = .thirdGrape
+        alertButton.image = UIImage(systemName: "bell")!
+        
         let deleteButton = UIContextualAction(style: .destructive, title: nil) { action, view, handler in
 
             self.viewModel.deleteTodo(item: todo)
@@ -347,7 +356,7 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
         deleteButton.image = UIImage(systemName: "trash.fill")!
         deleteButton.image?.withTintColor(.white)
 
-        let swipeConfiguration = UISwipeActionsConfiguration(actions: [deleteButton, laterButton])
+        let swipeConfiguration = UISwipeActionsConfiguration(actions: [deleteButton, alertButton, laterButton])
         return swipeConfiguration
 
     }
