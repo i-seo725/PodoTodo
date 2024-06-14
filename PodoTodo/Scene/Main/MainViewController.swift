@@ -343,7 +343,7 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
         laterButton.image = UIImage(systemName: "arrowshape.right.fill")!
 
         alertButton.backgroundColor = .thirdGrape
-        alertButton.image = UIImage(systemName: "bell")!
+        alertButton.image = UIImage(systemName: "bell.fill")!
         
         let deleteButton = UIContextualAction(style: .destructive, title: nil) { action, view, handler in
 
