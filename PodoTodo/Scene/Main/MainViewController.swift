@@ -159,8 +159,11 @@ final class MainViewController: BaseViewController {
             navBar.backgroundColor = .clear
         }
         let listButton = UIBarButtonItem(image: UIImage(systemName: "list.bullet")!, style: .plain, target: self, action: #selector(listButtonTapped))
+        let settingButton = UIBarButtonItem(image: UIImage(systemName: "gearshape")!, style: .plain, target: self, action: #selector(settingButtonTapped))
         listButton.tintColor = .firstGrape
+        settingButton.tintColor = .firstGrape
         navigationItem.leftBarButtonItem = listButton
+        navigationItem.rightBarButtonItem = settingButton
         navigationItem.backButtonTitle = ""
     }
     
@@ -169,6 +172,10 @@ final class MainViewController: BaseViewController {
         navigationItem.title = viewModel.configureNavigationTitle(Date())
         calendarDate = Date()
         todoTable.reloadData()
+    }
+    
+    @objc func settingButtonTapped() {
+        
     }
     
     @objc func listButtonTapped() {
