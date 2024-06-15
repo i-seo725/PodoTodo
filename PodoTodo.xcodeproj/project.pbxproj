@@ -66,6 +66,7 @@
 		F49DDCE72ACDB0A60067EFE6 /* Grape.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49DDCE62ACDB0A60067EFE6 /* Grape.swift */; };
 		F49DDCE92ACDB7220067EFE6 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = F49DDCE82ACDB7220067EFE6 /* .gitignore */; };
 		F49DDCEC2ACDB7330067EFE6 /* APIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49DDCEB2ACDB7330067EFE6 /* APIKey.swift */; };
+		F4D424552C1DB66100F24292 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D424542C1DB66100F24292 /* SettingViewController.swift */; };
 		F4E6DA342AEC1F4A00C55559 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F4E6DA332AEC1F4A00C55559 /* GoogleService-Info.plist */; };
 		F4F8AD5B2B4792A400317F08 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = F4F8AD5A2B4792A400317F08 /* Localizable.xcstrings */; };
 /* End PBXBuildFile section */
@@ -124,6 +125,7 @@
 		F49DDCE62ACDB0A60067EFE6 /* Grape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grape.swift; sourceTree = "<group>"; };
 		F49DDCE82ACDB7220067EFE6 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		F49DDCEB2ACDB7330067EFE6 /* APIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
+		F4D424542C1DB66100F24292 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		F4E6DA332AEC1F4A00C55559 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		F4F8AD5A2B4792A400317F08 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -260,6 +262,7 @@
 				F45DF3302ACBFF60004D4667 /* Tab */,
 				F45DF32B2AC87ED5004D4667 /* WeatherView.swift */,
 				F46210FC2AD07BA0001A5EA2 /* KindOfTabEnum.swift */,
+				F4D424542C1DB66100F24292 /* SettingViewController.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -540,6 +543,7 @@
 				F466DB912AD5236900E2B306 /* Date+Extension.swift in Sources */,
 				F457C10C2AC1854500B4D46C /* SceneDelegate.swift in Sources */,
 				F466DBB02ADC2DC600E2B306 /* GroupRepository.swift in Sources */,
+				F4D424552C1DB66100F24292 /* SettingViewController.swift in Sources */,
 				F45DF30C2AC6C351004D4667 /* Font.swift in Sources */,
 				F466DBAE2AD9ACD600E2B306 /* GroupTableViewCell.swift in Sources */,
 			);
