@@ -15,4 +15,16 @@ final class SettingViewController: BaseViewController {
         
     }
     
+    override func configureView() {
+        super.configureView()
+        configNavBar()
+    }
+    
+    override func setConstraints() {
+        
+    }
+    
+    func configNavBar() {
+        navigationItem.title = "설정"
+    }
 }
