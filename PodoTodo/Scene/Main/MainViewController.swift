@@ -175,7 +175,8 @@ final class MainViewController: BaseViewController {
     }
     
     @objc func settingButtonTapped() {
-        
+        let vc = SettingViewController()
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     @objc func listButtonTapped() {
