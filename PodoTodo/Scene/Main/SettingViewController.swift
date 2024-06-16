@@ -26,6 +26,6 @@ final class SettingViewController: BaseViewController {
     
     func configNavBar() {
         navigationItem.title = "설정"
-    
+        navigationController?.navigationBar.tintColor = .firstGrape
     }
 }
