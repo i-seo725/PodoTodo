@@ -10,6 +10,8 @@ import SnapKit
 
 final class SettingViewController: BaseViewController {
     
+    let tableView = UITableView()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -18,10 +20,13 @@ final class SettingViewController: BaseViewController {
     override func configureView() {
         super.configureView()
         configNavBar()
+        view.addSubview(tableView)
     }
     
     override func setConstraints() {
-        
+        tableView.snp.makeConstraints { make in
+            make.edges.equalTo(view.safeAreaLayoutGuide)
+        }
     }
     
     func configNavBar() {
