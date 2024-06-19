@@ -10,7 +10,7 @@ import SnapKit
 
 final class SettingViewController: BaseViewController {
     
-    let tableView = UITableView()
+    let tableView = UITableView(frame: .zero, style: .insetGrouped)
     
     override func viewDidLoad() {
         super.viewDidLoad()
