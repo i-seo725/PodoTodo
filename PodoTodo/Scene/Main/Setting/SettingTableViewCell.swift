@@ -13,7 +13,7 @@ class SettingTableViewCell: UITableViewCell {
     let title = {
         let view = UILabel()
         view.text = "알림 설정"
-        view.font = UIFont.jamsilContent
+//        view.font = UIFont.jamsilSubTitle
         return view
     }()
     
@@ -22,6 +22,7 @@ class SettingTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         configureView()
+        setConstraints()
     }
     
     required init?(coder: NSCoder) {
@@ -36,12 +37,12 @@ class SettingTableViewCell: UITableViewCell {
     func setConstraints() {
         title.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
-            make.leading.equalToSuperview().offset(10)
+            make.leading.equalToSuperview().offset(20)
         }
         
         alertSwitch.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
-            make.trailing.equalToSuperview().inset(10)
+            make.trailing.equalToSuperview().inset(20)
         }
     }
 }
