@@ -21,8 +21,7 @@ final class SettingViewController: BaseViewController {
         super.configureView()
         configNavBar()
         view.addSubview(tableView)
-        tableView.delegate = self
-        tableView.dataSource = self
+        configureTableView()
     }
     
     override func setConstraints() {
@@ -35,6 +34,12 @@ final class SettingViewController: BaseViewController {
         navigationItem.title = "설정"
         navigationController?.navigationBar.tintColor = .firstGrape
     }
+    
+    func configureTableView() {
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.register(SettingTableViewCell.self, forCellReuseIdentifier: "cell")
+    }
 }
 
 extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
@@ -44,10 +49,7 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell()
-        var config = cell.defaultContentConfiguration()
-        config.text = "알림 설정"
-        cell.contentConfiguration = config
+        let cell = SettingTableViewCell
         return cell
     }
     
