@@ -255,6 +255,7 @@
 		F45DF3212AC81A53004D4667 /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				F4D424562C24627300F24292 /* Setting */,
 				F457C10D2AC1854500B4D46C /* MainViewController.swift */,
 				F466D6122AD266C900819ED9 /* ViewModel.swift */,
 				F466D6112AD266C000819ED9 /* TableView */,
@@ -262,7 +263,6 @@
 				F45DF3302ACBFF60004D4667 /* Tab */,
 				F45DF32B2AC87ED5004D4667 /* WeatherView.swift */,
 				F46210FC2AD07BA0001A5EA2 /* KindOfTabEnum.swift */,
-				F4D424542C1DB66100F24292 /* SettingViewController.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -378,6 +378,14 @@
 				F49DDCEB2ACDB7330067EFE6 /* APIKey.swift */,
 			);
 			path = Network;
+			sourceTree = "<group>";
+		};
+		F4D424562C24627300F24292 /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				F4D424542C1DB66100F24292 /* SettingViewController.swift */,
+			);
+			path = Setting;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
