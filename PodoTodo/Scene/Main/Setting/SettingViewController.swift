@@ -10,7 +10,7 @@ import SnapKit
 
 final class SettingViewController: BaseViewController {
     
-    let tableView = UITableView(frame: .zero, style: .insetGrouped)
+    let settingTableView = UITableView(frame: .zero, style: .insetGrouped)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,12 +20,12 @@ final class SettingViewController: BaseViewController {
     override func configureView() {
         super.configureView()
         configNavBar()
-        view.addSubview(tableView)
+        view.addSubview(settingTableView)
         configureTableView()
     }
     
     override func setConstraints() {
-        tableView.snp.makeConstraints { make in
+        settingTableView.snp.makeConstraints { make in
             make.edges.equalTo(view.safeAreaLayoutGuide)
         }
     }
@@ -36,9 +36,9 @@ final class SettingViewController: BaseViewController {
     }
     
     func configureTableView() {
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.register(SettingTableViewCell.self, forCellReuseIdentifier: "cell")
+        settingTableView.delegate = self
+        settingTableView.dataSource = self
+        settingTableView.register(SettingTableViewCell.self, forCellReuseIdentifier: "cell")
     }
 }
 
@@ -49,7 +49,7 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = SettingTableViewCell
+        guard let cell =
         return cell
     }
     
