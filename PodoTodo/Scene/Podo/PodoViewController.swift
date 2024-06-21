@@ -57,12 +57,7 @@ class PodoViewController: BaseViewController {
         super.configureView()
         configureColelctionView()
         underlineView.backgroundColor = .firstGrape
-        navigationItem.title = "grape stickers".localized
-        if let navBar = navigationController?.navigationBar {
-            navBar.titleTextAttributes = [.font: UIFont.jamsilNav]
-            navBar.backgroundColor = .background
-        }
-        
+        configureNavBar()
     }
     
     override func addSubViews() {
@@ -105,6 +100,20 @@ class PodoViewController: BaseViewController {
         }
     }
     
+    func configureNavBar() {
+        navigationItem.title = "grape stickers".localized
+        if let navBar = navigationController?.navigationBar {
+            navBar.titleTextAttributes = [.font: UIFont.jamsilNav]
+            navBar.backgroundColor = .background
+        }
+        let podo = UIBarButtonItem(image: UIImage(systemName: "circle.hexagongrid.fill")!, style: .plain, target: self, action: #selector(podoButtonTapped))
+        podo.tintColor = .firstGrape
+        navigationItem.rightBarButtonItem = podo
+    }
+    
+    @objc func podoButtonTapped() {
+        
+    }
 }
 
 extension PodoViewController: UICollectionViewDelegate, UICollectionViewDataSource {
