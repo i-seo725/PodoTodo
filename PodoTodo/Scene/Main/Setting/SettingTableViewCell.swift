@@ -10,7 +10,7 @@ import SnapKit
 
 class SettingTableViewCell: UITableViewCell {
     
-    let title = {
+    var title = {
         let view = UILabel()
         view.text = "알림 설정"
 //        view.font = UIFont.jamsilSubTitle
@@ -18,6 +18,7 @@ class SettingTableViewCell: UITableViewCell {
     }()
     
     let alertSwitch = UISwitch()
+    let timePicker = UIDatePicker()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -32,6 +33,9 @@ class SettingTableViewCell: UITableViewCell {
     func configureView() {
         contentView.addSubview(title)
         contentView.addSubview(alertSwitch)
+        contentView.addSubview(timePicker)
+        timePicker.datePickerMode = .time
+        timePicker.isHidden = true
     }
     
     func setConstraints() {
@@ -41,6 +45,11 @@ class SettingTableViewCell: UITableViewCell {
         }
         
         alertSwitch.snp.makeConstraints { make in
+            make.centerY.equalToSuperview()
+            make.trailing.equalToSuperview().inset(20)
+        }
+        
+        timePicker.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
             make.trailing.equalToSuperview().inset(20)
         }
