@@ -54,8 +54,6 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
         guard let cell = settingTableView.dequeueReusableCell(withIdentifier: "cell") as? SettingTableViewCell else { return UITableViewCell() }
         cell.selectionStyle = .none
         
-        
-        
         switch indexPath.row {
         case 0:
             cell.title.text = "알림 설정"
