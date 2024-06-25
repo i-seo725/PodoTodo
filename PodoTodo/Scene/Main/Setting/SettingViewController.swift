@@ -7,7 +7,6 @@
 
 import UIKit
 import SnapKit
-import RxSwift
 
 final class SettingViewController: BaseViewController {
     
@@ -48,12 +47,16 @@ final class SettingViewController: BaseViewController {
 extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        return numberOfRows
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = settingTableView.dequeueReusableCell(withIdentifier: "cell") as? SettingTableViewCell else { return UITableViewCell() }
         cell.selectionStyle = .none
+        cell.handler = {
+            self.numberOfRows = cell.isOn ? 2 : 1
+            tableView.reloadData()
+        }
         
         switch indexPath.row {
         case 0:

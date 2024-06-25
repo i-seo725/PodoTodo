@@ -67,10 +67,6 @@
 		F49DDCEC2ACDB7330067EFE6 /* APIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49DDCEB2ACDB7330067EFE6 /* APIKey.swift */; };
 		F4D424552C1DB66100F24292 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D424542C1DB66100F24292 /* SettingViewController.swift */; };
 		F4D424582C24629B00F24292 /* SettingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D424572C24629B00F24292 /* SettingTableViewCell.swift */; };
-		F4D4245D2C29618B00F24292 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = F4D4245C2C29618B00F24292 /* RxCocoa */; };
-		F4D4245F2C29618B00F24292 /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = F4D4245E2C29618B00F24292 /* RxRelay */; };
-		F4D424612C29618B00F24292 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = F4D424602C29618B00F24292 /* RxSwift */; };
-		F4D424632C29618B00F24292 /* RxTest in Frameworks */ = {isa = PBXBuildFile; productRef = F4D424622C29618B00F24292 /* RxTest */; };
 		F4E6DA342AEC1F4A00C55559 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F4E6DA332AEC1F4A00C55559 /* GoogleService-Info.plist */; };
 		F4F8AD5B2B4792A400317F08 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = F4F8AD5A2B4792A400317F08 /* Localizable.xcstrings */; };
 /* End PBXBuildFile section */
@@ -140,15 +136,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F4D424632C29618B00F24292 /* RxTest in Frameworks */,
 				F47DD5C52B011EBA00997462 /* FirebaseMessaging in Frameworks */,
 				F466D6092AD12ACA00819ED9 /* RealmSwift in Frameworks */,
-				F4D4245D2C29618B00F24292 /* RxCocoa in Frameworks */,
 				F47DD5BF2B011EBA00997462 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
 				F47DD5C72B011EBA00997462 /* FirebaseStorage in Frameworks */,
 				F47DD5C32B011EBA00997462 /* FirebaseInAppMessagingSwift-Beta in Frameworks */,
-				F4D424612C29618B00F24292 /* RxSwift in Frameworks */,
-				F4D4245F2C29618B00F24292 /* RxRelay in Frameworks */,
 				F457C1252AC185E300B4D46C /* SnapKit in Frameworks */,
 				F47DD5C12B011EBA00997462 /* FirebaseCrashlytics in Frameworks */,
 				F457C11F2AC185C800B4D46C /* FSCalendar in Frameworks */,
@@ -424,10 +416,6 @@
 				F47DD5C22B011EBA00997462 /* FirebaseInAppMessagingSwift-Beta */,
 				F47DD5C42B011EBA00997462 /* FirebaseMessaging */,
 				F47DD5C62B011EBA00997462 /* FirebaseStorage */,
-				F4D4245C2C29618B00F24292 /* RxCocoa */,
-				F4D4245E2C29618B00F24292 /* RxRelay */,
-				F4D424602C29618B00F24292 /* RxSwift */,
-				F4D424622C29618B00F24292 /* RxTest */,
 			);
 			productName = PodoTodo;
 			productReference = F457C1062AC1854500B4D46C /* PodoTodo.app */;
@@ -463,7 +451,6 @@
 				F457C1232AC185E300B4D46C /* XCRemoteSwiftPackageReference "SnapKit" */,
 				F466D6052AD12ACA00819ED9 /* XCRemoteSwiftPackageReference "realm-swift" */,
 				F47DD5BD2B011EBA00997462 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
-				F4D4245B2C29618B00F24292 /* XCRemoteSwiftPackageReference "RxSwift" */,
 			);
 			productRefGroup = F457C1072AC1854500B4D46C /* Products */;
 			projectDirPath = "";
@@ -834,14 +821,6 @@
 				minimumVersion = 10.17.0;
 			};
 		};
-		F4D4245B2C29618B00F24292 /* XCRemoteSwiftPackageReference "RxSwift" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/ReactiveX/RxSwift.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 6.7.1;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -889,26 +868,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = F47DD5BD2B011EBA00997462 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseStorage;
-		};
-		F4D4245C2C29618B00F24292 /* RxCocoa */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = F4D4245B2C29618B00F24292 /* XCRemoteSwiftPackageReference "RxSwift" */;
-			productName = RxCocoa;
-		};
-		F4D4245E2C29618B00F24292 /* RxRelay */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = F4D4245B2C29618B00F24292 /* XCRemoteSwiftPackageReference "RxSwift" */;
-			productName = RxRelay;
-		};
-		F4D424602C29618B00F24292 /* RxSwift */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = F4D4245B2C29618B00F24292 /* XCRemoteSwiftPackageReference "RxSwift" */;
-			productName = RxSwift;
-		};
-		F4D424622C29618B00F24292 /* RxTest */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = F4D4245B2C29618B00F24292 /* XCRemoteSwiftPackageReference "RxSwift" */;
-			productName = RxTest;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

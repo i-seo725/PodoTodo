@@ -20,6 +20,15 @@ class SettingTableViewCell: UITableViewCell {
     let alertSwitch = UISwitch()
     let timePicker = UIDatePicker()
     
+    var isOn = false {
+        didSet {
+            handler?()
+        }
+    }
+    
+    
+    var handler: (() -> Void)?
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         configureView()
@@ -36,6 +45,11 @@ class SettingTableViewCell: UITableViewCell {
         contentView.addSubview(timePicker)
         timePicker.datePickerMode = .time
         timePicker.isHidden = true
+        alertSwitch.addTarget(self, action: #selector(toggleSwitch), for: .valueChanged)
+    }
+    
+    @objc func toggleSwitch(_ sender: UISwitch) {
+        isOn = sender.isOn
     }
     
     func setConstraints() {
