@@ -12,7 +12,7 @@ final class SettingViewController: BaseViewController {
     
     let settingTableView = UITableView(frame: .zero, style: .insetGrouped)
     
-    var numberOfRows = 1
+    var numberOfRows = UserDefaults.standard.bool(forKey: "alertIsOn") ? 2 : 1
     
     override func viewDidLoad() {
         super.viewDidLoad()

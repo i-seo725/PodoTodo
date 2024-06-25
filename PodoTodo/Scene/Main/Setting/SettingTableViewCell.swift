@@ -45,10 +45,17 @@ class SettingTableViewCell: UITableViewCell {
         contentView.addSubview(timePicker)
         timePicker.datePickerMode = .time
         timePicker.isHidden = true
+        configureSwitch()
+    }
+    
+    func configureSwitch() {
+        isOn = UserDefaults.standard.bool(forKey: "alertIsOn")
+        alertSwitch.isOn = isOn
         alertSwitch.addTarget(self, action: #selector(toggleSwitch), for: .valueChanged)
     }
     
     @objc func toggleSwitch(_ sender: UISwitch) {
+        UserDefaults.standard.setValue(sender.isOn, forKey: "alertIsOn")
         isOn = sender.isOn
     }
     
