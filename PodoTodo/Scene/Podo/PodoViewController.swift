@@ -106,7 +106,7 @@ class PodoViewController: BaseViewController {
             navBar.titleTextAttributes = [.font: UIFont.jamsilNav]
             navBar.backgroundColor = .background
         }
-        let podo = UIBarButtonItem(image: UIImage(systemName: "circle.hexagongrid.fill")!, style: .plain, target: self, action: #selector(podoButtonTapped))
+//        let podo = UIBarButtonItem(image: UIImage(systemName: "circle.hexagongrid.fill")!, style: .plain, target: self, action: #selector(podoButtonTapped))
         podo.tintColor = .firstGrape
         navigationItem.rightBarButtonItem = podo
     }
